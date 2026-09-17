@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://d4huknsj0y0q2"]
+
+[ext_resource type="Texture2D" uid="uid://dsftwq5ahar76" path="res://Sprites/WallsMap.png" id="1_nvlmm"]
+
+[resource]
+atlas = ExtResource("1_nvlmm")
+region = Rect2(0, 0, 48, 48)

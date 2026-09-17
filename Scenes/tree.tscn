@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bi0p2cxdn3yy5"]
+
+[ext_resource type="Texture2D" uid="uid://cgbssmcigo2dl" path="res://Sprites/Tree.png" id="1_0vwjc"]
+[ext_resource type="Script" uid="uid://b2j61ji6bjooj" path="res://Scripts/tree.gd" id="2_rsuno"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4bev8"]
+radius = 9.65
+
+[node name="Tree" type="Area2D" unique_id=1098867022]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_rsuno")
+transparent = Color(1, 1, 1, 0.078431375)
+
+[node name="Timer" type="Timer" parent="." unique_id=912960230]
+wait_time = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=748364918]
+texture = ExtResource("1_0vwjc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1166495104]
+shape = SubResource("CircleShape2D_4bev8")
