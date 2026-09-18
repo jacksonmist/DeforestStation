@@ -35,6 +35,8 @@ func _ready() -> void:
 	area_exited.connect(_player_exited)
 	selection.visible = false
 	UiManager.set_structure_manager(self)
+	wood_amount = 0
+	UiManager.set_wood_amount(wood_amount)
 
 func _process(delta: float) -> void:
 	if is_build_mode:
@@ -59,8 +61,12 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 			var clicked_building = structures[mouse_cell]
 		elif selected_structure and not structures.has(mouse_cell):
 			add_child(cached_instance)
-			cached_instance.position = (mouse_cell - Vector2i(24, 24)) * 16
+			var cell = mouse_cell - Vector2i(24, 24)
+			cached_instance.position = (cell * 16)
 			cached_instance.set_active(true)
+			structures[cell] = cached_instance
+			change_wood(-cached_instance.purchase_cost)
+			cached_instance = null
 			select_structure(structures_enum.empty)
 
 func _player_entered(body):
@@ -83,6 +89,8 @@ func update_station_cells(dict_ref: Dictionary):
 	station_cells = dict_ref
 
 func select_structure(type: structures_enum):
+	if cached_instance:
+		cached_instance.queue_free()
 	cached_instance = null
 	match type:
 		structures_enum.empty:
@@ -94,21 +102,18 @@ func select_structure(type: structures_enum):
 	
 	if selected_structure:
 		cached_instance = selected_structure.instantiate()
+		if cached_instance.purchase_cost > wood_amount:
+			cached_instance.queue_free()
+			cached_instance = null
+			selected_structure = null
+			return
 		selected_structure_sprite.texture = cached_instance.texture
 	else:
 		selected_structure_sprite.texture = null
 
-func calculate_total_wood():
-	wood_amount = other_wood_amount + player_wood_amount
+func change_wood(amount: int):
+	wood_amount += amount
 	UiManager.set_wood_amount(wood_amount)
-	
-func add_other_wood(amount: int):
-	other_wood_amount += amount
-	calculate_total_wood()
-
-func update_player_wood(amount: int):
-	player_wood_amount = amount
-	calculate_total_wood()
 
 func get_selected_structure() -> PackedScene:
 	return selected_structure
