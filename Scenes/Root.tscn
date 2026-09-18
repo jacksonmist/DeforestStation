@@ -135,7 +135,8 @@ script = ExtResource("13_7f8yv")
 house = NodePath("../House")
 structure_manager = NodePath("../StructureManager")
 speed = 50.0
-aps = 50.0
+aps = 2.0
+damage = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=759726425]
 shape = SubResource("CircleShape2D_ltfbr")
@@ -145,7 +146,7 @@ zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 
 [node name="AttackCircle" parent="Player" unique_id=1872592653 instance=ExtResource("13_75oan")]
-collision_mask = 28
+collision_mask = 12
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=229233852]
 texture = ExtResource("15_fauc5")

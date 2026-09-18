@@ -30,7 +30,7 @@ func _ready() -> void:
 		if child.has_method("setup"):
 			child.setup(self)
 	timer = Timer.new()
-	timer.wait_time = attack_cooldown
+	update_attack_cooldown()
 	timer.one_shot = true
 	timer.autostart = false
 	add_child(timer)
@@ -46,9 +46,12 @@ func _process(delta: float) -> void:
 func attack():
 	if not can_attack:
 		return
-	var target = imm_targets[0]
-	if target.has_method("take_damage"):
-		target.take_damage(damage)
+	var chosen
+	for target in imm_targets:
+		if target.has_method("set_active") and target.is_active:
+			chosen = target
+	if chosen and chosen.has_method("take_damage"):
+		chosen.take_damage(damage)
 		can_attack = false
 		timer.start()
 	
