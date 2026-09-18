@@ -12,10 +12,10 @@
 [ext_resource type="Script" uid="uid://cl8dmktg4iq2y" path="res://Scripts/tree_manager.gd" id="10_dtygg"]
 [ext_resource type="PackedScene" uid="uid://bi0p2cxdn3yy5" path="res://Scenes/tree.tscn" id="11_aoudc"]
 [ext_resource type="PackedScene" uid="uid://dpempw6q6puu7" path="res://Scenes/wood.tscn" id="11_fauc5"]
-[ext_resource type="Texture2D" uid="uid://cttu6bfow3awj" path="res://Sprites/test_player.png" id="12_ql2nr"]
 [ext_resource type="Script" uid="uid://3qbuoccerxyg" path="res://Scripts/player.gd" id="13_7f8yv"]
-[ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="13_75oan"]
+[ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/friendly_attack_circle.tscn" id="13_75oan"]
 [ext_resource type="Script" uid="uid://bdk6tyr748nlp" path="res://Scripts/lumberjack.gd" id="15_75oan"]
+[ext_resource type="Texture2D" uid="uid://bgxie15kcisp8" path="res://Sprites/lumberjack.png" id="15_fauc5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g1ltr"]
 texture = ExtResource("1_y1djv")
@@ -52,6 +52,13 @@ radius = 8.0
 
 [node name="Node2D" type="Node2D" unique_id=1513264109]
 
+[node name="TreeManager" type="Node" parent="." unique_id=1309576017 node_paths=PackedStringArray("grid_manager", "house")]
+script = ExtResource("10_dtygg")
+wood = ExtResource("11_fauc5")
+tree_scene = ExtResource("11_aoudc")
+grid_manager = NodePath("../GridManager")
+house = NodePath("../House")
+
 [node name="GroundMap" type="TileMapLayer" parent="." unique_id=348636908 node_paths=PackedStringArray("pds_manager")]
 z_index = -1
 position = Vector2(-8, -8)
@@ -68,17 +75,19 @@ script = ExtResource("6_626no")
 ground_map = NodePath("..")
 tree_manager = NodePath("../../TreeManager")
 
-[node name="GridManager" type="Node" parent="." unique_id=366981937 node_paths=PackedStringArray("ground_map", "wall_map")]
+[node name="GridManager" type="Node" parent="." unique_id=366981937 node_paths=PackedStringArray("tree_manager", "ground_map", "wall_map")]
 script = ExtResource("7_6ebx2")
+tree_manager = NodePath("../TreeManager")
 ground_map = NodePath("../GroundMap")
 wall_map = NodePath("../GroundMap/WallMap")
-current_radius = null
 
 [node name="House" type="Area2D" parent="." unique_id=859446054 node_paths=PackedStringArray("ground_map", "grid")]
 texture_filter = 1
+collision_mask = 0
 script = ExtResource("9_am7h6")
 ground_map = NodePath("../GroundMap")
 grid = NodePath("../GridManager")
+starting_radius = 2
 health = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="House" unique_id=1493826941]
@@ -87,21 +96,14 @@ shape = SubResource("RectangleShape2D_4bev8")
 [node name="Sprite2D" type="Sprite2D" parent="House" unique_id=2096658549]
 texture = ExtResource("8_difym")
 
-[node name="TreeManager" type="Node" parent="." unique_id=1309576017 node_paths=PackedStringArray("grid_manager", "house")]
-script = ExtResource("10_dtygg")
-wood = ExtResource("11_fauc5")
-tree_scene = ExtResource("11_aoudc")
-grid_manager = NodePath("../GridManager")
-house = NodePath("../House")
-
 [node name="Player" type="Area2D" parent="." unique_id=583931774 node_paths=PackedStringArray("house")]
 z_index = 1
-texture_filter = 1
 collision_layer = 2
 collision_mask = 28
 script = ExtResource("13_7f8yv")
 house = NodePath("../House")
 speed = 50.0
+aps = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=759726425]
 shape = SubResource("CircleShape2D_ltfbr")
@@ -111,9 +113,10 @@ zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 
 [node name="AttackCircle" parent="Player" unique_id=1872592653 instance=ExtResource("13_75oan")]
+collision_mask = 28
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=229233852]
-texture = ExtResource("12_ql2nr")
+texture = ExtResource("15_fauc5")
 
 [node name="Timer" type="Timer" parent="Player" unique_id=1313961637]
 
@@ -132,4 +135,4 @@ shape = SubResource("CircleShape2D_fojhu")
 
 [node name="Sprite2D" type="Sprite2D" parent="Lumberjack" unique_id=1402586986]
 self_modulate = Color(0.39607844, 1, 0, 1)
-texture = ExtResource("12_ql2nr")
+texture = ExtResource("15_fauc5")

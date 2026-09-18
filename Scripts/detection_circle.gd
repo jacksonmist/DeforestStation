@@ -1,4 +1,4 @@
-class_name AttackCircle extends Area2D
+class_name FriendlyAttackCircle extends Area2D
 
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
@@ -9,18 +9,8 @@ func setup(parent_ref: Entity):
 	parent = parent_ref
 	area_entered.connect(target_entered)
 	area_exited.connect(target_exited)
-	set_layer_mask()
 	collision.shape = collision.shape.duplicate()
 	update_range()
-
-func set_layer_mask():
-	if parent.entity_allegience == parent.allegience.friendly:
-		set_collision_layer_value(1, true)
-		set_collision_mask_value(2, true)
-		set_collision_mask_value(3, true)
-	else:
-		set_collision_layer_value(2, true)
-		set_collision_mask_value(1, true)
 
 func target_entered(body):
 	if not target_list.has(body):

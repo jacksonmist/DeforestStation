@@ -47,8 +47,10 @@ func attack():
 	if not can_attack:
 		return
 	var target = imm_targets[0]
-	target.take_damage(damage)
-	can_attack = false
+	if target.has_method("take_damage"):
+		target.take_damage(damage)
+		can_attack = false
+		timer.start()
 	
 func take_damage(amount: float):
 	health -= amount

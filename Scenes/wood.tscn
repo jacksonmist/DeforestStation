@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dpempw6q6puu7"]
 
 [ext_resource type="Script" uid="uid://vq3jchn5qmwk" path="res://Scripts/wood.gd" id="1_wy180"]
+[ext_resource type="Texture2D" uid="uid://jpnmctqotyp3" path="res://Sprites/wood.png" id="2_tfydv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4bev8"]
 
@@ -11,3 +12,6 @@ script = ExtResource("1_wy180")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1039978635]
 shape = SubResource("CircleShape2D_4bev8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1848606799]
+texture = ExtResource("2_tfydv")

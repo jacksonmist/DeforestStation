@@ -1,20 +1,17 @@
 class_name GridManager extends Node
 
 var grid: Array[Vector2i]
+@export var tree_manager: TreeManager
 @export var ground_map: GroundMap
 @export var wall_map: WallMap
 
 var station_cells: Dictionary
+var cached_cells: Array[Vector2i]
 
-@export var current_radius: int = 0
+var current_radius: int = 0
 var house_cell: Vector2i
 var border_cells: Dictionary
-
-func _ready() -> void:
-	pass
-
-func _process(delta: float) -> void:
-	pass
+var can_upgrade: bool = true
 
 func set_house_cell(cell: Vector2i):
 	house_cell = cell
@@ -22,8 +19,11 @@ func set_house_cell(cell: Vector2i):
 	station_cells[cell] = true
 
 func upgrade_circle():
+	if not can_upgrade:
+		return
 	current_radius += 1
 	var added_cells: Array[Vector2i]
+	cached_cells = []
 	var r2 = current_radius ** 2
 	for x in range(-current_radius, current_radius + 1):
 		for y in range(-current_radius, current_radius + 1):
@@ -31,10 +31,22 @@ func upgrade_circle():
 				var cell = (Vector2i(house_cell.x + x, house_cell.y + y))
 				if not station_cells.has(cell):
 					added_cells.append(cell)
-	for cell in added_cells:
+	if not tree_manager.check_occupied(added_cells):
+		for cell in added_cells:
+			station_cells[cell] = true
+			ground_map.set_station_floor(cell)
+		calculate_border_cells(added_cells)
+	else:
+		can_upgrade = false
+		cached_cells = added_cells
+		print(cached_cells)
+
+func no_marked_trees():
+	for cell in cached_cells:
 		station_cells[cell] = true
 		ground_map.set_station_floor(cell)
-	calculate_border_cells(added_cells)
+	calculate_border_cells(cached_cells)
+	can_upgrade = true
 
 func calculate_border_cells(added_cells: Array[Vector2i]):
 	border_cells.clear()

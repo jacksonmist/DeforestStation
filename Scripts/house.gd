@@ -8,12 +8,16 @@ var cell: Vector2i
 func _ready() -> void:
 	cell = Vector2i(floor(ground_map.cell_by_cell/2))
 	grid.set_house_cell(cell)
-	upgrade_circle()
+	for i in range(starting_radius):
+		upgrade_circle()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 func upgrade_circle():
-	for i in range(starting_radius):
-		grid.upgrade_circle()
+	grid.upgrade_circle()	
+
+func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+	if event.is_action_pressed("LeftMouse"):
+		upgrade_circle()
