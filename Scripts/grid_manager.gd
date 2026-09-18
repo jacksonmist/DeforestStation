@@ -39,7 +39,6 @@ func upgrade_circle():
 	else:
 		can_upgrade = false
 		cached_cells = added_cells
-		print(cached_cells)
 
 func no_marked_trees():
 	for cell in cached_cells:

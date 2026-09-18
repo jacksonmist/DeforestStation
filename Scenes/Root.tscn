@@ -52,13 +52,6 @@ radius = 8.0
 
 [node name="Node2D" type="Node2D" unique_id=1513264109]
 
-[node name="TreeManager" type="Node" parent="." unique_id=1309576017 node_paths=PackedStringArray("grid_manager", "house")]
-script = ExtResource("10_dtygg")
-wood = ExtResource("11_fauc5")
-tree_scene = ExtResource("11_aoudc")
-grid_manager = NodePath("../GridManager")
-house = NodePath("../House")
-
 [node name="GroundMap" type="TileMapLayer" parent="." unique_id=348636908 node_paths=PackedStringArray("pds_manager")]
 z_index = -1
 position = Vector2(-8, -8)
@@ -74,6 +67,13 @@ script = ExtResource("5_yiytj")
 script = ExtResource("6_626no")
 ground_map = NodePath("..")
 tree_manager = NodePath("../../TreeManager")
+
+[node name="TreeManager" type="Node" parent="." unique_id=1309576017 node_paths=PackedStringArray("grid_manager", "house")]
+script = ExtResource("10_dtygg")
+wood = ExtResource("11_fauc5")
+tree_scene = ExtResource("11_aoudc")
+grid_manager = NodePath("../GridManager")
+house = NodePath("../House")
 
 [node name="GridManager" type="Node" parent="." unique_id=366981937 node_paths=PackedStringArray("tree_manager", "ground_map", "wall_map")]
 script = ExtResource("7_6ebx2")

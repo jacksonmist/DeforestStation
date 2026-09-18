@@ -7,6 +7,7 @@ var opaque: Color = Color.WHITE
 
 var is_marked: bool = false
 var is_active: bool = true
+var cell: Vector2i
 
 @onready var x: Sprite2D = $X
 @onready var sprite: Sprite2D = $Sprite2D
@@ -29,6 +30,8 @@ func _ready() -> void:
 		x.flip_v = false
 	else:
 		x.flip_v = true
+	if cell:
+		label.text = str(cell)
 
 func take_damage(amount: float):
 	if not is_active:
@@ -62,8 +65,8 @@ func set_active(active: bool):
 	else:
 		sprite.modulate = transparent
 
-func set_cell(cell: Vector2i):
-	label.text = str(cell)
+func set_cell(cell_ref: Vector2i):
+	cell = cell_ref
 
 func mark_tree():
 	is_marked = true
