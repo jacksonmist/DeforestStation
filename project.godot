@@ -15,6 +15,10 @@ run/main_scene="uid://dv2sgwsfcdyca"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+UiManager="*uid://f8vw6m82hyyo"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -56,6 +60,8 @@ LeftMouse={
 2d_physics/layer_4="tree"
 2d_physics/layer_5="wood"
 2d_physics/layer_6="wall"
+2d_physics/layer_7="player"
+2d_physics/layer_8="station"
 
 [physics]
 

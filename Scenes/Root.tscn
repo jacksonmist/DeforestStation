@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://dv2sgwsfcdyca"]
 
 [ext_resource type="Texture2D" uid="uid://dhat3ipmnjj1a" path="res://Sprites/BasicGroundTexture.png" id="1_y1djv"]
+[ext_resource type="Texture2D" uid="uid://doniadc2wwyju" path="res://Sprites/selection.png" id="2_7f8yv"]
+[ext_resource type="Texture2D" uid="uid://g5m5al7f2upv" path="res://Sprites/pos_selection.png" id="2_8btxg"]
 [ext_resource type="Texture2D" uid="uid://cu8cbxhf23tdt" path="res://Sprites/StationFloor.png" id="2_t0qco"]
+[ext_resource type="PackedScene" uid="uid://5hr4ryv38sbb" path="res://Scenes/barracks.tscn" id="2_ve1ck"]
 [ext_resource type="Script" uid="uid://dix58tw62qy4c" path="res://Scripts/ground_map.gd" id="3_75oan"]
+[ext_resource type="Texture2D" uid="uid://njuuhkdepf1c" path="res://Sprites/neg_selection.png" id="3_lbgny"]
+[ext_resource type="Texture2D" uid="uid://cdcil8c1cjwwf" path="res://Sprites/neu_selection.png" id="4_asw58"]
 [ext_resource type="Script" uid="uid://brclpklxi4iph" path="res://Scripts/pds_manager.gd" id="6_626no"]
 [ext_resource type="Script" uid="uid://uds2sukswpu" path="res://Scripts/grid_manager.gd" id="7_6ebx2"]
 [ext_resource type="Texture2D" uid="uid://eu8e1ajk145w" path="res://Sprites/BasicHouse.png" id="8_difym"]
@@ -22,7 +27,10 @@
 [ext_resource type="PackedScene" uid="uid://bakp2uylxujxy" path="res://Scenes/Walls/neinv_wall.tscn" id="22_8btxg"]
 [ext_resource type="PackedScene" uid="uid://i1d60enxi5n4" path="res://Scenes/Walls/seinv_wall.tscn" id="23_lbgny"]
 [ext_resource type="PackedScene" uid="uid://bgfjew1keeat4" path="res://Scenes/Walls/swinv_wall.tscn" id="24_asw58"]
+[ext_resource type="Script" uid="uid://cp5rh6gpfpk4k" path="res://Scripts/structure_manager.gd" id="24_ql2nr"]
 [ext_resource type="PackedScene" uid="uid://cegd77rb4u3em" path="res://Scenes/Walls/nwinv_wall.tscn" id="25_rcb2t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4bev8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g1ltr"]
 texture = ExtResource("1_y1djv")
@@ -37,6 +45,7 @@ sources/0 = SubResource("TileSetAtlasSource_g1ltr")
 sources/1 = SubResource("TileSetAtlasSource_ebfx1")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bev8"]
+size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ltfbr"]
 radius = 8.0
@@ -44,6 +53,26 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_fojhu"]
 
 [node name="Node2D" type="Node2D" unique_id=1513264109]
+
+[node name="StructureManager" type="Area2D" parent="." unique_id=806441737]
+collision_layer = 129
+collision_mask = 64
+script = ExtResource("24_ql2nr")
+pos_selection = ExtResource("2_8btxg")
+neg_selection = ExtResource("3_lbgny")
+neu_selection = ExtResource("4_asw58")
+barracks = ExtResource("2_ve1ck")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StructureManager" unique_id=1633693362]
+shape = SubResource("CircleShape2D_4bev8")
+debug_color = Color(0.99999994, 0.011874482, 0.05190014, 0.41960785)
+
+[node name="Selection" type="Sprite2D" parent="StructureManager" unique_id=211997279]
+z_index = 5
+texture = ExtResource("2_7f8yv")
+
+[node name="SelectedStructure" type="Sprite2D" parent="StructureManager/Selection" unique_id=700509714]
+self_modulate = Color(1, 1, 1, 0.5019608)
 
 [node name="GroundMap" type="TileMapLayer" parent="." unique_id=348636908 node_paths=PackedStringArray("pds_manager")]
 z_index = -1
@@ -75,13 +104,14 @@ tree_scene = ExtResource("11_aoudc")
 grid_manager = NodePath("../GridManager")
 house = NodePath("../House")
 
-[node name="GridManager" type="Node" parent="." unique_id=366981937 node_paths=PackedStringArray("tree_manager", "ground_map", "wall_manager")]
+[node name="GridManager" type="Node" parent="." unique_id=366981937 node_paths=PackedStringArray("tree_manager", "ground_map", "wall_manager", "structure_manager")]
 script = ExtResource("7_6ebx2")
 tree_manager = NodePath("../TreeManager")
 ground_map = NodePath("../GroundMap")
 wall_manager = NodePath("../GroundMap/WallManager")
+structure_manager = NodePath("../StructureManager")
 
-[node name="House" type="Area2D" parent="." unique_id=859446054 node_paths=PackedStringArray("ground_map", "grid")]
+[node name="House" type="Area2D" parent="." unique_id=859446054 node_paths=PackedStringArray("ground_map", "grid", "structure_manager")]
 texture_filter = 1
 collision_mask = 0
 script = ExtResource("9_am7h6")
@@ -89,6 +119,7 @@ ground_map = NodePath("../GroundMap")
 grid = NodePath("../GridManager")
 starting_radius = 2
 health = 100.0
+structure_manager = NodePath("../StructureManager")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="House" unique_id=1493826941]
 shape = SubResource("RectangleShape2D_4bev8")
@@ -96,12 +127,13 @@ shape = SubResource("RectangleShape2D_4bev8")
 [node name="Sprite2D" type="Sprite2D" parent="House" unique_id=2096658549]
 texture = ExtResource("8_difym")
 
-[node name="Player" type="Area2D" parent="." unique_id=583931774 node_paths=PackedStringArray("house")]
+[node name="Player" type="Area2D" parent="." unique_id=583931774 node_paths=PackedStringArray("house", "structure_manager")]
 z_index = 1
-collision_layer = 2
+collision_layer = 66
 collision_mask = 28
 script = ExtResource("13_7f8yv")
 house = NodePath("../House")
+structure_manager = NodePath("../StructureManager")
 speed = 50.0
 aps = 50.0
 

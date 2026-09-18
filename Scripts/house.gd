@@ -10,6 +10,7 @@ func _ready() -> void:
 	grid.set_house_cell(cell)
 	for i in range(starting_radius):
 		upgrade_circle()
+	structure_manager.set_house(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -17,7 +18,3 @@ func _process(delta: float) -> void:
 
 func upgrade_circle():
 	grid.upgrade_circle()	
-
-func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
-	if event.is_action_pressed("LeftMouse"):
-		upgrade_circle()

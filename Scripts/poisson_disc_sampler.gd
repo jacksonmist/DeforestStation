@@ -1,6 +1,6 @@
 class_name PoissonDiscSampler
 
-var r: float = 24 # Min distance between points
+var r: float = 20 # Min distance between points
 var k: int = 30 # Limit samples to choose before rejection
 var cell_size: float = r / sqrt(2.0)
 var min_cell: Vector2i

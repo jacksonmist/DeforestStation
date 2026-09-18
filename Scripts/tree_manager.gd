@@ -15,14 +15,12 @@ func place_trees(points: Array[Vector2]):
 		tree.position = point
 		tree.tree_manager = self
 		tree.wood = wood
-		#var tree_cell := Vector2i(floor(point/16))
 		var tree_cell := Vector2i(round(point/16)) + Vector2i(24, 24)
 		var dir_to_house = Vector2i(Vector2(house_cell - tree_cell).normalized().round())
-		#tree.position = tree_cell * 16
 		tree_cell += dir_to_house
 		tree.set_cell(tree_cell)
 		var distance_to_house = tree_cell.distance_to(house_cell)
-		if distance_to_house <= house.starting_radius:
+		if distance_to_house <= house.starting_radius + 0.25:
 			tree.queue_free()
 			continue
 		if not tree_dict.has(tree_cell):

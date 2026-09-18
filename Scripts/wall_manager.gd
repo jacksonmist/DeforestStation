@@ -15,12 +15,23 @@ const W = 8
 @export var NW_wall: PackedScene
 
 var walls: Dictionary
+var timer: Timer
+@export var time_to_place: float = 2
 
 func place_walls(border_cells: Dictionary, station_cells: Dictionary):
+	if timer and not timer.is_stopped():
+		await timer.timeout
+	timer = Timer.new()
+	timer.one_shot = true
+	timer.autostart = false
+	add_child(timer)
+	timer.wait_time = time_to_place / border_cells.size()
 	for wall in walls.keys():
 		walls[wall].queue_free()
 	walls.clear()
 	for cell in border_cells:
+		if cell == Vector2i(25, 24) or cell == Vector2i(24, 23) or cell == Vector2i(23, 24) or cell == Vector2i(24, 25):
+			continue
 		var mask = 0
 		if Vector2i(cell.x, cell.y -1) in station_cells:
 			mask += N
@@ -49,6 +60,9 @@ func place_walls(border_cells: Dictionary, station_cells: Dictionary):
 			12:
 				wall_choice = NE_wall
 		if wall_choice:
+			if not timer.is_stopped():
+				await timer.timeout
+			timer.start()
 			var instance = wall_choice.instantiate()
 			add_child(instance)
 			walls[cell] = instance

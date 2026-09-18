@@ -4,6 +4,7 @@ var grid: Array[Vector2i]
 @export var tree_manager: TreeManager
 @export var ground_map: GroundMap
 @export var wall_manager: WallManager
+@export var structure_manager: StructureManager
 
 var station_cells: Dictionary
 var cached_cells: Array[Vector2i]
@@ -21,7 +22,6 @@ func set_house_cell(cell: Vector2i):
 func upgrade_circle():
 	if not can_upgrade:
 		return
-	current_radius += 1
 	var added_cells: Array[Vector2i]
 	cached_cells = []
 	var r2 = current_radius ** 2
@@ -36,6 +36,9 @@ func upgrade_circle():
 			station_cells[cell] = true
 			ground_map.set_station_floor(cell)
 		calculate_border_cells(added_cells)
+		current_radius += 1
+		structure_manager.update_radius(current_radius)
+		structure_manager.update_station_cells(station_cells)
 	else:
 		can_upgrade = false
 		cached_cells = added_cells
@@ -45,6 +48,9 @@ func no_marked_trees():
 		station_cells[cell] = true
 		ground_map.set_station_floor(cell)
 	calculate_border_cells(cached_cells)
+	current_radius += 1
+	structure_manager.update_radius(current_radius)
+	structure_manager.update_station_cells(station_cells)
 	can_upgrade = true
 
 func calculate_border_cells(added_cells: Array[Vector2i]):

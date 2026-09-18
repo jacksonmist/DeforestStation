@@ -76,4 +76,3 @@ func timeout():
 
 func add_wood(amount: int):
 	wood_amount += amount
-	print(wood_amount)
