@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b1mrwso64rt0p"]
+
+[ext_resource type="Script" uid="uid://c1b07x6ws2jrs" path="res://Scripts/wall.gd" id="1_kqsj0"]
+[ext_resource type="Texture2D" uid="uid://dq53sel1cfjyi" path="res://Sprites/Walls/NHWall.png" id="1_rjock"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fauc5"]
+size = Vector2(20, 9)
+
+[node name="NHWall" type="Area2D" unique_id=894483231]
+collision_layer = 33
+collision_mask = 0
+script = ExtResource("1_kqsj0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=115562556]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_fauc5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1351434149]
+texture = ExtResource("1_rjock")

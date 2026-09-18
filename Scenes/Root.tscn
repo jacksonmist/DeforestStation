@@ -3,8 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dhat3ipmnjj1a" path="res://Sprites/BasicGroundTexture.png" id="1_y1djv"]
 [ext_resource type="Texture2D" uid="uid://cu8cbxhf23tdt" path="res://Sprites/StationFloor.png" id="2_t0qco"]
 [ext_resource type="Script" uid="uid://dix58tw62qy4c" path="res://Scripts/ground_map.gd" id="3_75oan"]
-[ext_resource type="Texture2D" uid="uid://d4huknsj0y0q2" path="res://WallBitMask.tres" id="4_fauc5"]
-[ext_resource type="Script" uid="uid://djgieej3j6nfl" path="res://Scripts/wall_map.gd" id="5_yiytj"]
 [ext_resource type="Script" uid="uid://brclpklxi4iph" path="res://Scripts/pds_manager.gd" id="6_626no"]
 [ext_resource type="Script" uid="uid://uds2sukswpu" path="res://Scripts/grid_manager.gd" id="7_6ebx2"]
 [ext_resource type="Texture2D" uid="uid://eu8e1ajk145w" path="res://Sprites/BasicHouse.png" id="8_difym"]
@@ -16,6 +14,15 @@
 [ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/friendly_attack_circle.tscn" id="13_75oan"]
 [ext_resource type="Script" uid="uid://bdk6tyr748nlp" path="res://Scripts/lumberjack.gd" id="15_75oan"]
 [ext_resource type="Texture2D" uid="uid://bgxie15kcisp8" path="res://Sprites/lumberjack.png" id="15_fauc5"]
+[ext_resource type="Script" uid="uid://0er3lf37txt3" path="res://Scripts/wall_manager.gd" id="17_yiytj"]
+[ext_resource type="PackedScene" uid="uid://b1mrwso64rt0p" path="res://Scenes/Walls/nh_wall.tscn" id="18_7f8yv"]
+[ext_resource type="PackedScene" uid="uid://bqkooc4x12xdd" path="res://Scenes/Walls/ev_wall.tscn" id="19_ve1ck"]
+[ext_resource type="PackedScene" uid="uid://ybcisskitqda" path="res://Scenes/Walls/sh_wall.tscn" id="20_m1xq0"]
+[ext_resource type="PackedScene" uid="uid://l6gea42fapkk" path="res://Scenes/Walls/wv_wall.tscn" id="21_jcrtk"]
+[ext_resource type="PackedScene" uid="uid://bakp2uylxujxy" path="res://Scenes/Walls/neinv_wall.tscn" id="22_8btxg"]
+[ext_resource type="PackedScene" uid="uid://i1d60enxi5n4" path="res://Scenes/Walls/seinv_wall.tscn" id="23_lbgny"]
+[ext_resource type="PackedScene" uid="uid://bgfjew1keeat4" path="res://Scenes/Walls/swinv_wall.tscn" id="24_asw58"]
+[ext_resource type="PackedScene" uid="uid://cegd77rb4u3em" path="res://Scenes/Walls/nwinv_wall.tscn" id="25_rcb2t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g1ltr"]
 texture = ExtResource("1_y1djv")
@@ -28,20 +35,6 @@ texture = ExtResource("2_t0qco")
 [sub_resource type="TileSet" id="TileSet_ltfbr"]
 sources/0 = SubResource("TileSetAtlasSource_g1ltr")
 sources/1 = SubResource("TileSetAtlasSource_ebfx1")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2qvp8"]
-texture = ExtResource("4_fauc5")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-0:1/0 = 0
-2:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_4bev8"]
-sources/1 = SubResource("TileSetAtlasSource_2qvp8")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bev8"]
 
@@ -59,14 +52,21 @@ tile_set = SubResource("TileSet_ltfbr")
 script = ExtResource("3_75oan")
 pds_manager = NodePath("PoissonDiscSampler")
 
-[node name="WallMap" type="TileMapLayer" parent="GroundMap" unique_id=1622866128]
-tile_set = SubResource("TileSet_4bev8")
-script = ExtResource("5_yiytj")
-
 [node name="PoissonDiscSampler" type="Node" parent="GroundMap" unique_id=650709598 node_paths=PackedStringArray("ground_map", "tree_manager")]
 script = ExtResource("6_626no")
 ground_map = NodePath("..")
 tree_manager = NodePath("../../TreeManager")
+
+[node name="WallManager" type="Node" parent="GroundMap" unique_id=53144409]
+script = ExtResource("17_yiytj")
+N_wall = ExtResource("18_7f8yv")
+E_wall = ExtResource("19_ve1ck")
+S_wall = ExtResource("20_m1xq0")
+W_wall = ExtResource("21_jcrtk")
+NE_wall = ExtResource("22_8btxg")
+SE_wall = ExtResource("23_lbgny")
+SW_wall = ExtResource("24_asw58")
+NW_wall = ExtResource("25_rcb2t")
 
 [node name="TreeManager" type="Node" parent="." unique_id=1309576017 node_paths=PackedStringArray("grid_manager", "house")]
 script = ExtResource("10_dtygg")
@@ -75,11 +75,11 @@ tree_scene = ExtResource("11_aoudc")
 grid_manager = NodePath("../GridManager")
 house = NodePath("../House")
 
-[node name="GridManager" type="Node" parent="." unique_id=366981937 node_paths=PackedStringArray("tree_manager", "ground_map", "wall_map")]
+[node name="GridManager" type="Node" parent="." unique_id=366981937 node_paths=PackedStringArray("tree_manager", "ground_map", "wall_manager")]
 script = ExtResource("7_6ebx2")
 tree_manager = NodePath("../TreeManager")
 ground_map = NodePath("../GroundMap")
-wall_map = NodePath("../GroundMap/WallMap")
+wall_manager = NodePath("../GroundMap/WallManager")
 
 [node name="House" type="Area2D" parent="." unique_id=859446054 node_paths=PackedStringArray("ground_map", "grid")]
 texture_filter = 1

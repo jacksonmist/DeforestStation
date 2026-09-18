@@ -3,7 +3,7 @@ class_name GridManager extends Node
 var grid: Array[Vector2i]
 @export var tree_manager: TreeManager
 @export var ground_map: GroundMap
-@export var wall_map: WallMap
+@export var wall_manager: WallManager
 
 var station_cells: Dictionary
 var cached_cells: Array[Vector2i]
@@ -56,4 +56,4 @@ func calculate_border_cells(added_cells: Array[Vector2i]):
 			var neighbor = Vector2i(cell + direction)
 			if not station_cells.has(neighbor):
 				border_cells[neighbor] = true
-	wall_map.place_walls(border_cells, station_cells)
+	wall_manager.place_walls(border_cells, station_cells)

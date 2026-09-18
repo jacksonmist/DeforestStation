@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ybcisskitqda"]
+
+[ext_resource type="Script" uid="uid://c1b07x6ws2jrs" path="res://Scripts/wall.gd" id="1_ctot8"]
+[ext_resource type="Texture2D" uid="uid://dpyo5ajkso1e" path="res://Sprites/Walls/SHWall.png" id="1_ri0ft"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fauc5"]
+size = Vector2(21, 9)
+
+[node name="SHWall" type="Area2D" unique_id=1291883185]
+collision_layer = 33
+collision_mask = 0
+script = ExtResource("1_ctot8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1432480661]
+position = Vector2(0.5, -5.5)
+shape = SubResource("RectangleShape2D_fauc5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1360207215]
+texture = ExtResource("1_ri0ft")

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bgfjew1keeat4"]
+
+[ext_resource type="Script" uid="uid://c1b07x6ws2jrs" path="res://Scripts/wall.gd" id="1_51aug"]
+[ext_resource type="Texture2D" uid="uid://blwlkac4hqvw5" path="res://Sprites/Walls/SWINVWall.png" id="1_aq3gb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fauc5"]
+size = Vector2(21, 20)
+
+[node name="SWINVWall" type="Area2D" unique_id=1167158250]
+collision_layer = 33
+collision_mask = 0
+script = ExtResource("1_51aug")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1581255986]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_fauc5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=326005138]
+texture = ExtResource("1_aq3gb")

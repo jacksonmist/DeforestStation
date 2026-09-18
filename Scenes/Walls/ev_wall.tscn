@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bqkooc4x12xdd"]
+
+[ext_resource type="Texture2D" uid="uid://n8tfc07m78jm" path="res://Sprites/Walls/EVWall.png" id="1_2hi4b"]
+[ext_resource type="Script" uid="uid://c1b07x6ws2jrs" path="res://Scripts/wall.gd" id="1_f7tdo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fauc5"]
+size = Vector2(9, 20)
+
+[node name="EVWall" type="Area2D" unique_id=19776424]
+collision_layer = 33
+collision_mask = 0
+script = ExtResource("1_f7tdo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=583963234]
+position = Vector2(-5.5, 0)
+shape = SubResource("RectangleShape2D_fauc5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=795924912]
+texture = ExtResource("1_2hi4b")

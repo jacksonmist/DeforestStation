@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://i1d60enxi5n4"]
+
+[ext_resource type="Texture2D" uid="uid://tqgtj8tej84c" path="res://Sprites/Walls/SEINVWall.png" id="1_4l1o1"]
+[ext_resource type="Script" uid="uid://c1b07x6ws2jrs" path="res://Scripts/wall.gd" id="1_ikep0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fauc5"]
+size = Vector2(21, 20)
+
+[node name="SEINVWall" type="Area2D" unique_id=1037601829]
+collision_layer = 33
+collision_mask = 0
+script = ExtResource("1_ikep0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=966146832]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_fauc5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=738222481]
+texture = ExtResource("1_4l1o1")
