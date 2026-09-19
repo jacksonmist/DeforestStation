@@ -50,4 +50,3 @@ func remove_marked(tree):
 		print("Marked tree not found in array")
 	if marked_trees.is_empty():
 		grid_manager.no_marked_trees()
-	print(marked_trees)

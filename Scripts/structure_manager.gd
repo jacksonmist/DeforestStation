@@ -24,6 +24,11 @@ var cached_instance: Area2D
 var selected_structure: PackedScene
 @export var barracks: PackedScene
 
+var shown_building_menu: BuildingMenu
+
+signal entered_build
+signal exited_build
+
 enum structures_enum {
 	empty,
 	barracks,
@@ -61,20 +66,25 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 			var clicked_building = structures[mouse_cell]
 		elif selected_structure and not structures.has(mouse_cell):
 			add_child(cached_instance)
-			var cell = mouse_cell - Vector2i(24, 24)
-			cached_instance.position = (cell * 16)
+			var cell = mouse_cell
+			cached_instance.position = (cell - Vector2i(24, 24)) * 16
 			cached_instance.set_active(true)
 			structures[cell] = cached_instance
 			change_wood(-cached_instance.purchase_cost)
+			cached_instance.set_origin(cell)
 			cached_instance = null
 			select_structure(structures_enum.empty)
 
 func _player_entered(body):
 	is_build_mode = true
+	entered_build.emit()
 	UiManager.show_build_menu()
 
 func _player_exited(body):
 	is_build_mode = false
+	exited_build.emit()
+	selection.visible = false
+	set_shown_building_menu(null)
 	UiManager.hide_build_menu()
 
 func update_radius(amount: float):
@@ -108,6 +118,7 @@ func select_structure(type: structures_enum):
 			selected_structure = null
 			return
 		selected_structure_sprite.texture = cached_instance.texture
+		cached_instance.set_structure_manager(self)
 	else:
 		selected_structure_sprite.texture = null
 
@@ -117,3 +128,17 @@ func change_wood(amount: int):
 
 func get_selected_structure() -> PackedScene:
 	return selected_structure
+
+func set_shown_building_menu(menu: BuildingMenu):
+	if shown_building_menu and shown_building_menu != menu:
+		shown_building_menu.hide_menu()
+	shown_building_menu = menu
+
+func sell_building(building_cells: Array[Vector2i]):
+	var origin = building_cells[0]
+	if not structures[origin].can_sell:
+		return
+	change_wood(int(ceil(float(structures[origin].purchase_cost) / 2)))
+	structures[origin].queue_free()
+	for cell in building_cells:
+		structures.erase(cell)

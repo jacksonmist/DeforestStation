@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://bgfjew1keeat4" path="res://Scenes/Walls/swinv_wall.tscn" id="24_asw58"]
 [ext_resource type="Script" uid="uid://cp5rh6gpfpk4k" path="res://Scripts/structure_manager.gd" id="24_ql2nr"]
 [ext_resource type="PackedScene" uid="uid://cegd77rb4u3em" path="res://Scenes/Walls/nwinv_wall.tscn" id="25_rcb2t"]
+[ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="26_lbgny"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4bev8"]
 
@@ -120,12 +121,15 @@ grid = NodePath("../GridManager")
 starting_radius = 2
 health = 100.0
 structure_manager = NodePath("../StructureManager")
+base_upgrade_cost = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="House" unique_id=1493826941]
 shape = SubResource("RectangleShape2D_4bev8")
 
 [node name="Sprite2D" type="Sprite2D" parent="House" unique_id=2096658549]
 texture = ExtResource("8_difym")
+
+[node name="BuildingMenu" parent="House" unique_id=1431244483 instance=ExtResource("26_lbgny")]
 
 [node name="Player" type="Area2D" parent="." unique_id=583931774 node_paths=PackedStringArray("house", "structure_manager")]
 z_index = 1
