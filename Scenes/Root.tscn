@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://dpempw6q6puu7" path="res://Scenes/wood.tscn" id="11_fauc5"]
 [ext_resource type="Script" uid="uid://3qbuoccerxyg" path="res://Scripts/player.gd" id="13_7f8yv"]
 [ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/friendly_attack_circle.tscn" id="13_75oan"]
-[ext_resource type="Script" uid="uid://bdk6tyr748nlp" path="res://Scripts/lumberjack.gd" id="15_75oan"]
 [ext_resource type="Texture2D" uid="uid://bgxie15kcisp8" path="res://Sprites/lumberjack.png" id="15_fauc5"]
 [ext_resource type="Script" uid="uid://0er3lf37txt3" path="res://Scripts/wall_manager.gd" id="17_yiytj"]
 [ext_resource type="PackedScene" uid="uid://b1mrwso64rt0p" path="res://Scenes/Walls/nh_wall.tscn" id="18_7f8yv"]
@@ -50,8 +49,6 @@ size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ltfbr"]
 radius = 8.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_fojhu"]
 
 [node name="Node2D" type="Node2D" unique_id=1513264109]
 
@@ -156,20 +153,3 @@ collision_mask = 12
 texture = ExtResource("15_fauc5")
 
 [node name="Timer" type="Timer" parent="Player" unique_id=1313961637]
-
-[node name="Lumberjack" type="Area2D" parent="." unique_id=2043696574]
-position = Vector2(22, 0)
-collision_layer = 4
-collision_mask = 28
-script = ExtResource("15_75oan")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lumberjack" unique_id=1879109957]
-shape = SubResource("CircleShape2D_fojhu")
-
-[node name="AttackCircle" parent="Lumberjack" unique_id=487577566 instance=ExtResource("13_75oan")]
-
-[node name="Timer" type="Timer" parent="Lumberjack" unique_id=924671174]
-
-[node name="Sprite2D" type="Sprite2D" parent="Lumberjack" unique_id=1402586986]
-self_modulate = Color(0.39607844, 1, 0, 1)
-texture = ExtResource("15_fauc5")

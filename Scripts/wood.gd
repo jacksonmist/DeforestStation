@@ -12,15 +12,18 @@ func _ready() -> void:
 		sprite.flip_h = false
 	else:
 		sprite.flip_h = true
+	area_entered.connect(_on_area_entered)
 
 func _process(delta: float) -> void:
 	if target:
-		var direction = (target.position - position).normalized()
+		var direction = (target.global_position - position).normalized()
 		position += (direction * delta * collection_speed)
 		collection_speed += (acceleration * delta)
-		if position.distance_to(target.position) <= 2:
+		if position.distance_to(target.global_position) <= 2:
 			target.add_wood(value)
 			queue_free()
 
-func collect(body: Entity):
+func _on_area_entered(body):
+	if body.wood_amount >= body.max_wood:
+		return
 	target = body

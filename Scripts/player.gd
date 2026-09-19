@@ -12,8 +12,7 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 
 func _on_area_entered(body):
-	if body is Wood:
-		body.collect(self)
+	pass
 
 func add_wood(amount: int):
 	structure_manager.change_wood(amount)

@@ -1,6 +1,7 @@
 class_name Entity extends Area2D
 
-@export var health: float = 10.0
+@export var max_health: float = 10.0
+var health: float
 @export var speed: float = 20.0
 @export var aps: float = 1.0
 @export var damage: float = 5.0
@@ -8,8 +9,13 @@ class_name Entity extends Area2D
 var can_attack: bool = true
 var attack_cooldown: float = 1.0
 var timer: Timer
+var is_active: bool = false
+var low_health_factor: float = 0.33
+var is_low_health: bool = false
 
 var wood_amount: int
+@export var starting_max_wood: int = 5
+var max_wood: int = INF
 
 enum allegience {
 	friendly,
@@ -26,6 +32,9 @@ var target_list: Array[Node2D]
 var move_direction := Vector2.ZERO
 
 func _ready() -> void:
+	is_active = true
+	health = max_health
+	max_wood = starting_max_wood
 	for child in get_children():
 		if child.has_method("setup"):
 			child.setup(self)
@@ -57,6 +66,8 @@ func attack():
 	
 func take_damage(amount: float):
 	health -= amount
+	if health / max_health < low_health_factor:
+		is_low_health = true
 	if health <= 0:
 		health = 0
 		die()
@@ -79,3 +90,9 @@ func timeout():
 
 func add_wood(amount: int):
 	wood_amount += amount
+
+func heal(amount: float):
+	health += amount
+	if health >= max_health:
+		health = max_health
+	print(health, max_health)

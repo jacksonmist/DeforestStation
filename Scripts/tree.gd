@@ -13,6 +13,7 @@ var cell: Vector2i
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var timer: Timer = $Timer
 @onready var label: Label = $Label
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 @export var health: float = 5.0
 @export var respawn_time: float = 10.0
@@ -63,6 +64,7 @@ func set_active(active: bool):
 		respawn_tween = create_tween()
 		respawn_tween.tween_property(sprite, "modulate", opaque, 0.5)
 	else:
+		collision.disabled = true
 		sprite.modulate = transparent
 
 func set_cell(cell_ref: Vector2i):

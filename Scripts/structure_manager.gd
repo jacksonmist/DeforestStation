@@ -113,7 +113,7 @@ func select_structure(type: structures_enum):
 	if selected_structure:
 		cached_instance = selected_structure.instantiate()
 		if cached_instance.purchase_cost > wood_amount:
-			cached_instance.queue_free()
+			cached_instance.cleanup()
 			cached_instance = null
 			selected_structure = null
 			return
@@ -139,6 +139,6 @@ func sell_building(building_cells: Array[Vector2i]):
 	if not structures[origin].can_sell:
 		return
 	change_wood(int(ceil(float(structures[origin].purchase_cost) / 2)))
-	structures[origin].queue_free()
+	structures[origin].cleanup()
 	for cell in building_cells:
 		structures.erase(cell)

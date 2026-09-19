@@ -13,6 +13,7 @@ var max_level: int = 10
 var can_sell: bool = true
 var origin: Vector2i
 var occupied_cells: Array[Vector2i]
+var is_active: bool = false
 
 signal clicked
 signal max_level_reached
@@ -22,6 +23,7 @@ func _ready() -> void:
 		if child.has_method("setup"):
 			child.setup(self)
 	setup()
+	calculate_stats()
 	_calculate_upgrade_cost()
 
 func setup():
@@ -35,20 +37,20 @@ func upgrade_level() -> bool:
 		return false
 	level += 1
 	structure_manager.change_wood(-current_upgrade_cost)
-	upgrade_stats()
+	calculate_stats()
 	if level == max_level:
 		max_level_reached.emit()
 	_calculate_upgrade_cost()
 	return true
 
-func upgrade_stats():
+func calculate_stats():
 	pass
 
 func _calculate_upgrade_cost():
 	current_upgrade_cost = base_upgrade_cost * 2 ** (level - 1)
 
 func set_active(active: bool):
-	pass
+	is_active = active
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("LeftMouse"):
@@ -70,3 +72,6 @@ func sell():
 	if not can_sell:
 		return
 	structure_manager.sell_building(occupied_cells)
+
+func cleanup():
+	queue_free()
