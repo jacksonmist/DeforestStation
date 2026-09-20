@@ -21,9 +21,11 @@ var max_wood: int = INF
 
 var walk_rotation: float = PI / 5
 var walk_height: float = 4
+var walk_width: float = 4
 var base_walk_speed: float = 0.3
-var position_tween: Tween
+var position_tween_y: Tween
 var rotation_tween: Tween
+var x_dir: int = 0
 
 enum allegience {
 	friendly,
@@ -57,25 +59,28 @@ func _process(delta: float) -> void:
 	if not imm_targets.is_empty():
 		attack()
 	if move_direction == Vector2.ZERO:
+		x_dir = 0
 		walk_time = 0
 		if not rotation_tween and sprite.rotation != 0:
 			rotation_tween = create_tween().set_parallel(true)
 			rotation_tween.tween_property(sprite, "rotation", 0, 0.1)
-		if not position_tween and sprite.position != Vector2.ZERO:
-			position_tween = create_tween().set_parallel(true)
-			position_tween.tween_property(sprite, "position", Vector2.ZERO, 0.1)
+		if not position_tween_y and sprite.position != Vector2.ZERO:
+			position_tween_y = create_tween().set_parallel(true)
+			position_tween_y.tween_property(sprite, "position", Vector2.ZERO, 0.1)
 		return
 	if rotation_tween:
 		rotation_tween.kill()
-		rotation_tween = null
-	if position_tween:
-		position_tween.kill()
-		position_tween = null
+	rotation_tween = null
+	if position_tween_y:
+		position_tween_y.kill()
+	position_tween_y = null
 	position += (move_direction * speed * delta)
 	walk_time += delta
+	if x_dir == 0:
+		x_dir = 1 if move_direction.x >= 0 else -1
+	sprite.position.x = x_dir * (walk_width * sin(walk_time * base_walk_speed * speed))
 	sprite.position.y = -(walk_height * sin(walk_time * base_walk_speed * speed) ** 2)
-	sprite.rotation = (walk_rotation * sin(walk_time * base_walk_speed * speed))
-	
+	sprite.rotation = x_dir * (walk_rotation * sin(walk_time * base_walk_speed * speed))
 
 func attack():
 	if not can_attack:

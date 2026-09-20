@@ -153,7 +153,7 @@ collision_mask = 28
 script = ExtResource("13_7f8yv")
 house = NodePath("../House")
 structure_manager = NodePath("../StructureManager")
-speed = 50.0
+speed = 25.0
 aps = 2.0
 damage = 1.0
 
