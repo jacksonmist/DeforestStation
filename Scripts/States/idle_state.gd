@@ -1,7 +1,7 @@
 class_name IdleState extends State
 
 func enter_state() ->  void:
-	print("idle")
+	pass
 	
 func update(_delta: float) -> void:
 	if parent.wood_amount >= parent.max_wood:

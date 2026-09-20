@@ -8,6 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_fojhu"]
 
 [node name="Lumberjack" type="Area2D" unique_id=182905865]
+z_index = 4
 collision_layer = 2
 collision_mask = 28
 script = ExtResource("1_cvosc")

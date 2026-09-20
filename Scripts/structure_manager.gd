@@ -4,9 +4,13 @@ class_name StructureManager extends Area2D
 @export var neg_selection: Texture2D
 @export var neu_selection: Texture2D
 
+
 @onready var shape: CollisionShape2D = $CollisionShape2D
+@onready var external_sprite: Sprite2D = $ExternalSprite
 @onready var selection: Sprite2D = $Selection
 @onready var selected_structure_sprite: Sprite2D = $Selection/SelectedStructure
+
+var external_sprite_offset := Vector2(8, -16)
 
 var station_cells: Dictionary
 var structures: Dictionary
@@ -48,10 +52,14 @@ func _process(delta: float) -> void:
 		var mouse_pos = get_global_mouse_position()
 		mouse_cell = Vector2i(floor((mouse_pos + Vector2(8, 8)) / 16)) + Vector2i(24, 24)
 		if mouse_cell in station_cells:
+			external_sprite.visible = false
 			selection.visible = true
 			selection.position = (mouse_cell - Vector2i(24, 24)) * 16
-		elif selection.visible == true:
-			selection.visible = false
+		else:
+			external_sprite.visible = true
+			external_sprite.position = mouse_pos + external_sprite_offset
+			if selection.visible == true:
+				selection.visible = false
 		if not selected_structure:
 			selection.texture = neu_selection
 			return
@@ -64,7 +72,7 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 	if event.is_action_pressed("LeftMouse"):
 		if not selected_structure and structures.has(mouse_cell):
 			var clicked_building = structures[mouse_cell]
-		elif selected_structure and not structures.has(mouse_cell):
+		elif selected_structure and not structures.has(mouse_cell) and station_cells.has(mouse_cell):
 			add_child(cached_instance)
 			var cell = mouse_cell
 			cached_instance.position = (cell - Vector2i(24, 24)) * 16
@@ -74,6 +82,7 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 			cached_instance.set_origin(cell)
 			cached_instance = null
 			select_structure(structures_enum.empty)
+			external_sprite.texture = null
 
 func _player_entered(body):
 	is_build_mode = true
@@ -101,6 +110,7 @@ func update_station_cells(dict_ref: Dictionary):
 func select_structure(type: structures_enum):
 	if cached_instance:
 		cached_instance.queue_free()
+	external_sprite.texture = null
 	cached_instance = null
 	match type:
 		structures_enum.empty:
@@ -119,6 +129,7 @@ func select_structure(type: structures_enum):
 			return
 		selected_structure_sprite.texture = cached_instance.texture
 		cached_instance.set_structure_manager(self)
+		external_sprite.texture = cached_instance.texture
 	else:
 		selected_structure_sprite.texture = null
 

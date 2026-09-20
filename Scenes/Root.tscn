@@ -79,6 +79,10 @@ texture = ExtResource("2_7f8yv")
 [node name="SelectedStructure" type="Sprite2D" parent="StructureManager/Selection" unique_id=700509714]
 self_modulate = Color(1, 1, 1, 0.5019608)
 
+[node name="ExternalSprite" type="Sprite2D" parent="StructureManager" unique_id=1269659419]
+modulate = Color(1, 1, 1, 0.78431374)
+z_index = 8
+
 [node name="GroundMap" type="TileMapLayer" parent="." unique_id=348636908 node_paths=PackedStringArray("pds_manager")]
 z_index = -1
 position = Vector2(-8, -8)
