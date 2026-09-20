@@ -151,6 +151,10 @@ base_amount_to_spawn = 100
 
 [node name="Timer" type="Timer" parent="EnemyManager" unique_id=1248380354]
 
+[node name="SpawnSpace" type="Timer" parent="EnemyManager" unique_id=1071549533]
+wait_time = 0.1
+one_shot = true
+
 [node name="Player" type="Area2D" parent="." unique_id=583931774 node_paths=PackedStringArray("house", "structure_manager")]
 z_index = 1
 collision_layer = 66

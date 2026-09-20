@@ -1,5 +1,6 @@
 class_name EnemyManager extends Node
 @onready var timer: Timer = $Timer
+@onready var spawn_space: Timer = $SpawnSpace
 
 @export var enemy_scenes: Array[PackedScene]
 
@@ -32,8 +33,9 @@ func spawn_enemy():
 		instance.set_wood(wood)
 		instance.set_manager(self)
 		active_enemies.append(instance)
-		
 		instance.position = position
+		spawn_space.start()
+		await spawn_space.timeout
 	timer.wait_time = spawn_delay
 	timer.start()
 
