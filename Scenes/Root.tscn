@@ -146,7 +146,8 @@ enemy_scenes = Array[PackedScene]([ExtResource("29_b2f2k"), ExtResource("28_asw5
 difficulty_manager = NodePath("../DifficultyManager")
 tree_manager = NodePath("../TreeManager")
 house = NodePath("../House")
-base_amount_to_spawn = 0
+wood = ExtResource("11_fauc5")
+base_amount_to_spawn = 100
 
 [node name="Timer" type="Timer" parent="EnemyManager" unique_id=1248380354]
 

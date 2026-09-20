@@ -47,7 +47,7 @@ func cut_down():
 		respawn_tween.kill()
 	var wood_instance = wood.instantiate()
 	tree_manager.add_child(wood_instance)
-	wood_instance.position = position
+	wood_instance.set_start_position(position)
 	
 	if not is_marked:
 		timer.start()

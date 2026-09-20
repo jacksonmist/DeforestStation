@@ -6,6 +6,7 @@ class_name EnemyManager extends Node
 @export var difficulty_manager: DifficultyManager
 @export var tree_manager: TreeManager
 @export var house: House
+@export var wood: PackedScene
 
 @export var base_amount_to_spawn: int = 5
 var spawn_amount_modifier: float = 1
@@ -28,6 +29,8 @@ func spawn_enemy():
 		var position = get_position()
 		add_child(instance)
 		instance.set_house(house)
+		instance.set_wood(wood)
+		instance.set_manager(self)
 		active_enemies.append(instance)
 		
 		instance.position = position

@@ -125,3 +125,6 @@ func heal(amount: float):
 	health += amount
 	if health >= max_health:
 		health = max_health
+
+func set_active(active: bool):
+	is_active = active

@@ -1,5 +1,6 @@
 class_name Building extends Area2D
 
+@export var destroyed: Texture2D
 @export var texture: Texture2D
 @export var health: float
 @export var structure_manager: StructureManager
