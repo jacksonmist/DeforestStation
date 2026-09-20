@@ -3,7 +3,6 @@ class_name Lumberjack extends Entity
 @onready var state_manager: LumberjackStateManager = $LumberjackStateManager
 var house: House
 var barracks: Barracks
-@onready var sprite: Sprite2D = $Sprite2D
 
 func setup(house_ref: House, barracks_ref: Barracks):
 	house = house_ref
