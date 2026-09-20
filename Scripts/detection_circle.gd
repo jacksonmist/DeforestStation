@@ -1,4 +1,4 @@
-class_name FriendlyAttackCircle extends Area2D
+class_name AttackCircle extends Area2D
 
 @onready var collision: CollisionShape2D = $CollisionShape2D
 

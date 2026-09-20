@@ -12,7 +12,6 @@ func setup(house_ref: House, barracks_ref: Barracks):
 	state_manager.set_barracks(barracks)
 	area_entered.connect(_on_body_entered)
 	area_entered.connect(_on_body_exited)
-	health = 1
 	
 func _on_body_entered(body):
 	if not dis_targets.has(body):

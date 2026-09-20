@@ -1,7 +1,6 @@
 class_name AttackState extends State
 
 func enter_state() ->  void:
-	print("Attack")
 	parent.move(Vector2.ZERO)
 	
 func update(_delta: float) -> void:

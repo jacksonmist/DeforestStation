@@ -17,6 +17,7 @@ var cell: Vector2i
 
 @export var health: float = 5.0
 @export var respawn_time: float = 10.0
+var index: int = 0
 
 var respawn_tween: Tween
 
@@ -53,6 +54,7 @@ func cut_down():
 		set_active(false)
 	else:
 		tree_manager.remove_marked(self)
+		tree_manager.remove_from_dict(self)
 		queue_free()
 
 func respawn():

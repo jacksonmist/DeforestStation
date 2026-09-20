@@ -1,7 +1,6 @@
 class_name HealState extends State
 
 func enter_state() ->  void:
-	print("Heal")
 	parent.move(Vector2.ZERO)
 	barracks.start_healing(parent)
 	parent.set_active(false)

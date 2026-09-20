@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bq1vdjj0tnmfv"]
 
 [ext_resource type="Script" uid="uid://bdk6tyr748nlp" path="res://Scripts/lumberjack.gd" id="1_cvosc"]
-[ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/friendly_attack_circle.tscn" id="2_l6amt"]
+[ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="2_l6amt"]
 [ext_resource type="Texture2D" uid="uid://bgxie15kcisp8" path="res://Sprites/lumberjack.png" id="3_tmy3w"]
 [ext_resource type="Script" uid="uid://bke8m11uje4jh" path="res://Scripts/States/lumberjack_state_machine.gd" id="4_l6amt"]
 
@@ -11,8 +11,6 @@
 collision_layer = 2
 collision_mask = 28
 script = ExtResource("1_cvosc")
-speed = 100.0
-starting_max_wood = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=20061218]
 shape = SubResource("CircleShape2D_fojhu")

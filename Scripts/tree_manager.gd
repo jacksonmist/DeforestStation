@@ -26,7 +26,11 @@ func place_trees(points: Array[Vector2]):
 		if not tree_dict.has(tree_cell):
 			tree_dict[tree_cell] = [tree]
 		else:
+			var idx: int = 0
+			for x in tree_dict[tree_cell]:
+				idx += 1
 			tree_dict[tree_cell].append(tree)
+			tree.index = idx
 
 func check_occupied(cells: Array[Vector2i]):
 	marked_trees = []
@@ -50,3 +54,8 @@ func remove_marked(tree):
 		print("Marked tree not found in array")
 	if marked_trees.is_empty():
 		grid_manager.no_marked_trees()
+
+func remove_from_dict(tree: TreeObj):
+	tree_dict[tree.cell].remove_at(tree.index)
+	if tree_dict[tree.cell].is_empty():
+		tree_dict.erase(tree.cell)

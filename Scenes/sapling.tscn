@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cncyhvhqrtrbr"]
+
+[ext_resource type="Script" uid="uid://c12j6dail8atv" path="res://Scenes/sapling.gd" id="1_3xnho"]
+[ext_resource type="Texture2D" uid="uid://bepnfbs6lblmt" path="res://Sprites/sapling.png" id="2_gmhoa"]
+[ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="2_noemw"]
+[ext_resource type="Script" uid="uid://rvj525v7mbf5" path="res://Scripts/States/enemy_state_machine.gd" id="4_gmhoa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wovv8"]
+radius = 8.0
+
+[node name="Sapling" type="Area2D" unique_id=2022470615]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_3xnho")
+wood_dropped = 1
+max_health = 2.0
+aps = 2.0
+damage = 0.5
+atk_range = 5.0
+entity_allegience = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1089844469]
+shape = SubResource("CircleShape2D_wovv8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1022075136]
+texture = ExtResource("2_gmhoa")
+
+[node name="AttackCircle" parent="." unique_id=1872592653 instance=ExtResource("2_noemw")]
+collision_mask = 3
+
+[node name="EnemyStateMachine" type="Node" parent="." unique_id=279241069]
+script = ExtResource("4_gmhoa")
+metadata/_custom_type_script = "uid://rvj525v7mbf5"

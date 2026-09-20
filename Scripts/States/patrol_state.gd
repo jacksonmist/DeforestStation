@@ -2,7 +2,6 @@ class_name PatrolState extends State
 
 var move_direction: Vector2
 func enter_state() ->  void:
-	print("patrol")
 	var angle = randf_range(0, 2 * PI)
 	move_direction = Vector2(cos(angle), sin(angle))
 	

@@ -11,9 +11,9 @@ size = Vector2(16, 16)
 [node name="Barracks" type="Area2D" unique_id=1416347816]
 script = ExtResource("1_coeoc")
 lj_scene = ExtResource("2_87o8n")
-base_lj_count = 1
 texture = ExtResource("2_3p7p4")
 health = 20.0
+purchase_cost = 5
 metadata/_custom_type_script = "uid://j4q133l8rdcj"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=708572482]

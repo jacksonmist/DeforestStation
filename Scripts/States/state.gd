@@ -2,11 +2,11 @@
 class_name State extends Resource
 
 var parent: Entity
-var sm: LumberjackStateManager
+var sm
 var house: Building
 var barracks: Barracks
 
-func setup(parent_ref: Entity, state_machine_ref: LumberjackStateManager):
+func setup(parent_ref: Entity, state_machine_ref):
 	parent = parent_ref
 	sm = state_machine_ref
 
