@@ -157,6 +157,7 @@ one_shot = true
 
 [node name="Player" type="Area2D" parent="." unique_id=583931774 node_paths=PackedStringArray("house", "structure_manager")]
 z_index = 1
+position = Vector2(32, 0)
 collision_layer = 66
 collision_mask = 28
 script = ExtResource("13_7f8yv")

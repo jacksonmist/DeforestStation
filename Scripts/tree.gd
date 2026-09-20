@@ -21,6 +21,10 @@ var index: int = 0
 
 var respawn_tween: Tween
 
+var damaged_tween: Tween
+@export var damaged_color: Color = Color("79444a")
+var damaged_time: float = 0.3
+
 func _ready() -> void:
 	timer.timeout.connect(respawn)
 	x.visible = false
@@ -39,6 +43,11 @@ func take_damage(amount: float):
 	if not is_active:
 		return
 	health -= amount
+	if damaged_tween and damaged_tween.is_running():
+		damaged_tween.kill()
+	damaged_tween = create_tween()
+	damaged_tween.tween_property(self, "modulate", damaged_color, damaged_time / 2)
+	damaged_tween.tween_property(self, "modulate", Color.WHITE, damaged_time / 2)
 	if health <= 0:
 		cut_down()
 

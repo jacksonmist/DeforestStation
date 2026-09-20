@@ -9,6 +9,7 @@ var health: float
 @export var atk_range: float = 8.0
 var can_attack: bool = true
 var attack_cooldown: float = 1.0
+var chosen_target
 var timer: Timer
 var is_active: bool = false
 var low_health_factor: float = 0.33
@@ -26,6 +27,10 @@ var base_walk_speed: float = 0.3
 var position_tween_y: Tween
 var rotation_tween: Tween
 var x_dir: int = 0
+
+var damaged_tween: Tween
+@export var damaged_color: Color = Color("79444a")
+var damaged_time: float = 0.3
 
 enum allegience {
 	friendly,
@@ -85,17 +90,23 @@ func _process(delta: float) -> void:
 func attack():
 	if not can_attack:
 		return
-	var chosen
 	for target in imm_targets:
+		if chosen_target and imm_targets.has(chosen_target):
+			break
 		if target.has_method("set_active") and target.is_active:
-			chosen = target
-	if chosen and chosen.has_method("take_damage"):
-		chosen.take_damage(damage)
+			chosen_target = target
+	if chosen_target and chosen_target.has_method("take_damage"):
+		chosen_target.take_damage(damage)
 		can_attack = false
 		timer.start()
 	
 func take_damage(amount: float):
 	health -= amount
+	if damaged_tween and damaged_tween.is_running():
+		damaged_tween.kill()
+	damaged_tween = create_tween()
+	damaged_tween.tween_property(self, "modulate", damaged_color, damaged_time / 2)
+	damaged_tween.tween_property(self, "modulate", Color.WHITE, damaged_time / 2)
 	if health / max_health < low_health_factor:
 		is_low_health = true
 	if health <= 0:
