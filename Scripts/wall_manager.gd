@@ -67,4 +67,5 @@ func place_walls(border_cells: Dictionary, station_cells: Dictionary):
 			add_child(instance)
 			walls[cell] = instance
 			instance.position = (cell - Vector2i(24, 24)) * 16
+			instance.set_active(true)
 		

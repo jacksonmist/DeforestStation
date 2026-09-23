@@ -8,7 +8,8 @@ var states: Dictionary = {
 	AttackState: AttackState.new(),
 	ChaseState: ChaseState.new(),
 	ReturnState: ReturnState.new(),
-	HealState: HealState.new()
+	HealState: HealState.new(),
+	DieState: DieState.new()
 }
 
 var current_state: State

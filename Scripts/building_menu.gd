@@ -1,7 +1,15 @@
 class_name BuildingMenu extends NinePatchRect
 
-@onready var upgrade: Button = $Upgrade
-@onready var sell: Button = $Sell
+@onready var upgrade: TextureButton = $Control/Upgrade
+@onready var sell: TextureButton = $Control/Sell
+
+@export var can_afford_color: Color = Color("abff7a")
+@export var cant_afford_color: Color = Color("ff7a7a")
+
+@onready var upgrade_cost: Label = $Control/Upgrade/Cost
+@onready var repair_cost: Label = $Control/Repair/Cost
+@onready var sell_cost: Label = $Control/Sell/Cost
+
 
 var parent: Building
 var is_showing: bool = false
@@ -15,6 +23,9 @@ var scale_tween: Tween
 var tween_time: float = 0.5
 
 func setup(parent_ref: Building):
+	if not parent_ref.structure_manager:
+		visible = false
+		return
 	parent = parent_ref
 	end_pos = position
 	start_pos = parent.position

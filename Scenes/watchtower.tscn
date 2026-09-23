@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cgmrfselonvx3"]
+
+[ext_resource type="Script" uid="uid://bdmb1fm23aarg" path="res://Scenes/watchtower.gd" id="1_sfo61"]
+[ext_resource type="Texture2D" uid="uid://dwqtaxkbyxxd2" path="res://Sprites/Buildings/WatchtowerDestroyed.png" id="2_dravq"]
+[ext_resource type="Texture2D" uid="uid://d0o6egassawcm" path="res://Sprites/Buildings/Watchtower.png" id="3_l5kcv"]
+[ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="4_csx8u"]
+[ext_resource type="Script" uid="uid://chlfduv0r0x3i" path="res://Scenes/structure_attack_circle.gd" id="5_dravq"]
+[ext_resource type="Script" uid="uid://cvo6v8vhg0j2r" path="res://Scenes/attack_component.gd" id="6_l5kcv"]
+[ext_resource type="PackedScene" uid="uid://bwsje06si6jec" path="res://Scenes/watchtower_proj.tscn" id="7_csx8u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltfbr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fojhu"]
+radius = 64.0
+
+[node name="Watchtower" type="Area2D" unique_id=1353480180]
+collision_mask = 0
+script = ExtResource("1_sfo61")
+destroyed = ExtResource("2_dravq")
+texture = ExtResource("3_l5kcv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=517062476]
+shape = SubResource("RectangleShape2D_ltfbr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1580423431]
+texture = ExtResource("3_l5kcv")
+
+[node name="BuildingMenu" parent="." unique_id=1431244483 instance=ExtResource("4_csx8u")]
+
+[node name="StructureAttackCircle" type="Area2D" parent="." unique_id=350848969]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("5_dravq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StructureAttackCircle" unique_id=688091219]
+shape = SubResource("CircleShape2D_fojhu")
+
+[node name="AttackComponent" type="Node2D" parent="." unique_id=498190048]
+script = ExtResource("6_l5kcv")
+projectile = ExtResource("7_csx8u")

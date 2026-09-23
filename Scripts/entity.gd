@@ -19,6 +19,7 @@ var walk_time: float = 0
 var wood_amount: int
 @export var starting_max_wood: int = 5
 var max_wood: int = INF
+var can_pick_wood: bool = true
 
 var walk_rotation: float = PI / 5
 var walk_height: float = 4
@@ -27,6 +28,7 @@ var base_walk_speed: float = 0.3
 var position_tween_y: Tween
 var rotation_tween: Tween
 var x_dir: int = 0
+var is_dead: bool = false
 
 var damaged_tween: Tween
 @export var damaged_color: Color = Color("79444a")
@@ -61,6 +63,8 @@ func _ready() -> void:
 	timer.timeout.connect(timeout)
 
 func _process(delta: float) -> void:
+	if is_dead:
+		return
 	if not imm_targets.is_empty():
 		attack()
 	if move_direction == Vector2.ZERO:
@@ -88,10 +92,10 @@ func _process(delta: float) -> void:
 	sprite.rotation = x_dir * (walk_rotation * sin(walk_time * base_walk_speed * speed))
 
 func attack():
-	if not can_attack:
+	if not can_attack or not is_active:
 		return
 	for target in imm_targets:
-		if chosen_target and imm_targets.has(chosen_target):
+		if chosen_target and imm_targets.has(chosen_target) and chosen_target.is_active:
 			break
 		if target.has_method("set_active") and target.is_active:
 			chosen_target = target

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cncyhvhqrtrbr"]
 
-[ext_resource type="Script" uid="uid://c12j6dail8atv" path="res://Scenes/sapling.gd" id="1_3xnho"]
+[ext_resource type="Script" uid="uid://c12j6dail8atv" path="res://Scripts/sapling.gd" id="1_3xnho"]
 [ext_resource type="Texture2D" uid="uid://bepnfbs6lblmt" path="res://Sprites/sapling.png" id="2_gmhoa"]
 [ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="2_noemw"]
 [ext_resource type="Script" uid="uid://rvj525v7mbf5" path="res://Scripts/States/enemy_state_machine.gd" id="4_gmhoa"]

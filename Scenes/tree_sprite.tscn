@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cvvwlioxxd46o"]
 
-[ext_resource type="Script" uid="uid://beafqc1nvt2ce" path="res://Scenes/tree_sprite.gd" id="1_f8iu2"]
+[ext_resource type="Script" uid="uid://beafqc1nvt2ce" path="res://Scripts/tree_sprite.gd" id="1_f8iu2"]
 [ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="2_yjh15"]
 [ext_resource type="Texture2D" uid="uid://blmvw5o61ls5o" path="res://Sprites/tree_sprite.png" id="3_0lcod"]
 [ext_resource type="Script" uid="uid://rvj525v7mbf5" path="res://Scripts/States/enemy_state_machine.gd" id="4_yjh15"]

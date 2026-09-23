@@ -20,10 +20,22 @@ func setup():
 	create_lumberjacks(base_lj_count)
 	heal_timer.timeout.connect(heal)
 	heal_timer.start()
+	repaired_signal.connect(repair)
+	heal_amount = base_heal_amount
 
 func calculate_stats():
 	heal_amount = base_heal_amount + ((level - 1) * heal_increase_rate)
-	
+	var lj_amount = base_lj_count + ((level - 1) * lj_increase_rate)
+	create_lumberjacks(lj_amount - lumberjacks.size())
+
+func destroy():
+	super()
+	heal_timer.stop()
+
+func repair():
+	super()
+	heal_timer.start()
+
 func heal():
 	if healing.is_empty():
 		heal_timer.start()
@@ -70,3 +82,6 @@ func start_healing(jack: Lumberjack):
 func stop_healing(jack: Lumberjack):
 	if healing.has(jack):
 		healing.erase(jack)
+
+func building_placed():
+	amount_spent += purchase_cost

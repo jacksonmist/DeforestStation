@@ -20,6 +20,6 @@ func set_wood(wood_ref: PackedScene):
 func die():
 	for i in wood_dropped:
 		var instance = wood.instantiate()
-		enemy_manager.add_child(instance)
+		enemy_manager.call_deferred("add_child", instance)
 		instance.set_start_position(position)
 	queue_free()

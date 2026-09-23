@@ -38,6 +38,6 @@ func set_start_position(pos: Vector2):
 	ready_to_collect = true
 
 func _on_area_entered(body):
-	if body.wood_amount >= body.max_wood:
+	if body.wood_amount >= body.max_wood or not body.can_pick_wood:
 		return
 	target = body

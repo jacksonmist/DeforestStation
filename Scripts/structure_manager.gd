@@ -4,7 +4,6 @@ class_name StructureManager extends Area2D
 @export var neg_selection: Texture2D
 @export var neu_selection: Texture2D
 
-
 @onready var shape: CollisionShape2D = $CollisionShape2D
 @onready var external_sprite: Sprite2D = $ExternalSprite
 @onready var selection: Sprite2D = $Selection
@@ -25,10 +24,13 @@ var wood_amount: int
 var mouse_cell: Vector2i
 
 var cached_instance: Area2D
-var selected_structure: PackedScene
+var selected_structure: structures_enum
 @export var barracks: PackedScene
+@export var watchtower: PackedScene
 
 var shown_building_menu: BuildingMenu
+
+var destroyed_walls: Array[Wall]
 
 signal entered_build
 signal exited_build
@@ -38,14 +40,24 @@ enum structures_enum {
 	barracks,
 	watchtower
 }
+var structure_dict: Dictionary
 
 func _ready() -> void:
+	set_structure_dict()
 	area_entered.connect(_player_entered)
 	area_exited.connect(_player_exited)
 	selection.visible = false
 	UiManager.set_structure_manager(self)
 	wood_amount = 0
 	UiManager.set_wood_amount(wood_amount)
+	UiManager.unhandled_click.connect(unhandled_click)
+
+func set_structure_dict():
+	structure_dict = {
+		structures_enum.empty: null,
+		structures_enum.barracks: barracks,
+		structures_enum.watchtower: watchtower
+	}
 
 func _process(delta: float) -> void:
 	if is_build_mode:
@@ -79,6 +91,7 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 			cached_instance.set_active(true)
 			structures[cell] = cached_instance
 			change_wood(-cached_instance.purchase_cost)
+			cached_instance.building_placed()
 			cached_instance.set_origin(cell)
 			cached_instance = null
 			select_structure(structures_enum.empty)
@@ -114,18 +127,18 @@ func select_structure(type: structures_enum):
 	cached_instance = null
 	match type:
 		structures_enum.empty:
-			selected_structure = null
+			selected_structure = structures_enum.empty
 		structures_enum.barracks:
-			selected_structure = barracks
+			selected_structure = structures_enum.barracks
 		structures_enum.watchtower:
-			pass
+			selected_structure = structures_enum.watchtower
 	
 	if selected_structure:
-		cached_instance = selected_structure.instantiate()
+		cached_instance = structure_dict[selected_structure].instantiate()
 		if cached_instance.purchase_cost > wood_amount:
 			cached_instance.cleanup()
 			cached_instance = null
-			selected_structure = null
+			selected_structure = structures_enum.empty
 			return
 		selected_structure_sprite.texture = cached_instance.texture
 		cached_instance.set_structure_manager(self)
@@ -137,7 +150,7 @@ func change_wood(amount: int):
 	wood_amount += amount
 	UiManager.set_wood_amount(wood_amount)
 
-func get_selected_structure() -> PackedScene:
+func get_selected_structure() -> structures_enum:
 	return selected_structure
 
 func set_shown_building_menu(menu: BuildingMenu):
@@ -153,3 +166,21 @@ func sell_building(building_cells: Array[Vector2i]):
 	structures[origin].cleanup()
 	for cell in building_cells:
 		structures.erase(cell)
+
+func unhandled_click():
+	pass
+
+func add_destroyed_wall(wall_to_add: Wall):
+	if not destroyed_walls.has(wall_to_add):
+		destroyed_walls.append(wall_to_add)
+
+func repair_walls(first_wall: Wall):
+	if first_wall in destroyed_walls:
+		if first_wall.repair_cost <= wood_amount:
+			change_wood(first_wall.repair_cost)
+			first_wall.repair()
+	for wall in destroyed_walls:
+		if wall.repair_cost > wood_amount:
+			return
+		change_wood(wall.repair_cost)
+		wall.repair()

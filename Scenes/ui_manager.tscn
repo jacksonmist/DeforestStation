@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cn4ktcd2hgtqe" path="res://Sprites/SpriteContainer.png" id="3_i37jq"]
 [ext_resource type="Texture2D" uid="uid://dg7d05vrk5blu" path="res://Sprites/Buildings/Barracks.png" id="4_laqw3"]
 [ext_resource type="Texture2D" uid="uid://jpnmctqotyp3" path="res://Sprites/wood.png" id="5_laqw3"]
+[ext_resource type="Texture2D" uid="uid://d0o6egassawcm" path="res://Sprites/Buildings/Watchtower.png" id="5_wcp00"]
 [ext_resource type="LabelSettings" uid="uid://cddqxk8eahrc2" path="res://Fonts/GrapeSoda.tres" id="6_k436y"]
 
 [node name="UIManager" type="CanvasLayer" unique_id=952831957]
@@ -30,8 +31,9 @@ patch_margin_right = 7
 patch_margin_bottom = 7
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="SpriteContainer" type="TextureRect" parent="BuildMenu" unique_id=292860773]
+[node name="Barracks" type="TextureRect" parent="BuildMenu" unique_id=292860773]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 14.0
@@ -39,8 +41,9 @@ offset_right = 88.0
 offset_bottom = 86.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("3_i37jq")
+metadata/_edit_use_anchors_ = true
 
-[node name="BarracksButton" type="Button" parent="BuildMenu/SpriteContainer" unique_id=668198238]
+[node name="BarracksButton" type="Button" parent="BuildMenu/Barracks" unique_id=668198238]
 layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
@@ -49,7 +52,39 @@ theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.5019608)
 icon = ExtResource("4_laqw3")
 icon_alignment = 1
 
-[node name="BarracksHint" type="NinePatchRect" parent="BuildMenu/SpriteContainer" unique_id=2060877071]
+[node name="BarracksHint" type="NinePatchRect" parent="BuildMenu/Barracks" unique_id=2060877071]
+visible = false
+layout_mode = 0
+offset_top = -41.0
+offset_right = 75.29
+offset_bottom = -2.0299988
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_toaf1")
+patch_margin_left = 8
+patch_margin_top = 7
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Watchtower" type="TextureRect" parent="BuildMenu" unique_id=1346197962]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 14.0
+offset_right = 168.0
+offset_bottom = 86.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("3_i37jq")
+metadata/_edit_use_anchors_ = true
+
+[node name="WatchtowerButton" type="Button" parent="BuildMenu/Watchtower" unique_id=1348464953]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+scale = Vector2(3, 3)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.5019608)
+icon = ExtResource("5_wcp00")
+icon_alignment = 1
+
+[node name="WatchtowerHint" type="NinePatchRect" parent="BuildMenu/Watchtower" unique_id=902141098]
 visible = false
 layout_mode = 0
 offset_top = -41.0

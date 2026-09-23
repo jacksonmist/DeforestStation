@@ -13,18 +13,21 @@ var tween_time: float = 0.5
 var build_move_tween: Tween
 var build_scale_tween: Tween
 
-@onready var barracks_button: Button = $BuildMenu/SpriteContainer/BarracksButton
-@onready var barracks_hint: NinePatchRect = $BuildMenu/SpriteContainer/BarracksHint
+@onready var barracks_button: Button = $BuildMenu/Barracks/BarracksButton
+@onready var barracks_hint: NinePatchRect = $BuildMenu/Barracks/BarracksHint
+
+@onready var watchtower_button: Button = $BuildMenu/Watchtower/WatchtowerButton
+@onready var watchtower_hint: NinePatchRect = $BuildMenu/Watchtower/WatchtowerHint
+
+signal unhandled_click
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	build_menu.position = build_menu_start
 	barracks_button.mouse_entered.connect(show_barracks_hint)
 	barracks_button.mouse_exited.connect(hide_barracks_hint)
-	barracks_button.pressed.connect(select_barracks)
-
-func _process(delta: float) -> void:
-	pass
+	barracks_button.pressed.connect(select_building.bind(sm.structures_enum.barracks))
+	watchtower_button.pressed.connect(select_building.bind(sm.structures_enum.watchtower))
 
 func check_tween():
 	if build_move_tween and build_move_tween.is_running():
@@ -51,11 +54,17 @@ func hide_build_menu():
 	wood_tween.tween_property(wood_amount, "modulate", semi_trans, tween_time)
 	sm.select_structure(sm.structures_enum.empty)
 
-func select_barracks():
-	if sm.get_selected_structure() == sm.barracks:
+#func select_barracks():
+	#if sm.get_selected_structure() == sm.barracks:
+		#sm.select_structure(sm.structures_enum.empty)
+	#else:
+		#sm.select_structure(sm.structures_enum.barracks)
+
+func select_building(structure: StructureManager.structures_enum):
+	if sm.get_selected_structure() == structure:
 		sm.select_structure(sm.structures_enum.empty)
 	else:
-		sm.select_structure(sm.structures_enum.barracks)
+		sm.select_structure(structure)
 
 func show_barracks_hint():
 	barracks_hint.visible = true
@@ -68,3 +77,7 @@ func set_wood_amount(amount: int):
 
 func set_structure_manager(sm_ref: StructureManager):
 	sm = sm_ref
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("LeftMouse"):
+		unhandled_click.emit()

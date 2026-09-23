@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1b07x6ws2jrs" path="res://Scripts/wall.gd" id="1_dt568"]
 [ext_resource type="Texture2D" uid="uid://lr2uliguuxs6" path="res://Sprites/Walls/NWINVWall.png" id="1_qj4vc"]
+[ext_resource type="Texture2D" uid="uid://yng2305lpm40" path="res://Sprites/Walls/NWIDestroyed.png" id="2_0i3hb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fauc5"]
 size = Vector2(21, 20)
@@ -10,6 +11,8 @@ size = Vector2(21, 20)
 collision_layer = 33
 collision_mask = 0
 script = ExtResource("1_dt568")
+destroyed = ExtResource("2_0i3hb")
+texture = ExtResource("1_qj4vc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=602230163]
 position = Vector2(0.5, 0)

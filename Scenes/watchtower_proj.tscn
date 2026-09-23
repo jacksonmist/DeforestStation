@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bwsje06si6jec"]
+
+[ext_resource type="Script" uid="uid://v1jbay3e7am0" path="res://Scripts/projectile.gd" id="1_ocbep"]
+[ext_resource type="Texture2D" uid="uid://ckxqa4w66k73v" path="res://Sprites/WTProj.png" id="2_tljsu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wovv8"]
+radius = 4.0
+
+[node name="WatchtowerProj" type="Area2D" unique_id=115942772]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_ocbep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1381133728]
+shape = SubResource("CircleShape2D_wovv8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1868563290]
+texture = ExtResource("2_tljsu")

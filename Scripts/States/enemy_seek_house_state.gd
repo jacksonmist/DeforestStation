@@ -3,7 +3,6 @@ class_name EnemySeekHouseState extends State
 var vec_to_house: Vector2
 
 func enter_state() ->  void:
-	print("seekHouse")
 	vec_to_house = (house.position - parent.global_position).normalized()
 	parent.move(vec_to_house)
 
