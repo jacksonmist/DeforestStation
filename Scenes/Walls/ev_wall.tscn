@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c1b07x6ws2jrs" path="res://Scripts/wall.gd" id="1_f7tdo"]
 [ext_resource type="Texture2D" uid="uid://dvrxwu8lkufd2" path="res://Sprites/Walls/EVDestroyed.png" id="2_kvxnp"]
 [ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="4_eso5a"]
+[ext_resource type="PackedScene" uid="uid://bvepdyl5mvunk" path="res://Scenes/healthbar.tscn" id="5_r8nbv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fauc5"]
 size = Vector2(9, 20)
@@ -23,3 +24,5 @@ shape = SubResource("RectangleShape2D_fauc5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=795924912]
 texture = ExtResource("1_2hi4b")
+
+[node name="Healthbar" parent="." unique_id=305234403 instance=ExtResource("5_r8nbv")]

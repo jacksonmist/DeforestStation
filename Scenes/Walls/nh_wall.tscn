@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dq53sel1cfjyi" path="res://Sprites/Walls/NHWall.png" id="1_rjock"]
 [ext_resource type="Texture2D" uid="uid://c0vkbr6raa8kg" path="res://Sprites/Walls/NWDestroyed.png" id="2_0nosq"]
 [ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="4_vt0mh"]
+[ext_resource type="PackedScene" uid="uid://bvepdyl5mvunk" path="res://Scenes/healthbar.tscn" id="5_sgxj0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fauc5"]
 size = Vector2(20, 9)
@@ -23,3 +24,5 @@ shape = SubResource("RectangleShape2D_fauc5")
 texture = ExtResource("1_rjock")
 
 [node name="BuildingMenu" parent="." unique_id=1431244483 instance=ExtResource("4_vt0mh")]
+
+[node name="Healthbar" parent="." unique_id=305234403 instance=ExtResource("5_sgxj0")]

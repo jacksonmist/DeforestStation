@@ -1,4 +1,4 @@
-extends Node2D
+class_name AttackComponent extends Node2D
 
 var chosen_target: Enemy
 var first_target: bool = true

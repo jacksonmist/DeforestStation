@@ -2,6 +2,10 @@ class_name Building extends Area2D
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var building_menu: BuildingMenu = $BuildingMenu
+@onready var healthbar: TextureProgressBar = $Healthbar
+var healthbar_gradient: Gradient = Gradient.new()
+var full_health_color: Color = Color("abff7a")
+var no_health_color: Color = Color("ff7a7a")
 
 @export var repair_cost: int = 1
 var amount_spent: int = 0
@@ -47,6 +51,12 @@ func _ready() -> void:
 	amount_spent += purchase_cost
 	sell_amount = int(round(float(amount_spent / 2)))
 	prices_changed.emit()
+	
+	healthbar_gradient.set_color(0, no_health_color)
+	healthbar_gradient.set_color(1, full_health_color)
+	healthbar_gradient.set_offset(0, 0.0)
+	healthbar_gradient.set_offset(1, 1.0)
+	update_health_bar()
 
 func setup():
 	pass
@@ -67,6 +77,7 @@ func upgrade_level() -> bool:
 		max_level_reached.emit()
 	_calculate_upgrade_cost()
 	prices_changed.emit()
+	update_health_bar()
 	return true
 
 func calculate_stats():
@@ -91,13 +102,15 @@ func take_damage(amount: float):
 	damaged_tween.tween_property(self, "modulate", damaged_color, damaged_time / 2)
 	damaged_tween.tween_property(self, "modulate", Color.WHITE, damaged_time / 2)
 	health -= amount
+	update_health_bar()
 	damaged.emit()
 	if health <= 0:
 		health = 0
 		destroy()
 
-func heal(amount: int):
+func heal(amount: float):
 	health += amount
+	update_health_bar()
 	if health > max_health:
 		health = max_health
 
@@ -145,3 +158,8 @@ func update_target(target: Enemy):
 
 func building_placed():
 	amount_spent += purchase_cost
+
+func update_health_bar():
+	healthbar.visible = false if health == max_health else true
+	healthbar.tint_progress = healthbar_gradient.sample(health / max_health)
+	healthbar.value = ((health / max_health) * 50) + 12.5

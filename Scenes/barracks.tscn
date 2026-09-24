@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bq1vdjj0tnmfv" path="res://Scenes/lumberjack.tscn" id="2_87o8n"]
 [ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="3_3p7p4"]
 [ext_resource type="Texture2D" uid="uid://cyg8niagay6pe" path="res://Sprites/Buildings/BarracksDestroyed.png" id="3_he61m"]
+[ext_resource type="PackedScene" uid="uid://bvepdyl5mvunk" path="res://Scenes/healthbar.tscn" id="6_nf12f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ltfbr"]
 size = Vector2(16, 16)
@@ -27,3 +28,5 @@ texture = ExtResource("2_3p7p4")
 [node name="BuildingMenu" parent="." unique_id=1431244483 instance=ExtResource("3_3p7p4")]
 
 [node name="HealTimer" type="Timer" parent="." unique_id=65002723]
+
+[node name="Healthbar" parent="." unique_id=305234403 instance=ExtResource("6_nf12f")]

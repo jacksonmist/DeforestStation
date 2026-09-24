@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bvepdyl5mvunk"]
+
+[ext_resource type="Texture2D" uid="uid://duplqgsiit2sn" path="res://Sprites/Healthbar.png" id="1_1v5t1"]
+[ext_resource type="Texture2D" uid="uid://c1oxww0jey067" path="res://Sprites/HealthbarFill.png" id="2_bngtt"]
+
+[node name="Healthbar" type="TextureProgressBar" unique_id=305234403]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -6.0
+offset_right = 8.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 75.0
+value = 74.0
+texture_under = ExtResource("1_1v5t1")
+texture_progress = ExtResource("2_bngtt")

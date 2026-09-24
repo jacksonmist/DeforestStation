@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://631pop8ih08f"]
+
+[ext_resource type="Script" uid="uid://chlfduv0r0x3i" path="res://Scenes/structure_attack_circle.gd" id="1_7nfs3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fojhu"]
+radius = 64.0
+
+[node name="StructureAttackCircle" type="Area2D" unique_id=1048175314]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_7nfs3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1642940684]
+shape = SubResource("CircleShape2D_fojhu")

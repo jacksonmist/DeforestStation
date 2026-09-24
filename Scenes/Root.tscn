@@ -39,6 +39,13 @@
 [ext_resource type="PackedScene" uid="uid://cvvwlioxxd46o" path="res://Scenes/tree_sprite.tscn" id="28_asw58"]
 [ext_resource type="PackedScene" uid="uid://cncyhvhqrtrbr" path="res://Scenes/sapling.tscn" id="29_b2f2k"]
 [ext_resource type="Texture2D" uid="uid://scj60w220fse" path="res://Sprites/Buildings/HouseDestroyed.png" id="30_7j4pg"]
+[ext_resource type="PackedScene" uid="uid://bvepdyl5mvunk" path="res://Scenes/healthbar.tscn" id="33_s7pcd"]
+[ext_resource type="Script" uid="uid://bee4vpa8ku0hg" path="res://Scenes/boxing_ring.gd" id="41_p20sc"]
+[ext_resource type="Texture2D" uid="uid://kq8o0rllyrq7" path="res://Sprites/Buildings/BoxingRingDestroyed.png" id="42_jefpb"]
+[ext_resource type="Texture2D" uid="uid://cv41yioe78jk7" path="res://Sprites/Buildings/BoxingRing.png" id="42_mil3p"]
+[ext_resource type="Script" uid="uid://cvo6v8vhg0j2r" path="res://Scenes/attack_component.gd" id="44_ric31"]
+[ext_resource type="PackedScene" uid="uid://631pop8ih08f" path="res://Scenes/structure_attack_circle.tscn" id="44_y78se"]
+[ext_resource type="PackedScene" uid="uid://c1pw3qgaed5h1" path="res://Scenes/boxing_ring_proj.tscn" id="45_h1spj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ltfbr"]
 size = Vector2(16, 16)
@@ -77,6 +84,9 @@ size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ltfbr"]
 radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wovv8"]
+size = Vector2(32, 32)
 
 [node name="Node2D" type="Node2D" unique_id=1513264109]
 
@@ -162,6 +172,9 @@ shape = SubResource("RectangleShape2D_4bev8")
 texture = ExtResource("8_difym")
 
 [node name="BuildingMenu" parent="House" unique_id=1431244483 instance=ExtResource("26_lbgny")]
+visible = false
+
+[node name="Healthbar" parent="House" unique_id=305234403 instance=ExtResource("33_s7pcd")]
 
 [node name="GridManager" type="Node" parent="." unique_id=366981937 node_paths=PackedStringArray("tree_manager", "ground_map", "wall_manager", "structure_manager")]
 script = ExtResource("7_6ebx2")
@@ -210,3 +223,39 @@ collision_mask = 12
 texture = ExtResource("15_fauc5")
 
 [node name="Timer" type="Timer" parent="Player" unique_id=1313961637]
+
+[node name="BoxingRing" type="Area2D" parent="." unique_id=1191862686]
+position = Vector2(-46, 0)
+script = ExtResource("41_p20sc")
+destroyed = ExtResource("42_jefpb")
+texture = ExtResource("42_mil3p")
+base_upgrade_cost = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxingRing" unique_id=1619618194]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_wovv8")
+
+[node name="Sprite2D" type="Sprite2D" parent="BoxingRing" unique_id=1706445619]
+position = Vector2(8, 8)
+texture = ExtResource("42_mil3p")
+
+[node name="BuildingMenu" parent="BoxingRing" unique_id=1256980055 instance=ExtResource("26_lbgny")]
+visible = false
+offset_left = -23.0
+offset_right = 40.0
+
+[node name="Healthbar" parent="BoxingRing" unique_id=1475095031 instance=ExtResource("33_s7pcd")]
+offset_left = 0.0
+offset_top = 17.0
+offset_right = 16.0
+offset_bottom = 33.0
+
+[node name="StructureAttackCircle" parent="BoxingRing" unique_id=1048175314 instance=ExtResource("44_y78se")]
+position = Vector2(8, 8)
+
+[node name="AttackComponent" type="Node2D" parent="BoxingRing" unique_id=216968976]
+position = Vector2(8, 8)
+script = ExtResource("44_ric31")
+projectile = ExtResource("45_h1spj")
+proj_speed = 40.0
+metadata/_custom_type_script = "uid://cvo6v8vhg0j2r"

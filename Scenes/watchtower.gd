@@ -2,8 +2,6 @@ class_name Watchtower extends Building
 
 @onready var structure_attack_circle: StructureAttackCircle = $StructureAttackCircle
 
-var projectile: PackedScene
-
 @export var base_attack_range: float = 64.0
 @export var attack_range_scale: float = 16.0
 var attack_range: float
@@ -22,7 +20,7 @@ func setup():
 	damage = base_damage
 	structure_attack_circle.set_range(attack_range)
 
-func calculate_repair_cost():
+func calculate_stats():
 	attack_range = base_attack_range + (attack_range_scale * (level - 1))
 	structure_attack_circle.set_range(attack_range)
 	damage = base_damage + (damage_scale * (level - 1))

@@ -5,7 +5,7 @@ class_name StructureAttackCircle extends Area2D
 var targets: Array[Enemy]
 var chosen_target: Enemy
 var parent: Building
-var range: float
+var attack_range: float
 
 func setup(parent_ref: Building):
 	parent = parent_ref
@@ -13,7 +13,7 @@ func setup(parent_ref: Building):
 	area_exited.connect(enemy_exited)
 
 func set_range(value: float):
-	range = value
+	attack_range = value
 	collision.shape.radius = range
 
 func enemy_entered(body):

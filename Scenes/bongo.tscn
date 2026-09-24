@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://2fcitbft2cqe" path="res://Sprites/Buildings/BongoBuildingDestroyed.png" id="4_0mx1y"]
 [ext_resource type="Texture2D" uid="uid://c64uys76yoeq6" path="res://Sprites/Buildings/BongoBuilding.png" id="5_s32is"]
 [ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="6_7ql0t"]
+[ext_resource type="PackedScene" uid="uid://bvepdyl5mvunk" path="res://Scenes/healthbar.tscn" id="7_2to3s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fojhu"]
 size = Vector2(16, 16)
@@ -32,3 +33,5 @@ one_shot = true
 [node name="AnimTimer" type="Timer" parent="." unique_id=734431147]
 wait_time = 0.25
 one_shot = true
+
+[node name="Healthbar" parent="." unique_id=305234403 instance=ExtResource("7_2to3s")]
