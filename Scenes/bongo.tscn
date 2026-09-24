@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://c1s23t55v6ain"]
+
+[ext_resource type="Script" uid="uid://34bluifqnn6q" path="res://Scenes/bongo_building.gd" id="1_mhxy3"]
+[ext_resource type="Texture2D" uid="uid://dtldbxnsxkf0e" path="res://Sprites/Buildings/BongoBuildingAnim1.png" id="2_2to3s"]
+[ext_resource type="Texture2D" uid="uid://bqp4eh83n4666" path="res://Sprites/Buildings/BongoBuildingAnim2.png" id="3_icg70"]
+[ext_resource type="Texture2D" uid="uid://2fcitbft2cqe" path="res://Sprites/Buildings/BongoBuildingDestroyed.png" id="4_0mx1y"]
+[ext_resource type="Texture2D" uid="uid://c64uys76yoeq6" path="res://Sprites/Buildings/BongoBuilding.png" id="5_s32is"]
+[ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="6_7ql0t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fojhu"]
+size = Vector2(16, 16)
+
+[node name="Bongo" type="Area2D" unique_id=1695859636]
+script = ExtResource("1_mhxy3")
+anim1 = ExtResource("2_2to3s")
+anim2 = ExtResource("3_icg70")
+destroyed = ExtResource("4_0mx1y")
+texture = ExtResource("5_s32is")
+base_upgrade_cost = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=751032120]
+shape = SubResource("RectangleShape2D_fojhu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1053984749]
+texture = ExtResource("5_s32is")
+
+[node name="BuildingMenu" parent="." unique_id=1431244483 instance=ExtResource("6_7ql0t")]
+
+[node name="Timer" type="Timer" parent="." unique_id=1367022484]
+one_shot = true
+
+[node name="AnimTimer" type="Timer" parent="." unique_id=734431147]
+wait_time = 0.25
+one_shot = true

@@ -25,6 +25,7 @@ func attack():
 	var instance = projectile.instantiate()
 	call_deferred("add_child", instance)
 	instance.setup(direction_to_target, proj_speed, parent.damage, proj_time)
+	timer.wait_time = parent.cooldown
 	timer.start()
 
 func update_target():

@@ -18,7 +18,7 @@ var healing: Array[Lumberjack]
 
 func setup():
 	create_lumberjacks(base_lj_count)
-	heal_timer.timeout.connect(heal)
+	heal_timer.timeout.connect(heal_lumberjacks)
 	heal_timer.start()
 	repaired_signal.connect(repair)
 	heal_amount = base_heal_amount
@@ -36,7 +36,7 @@ func repair():
 	super()
 	heal_timer.start()
 
-func heal():
+func heal_lumberjacks():
 	if healing.is_empty():
 		heal_timer.start()
 		return
@@ -53,7 +53,7 @@ func create_lumberjacks(amount: int):
 	for i in amount:
 		var instance = lj_scene.instantiate()
 		add_child(instance)
-		instance.setup(house, self)
+		instance.setup(self)
 		lumberjacks.append(instance)
 		instance.position = Vector2.ZERO
 		timer.start()
@@ -82,6 +82,3 @@ func start_healing(jack: Lumberjack):
 func stop_healing(jack: Lumberjack):
 	if healing.has(jack):
 		healing.erase(jack)
-
-func building_placed():
-	amount_spent += purchase_cost

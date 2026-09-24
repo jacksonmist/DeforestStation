@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://2wdnkkjk6dd3"]
+
+[ext_resource type="Script" uid="uid://q85ftjmxhruj" path="res://Scenes/axel.gd" id="1_jmqqj"]
+[ext_resource type="Texture2D" uid="uid://dm0mavw58gvkn" path="res://Sprites/Buildings/AxelBuilding.png" id="2_0esg4"]
+[ext_resource type="Texture2D" uid="uid://b70twr686fglr" path="res://Sprites/Buildings/AxelDestroyed.png" id="3_hfbyh"]
+[ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="4_xi7x8"]
+[ext_resource type="Texture2D" uid="uid://cp48g645t2668" path="res://Sprites/Buildings/AxelAxe.png" id="5_qgh7r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fojhu"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fojhu"]
+radius = 5.0
+
+[node name="Axel" type="Area2D" unique_id=1349209013]
+script = ExtResource("1_jmqqj")
+destroyed = ExtResource("3_hfbyh")
+texture = ExtResource("2_0esg4")
+max_health = 15.0
+purchase_cost = 15
+upgrade_factor = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1839979854]
+shape = SubResource("RectangleShape2D_fojhu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1240428381]
+texture = ExtResource("2_0esg4")
+
+[node name="BuildingMenu" parent="." unique_id=1431244483 instance=ExtResource("4_xi7x8")]
+visible = false
+
+[node name="AxePivot" type="Node2D" parent="." unique_id=280751569]
+position = Vector2(0, -3)
+
+[node name="Sprite2D" type="Sprite2D" parent="AxePivot" unique_id=1815501091]
+position = Vector2(8, 0)
+texture = ExtResource("5_qgh7r")
+
+[node name="CollisionShape2D" type="Area2D" parent="AxePivot" unique_id=874727496]
+position = Vector2(12, -1.9999999)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AxePivot/CollisionShape2D" unique_id=910355274]
+shape = SubResource("CircleShape2D_fojhu")

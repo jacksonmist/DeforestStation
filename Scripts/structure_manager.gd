@@ -27,6 +27,8 @@ var cached_instance: Area2D
 var selected_structure: structures_enum
 @export var barracks: PackedScene
 @export var watchtower: PackedScene
+@export var bongo: PackedScene
+@export var axel: PackedScene
 
 var shown_building_menu: BuildingMenu
 
@@ -38,7 +40,9 @@ signal exited_build
 enum structures_enum {
 	empty,
 	barracks,
-	watchtower
+	watchtower,
+	bongo,
+	axel
 }
 var structure_dict: Dictionary
 
@@ -48,7 +52,7 @@ func _ready() -> void:
 	area_exited.connect(_player_exited)
 	selection.visible = false
 	UiManager.set_structure_manager(self)
-	wood_amount = 0
+	wood_amount = 500
 	UiManager.set_wood_amount(wood_amount)
 	UiManager.unhandled_click.connect(unhandled_click)
 
@@ -56,7 +60,9 @@ func set_structure_dict():
 	structure_dict = {
 		structures_enum.empty: null,
 		structures_enum.barracks: barracks,
-		structures_enum.watchtower: watchtower
+		structures_enum.watchtower: watchtower,
+		structures_enum.bongo: bongo,
+		structures_enum.axel: axel
 	}
 
 func _process(delta: float) -> void:
@@ -85,7 +91,6 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 		if not selected_structure and structures.has(mouse_cell):
 			var clicked_building = structures[mouse_cell]
 		elif selected_structure and not structures.has(mouse_cell) and station_cells.has(mouse_cell):
-			add_child(cached_instance)
 			var cell = mouse_cell
 			cached_instance.position = (cell - Vector2i(24, 24)) * 16
 			cached_instance.set_active(true)
@@ -93,6 +98,7 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 			change_wood(-cached_instance.purchase_cost)
 			cached_instance.building_placed()
 			cached_instance.set_origin(cell)
+			add_child(cached_instance)
 			cached_instance = null
 			select_structure(structures_enum.empty)
 			external_sprite.texture = null
@@ -132,6 +138,10 @@ func select_structure(type: structures_enum):
 			selected_structure = structures_enum.barracks
 		structures_enum.watchtower:
 			selected_structure = structures_enum.watchtower
+		structures_enum.bongo:
+			selected_structure = structures_enum.bongo
+		structures_enum.axel:
+			selected_structure = structures_enum.axel
 	
 	if selected_structure:
 		cached_instance = structure_dict[selected_structure].instantiate()
@@ -178,9 +188,14 @@ func repair_walls(first_wall: Wall):
 	if first_wall in destroyed_walls:
 		if first_wall.repair_cost <= wood_amount:
 			change_wood(first_wall.repair_cost)
-			first_wall.repair()
+			first_wall.set_repaired()
 	for wall in destroyed_walls:
 		if wall.repair_cost > wood_amount:
 			return
 		change_wood(wall.repair_cost)
-		wall.repair()
+		wall.set_repaired()
+		
+	set_shown_building_menu(null)
+
+func get_building_at_cell(cell: Vector2i) -> Building:
+	return structures[cell] if structures.has(cell) else null

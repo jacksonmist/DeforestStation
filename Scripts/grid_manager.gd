@@ -19,9 +19,9 @@ func set_house_cell(cell: Vector2i):
 	ground_map.set_station_floor(cell)
 	station_cells[cell] = true
 
-func upgrade_circle():
+func upgrade_circle() -> bool:
 	if not can_upgrade:
-		return
+		return false
 	var added_cells: Array[Vector2i]
 	cached_cells = []
 	var r2 = current_radius ** 2
@@ -42,6 +42,7 @@ func upgrade_circle():
 	else:
 		can_upgrade = false
 		cached_cells = added_cells
+	return true
 
 func no_marked_trees():
 	for cell in cached_cells:

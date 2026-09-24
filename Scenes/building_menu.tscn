@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://lr78bcwu01w8" path="res://Scripts/building_menu.gd" id="2_0hwfi"]
 [ext_resource type="Theme" uid="uid://bnl64toa6mah" path="res://Fonts/button_theme.tres" id="3_qa28y"]
 [ext_resource type="Texture2D" uid="uid://dpgaje1hduksk" path="res://Sprites/BuildMenuButton.png" id="4_qa28y"]
+[ext_resource type="Texture2D" uid="uid://dx0td1a8y68jy" path="res://Sprites/BuildMenuButtonHovered.png" id="5_0nh11"]
 [ext_resource type="LabelSettings" uid="uid://cddqxk8eahrc2" path="res://Fonts/GrapeSoda.tres" id="5_7njf1"]
+[ext_resource type="Texture2D" uid="uid://4ympbi3uoc6m" path="res://Sprites/BuildMenuButtonPressed.png" id="5_dqhaq"]
 [ext_resource type="Texture2D" uid="uid://jpnmctqotyp3" path="res://Sprites/wood.png" id="6_7njf1"]
 
 [node name="BuildingMenu" type="NinePatchRect" unique_id=1431244483]
@@ -40,14 +42,16 @@ offset_right = 48.0
 offset_bottom = 16.0
 theme = ExtResource("3_qa28y")
 texture_normal = ExtResource("4_qa28y")
+texture_pressed = ExtResource("5_dqhaq")
+texture_hover = ExtResource("5_0nh11")
 
 [node name="Upgrade" type="Label" parent="Control/Upgrade" unique_id=1917319188]
 layout_mode = 0
 offset_left = 3.0000005
 offset_top = 5.0
-offset_right = 215.0
-offset_bottom = 69.0
-scale = Vector2(0.1, 0.1)
+offset_right = 56.0
+offset_bottom = 21.0
+scale = Vector2(0.41, 0.41)
 text = "Upgrade"
 label_settings = ExtResource("5_7njf1")
 
@@ -63,10 +67,10 @@ texture = ExtResource("6_7njf1")
 [node name="Cost" type="Label" parent="Control/Upgrade" unique_id=131230555]
 layout_mode = 0
 offset_left = 34.0
-offset_top = 4.9999995
-offset_right = 154.0
-offset_bottom = 69.0
-scale = Vector2(0.1, 0.1)
+offset_top = 3.9999995
+offset_right = 58.0
+offset_bottom = 20.0
+scale = Vector2(0.41, 0.41)
 text = "-123"
 label_settings = ExtResource("5_7njf1")
 
@@ -77,14 +81,16 @@ offset_right = 48.0
 offset_bottom = 32.0
 theme = ExtResource("3_qa28y")
 texture_normal = ExtResource("4_qa28y")
+texture_pressed = ExtResource("5_dqhaq")
+texture_hover = ExtResource("5_0nh11")
 
 [node name="Repair" type="Label" parent="Control/Repair" unique_id=1767707836]
 layout_mode = 0
 offset_left = 3.0000005
 offset_top = 5.0
-offset_right = 215.0
-offset_bottom = 69.0
-scale = Vector2(0.1, 0.1)
+offset_right = 45.0
+offset_bottom = 21.0
+scale = Vector2(0.41, 0.41)
 text = "Repair"
 label_settings = ExtResource("5_7njf1")
 
@@ -100,10 +106,10 @@ texture = ExtResource("6_7njf1")
 [node name="Cost" type="Label" parent="Control/Repair" unique_id=2087614249]
 layout_mode = 0
 offset_left = 34.0
-offset_top = 4.9999995
-offset_right = 154.0
-offset_bottom = 69.0
-scale = Vector2(0.1, 0.1)
+offset_top = 3.9999995
+offset_right = 58.0
+offset_bottom = 20.0
+scale = Vector2(0.41, 0.41)
 text = "-123"
 label_settings = ExtResource("5_7njf1")
 
@@ -114,14 +120,17 @@ offset_right = 48.0
 offset_bottom = 48.0
 theme = ExtResource("3_qa28y")
 texture_normal = ExtResource("4_qa28y")
+texture_pressed = ExtResource("5_dqhaq")
+texture_hover = ExtResource("5_0nh11")
 
 [node name="Sell" type="Label" parent="Control/Sell" unique_id=1585901233]
+modulate = Color(0.67058825, 1, 0.47843137, 1)
 layout_mode = 0
 offset_left = 3.0000005
 offset_top = 5.0
-offset_right = 215.0
-offset_bottom = 69.0
-scale = Vector2(0.1, 0.1)
+offset_right = 25.0
+offset_bottom = 21.0
+scale = Vector2(0.41, 0.41)
 text = "Sell"
 label_settings = ExtResource("5_7njf1")
 
@@ -137,9 +146,9 @@ texture = ExtResource("6_7njf1")
 [node name="Cost" type="Label" parent="Control/Sell" unique_id=1875504794]
 layout_mode = 0
 offset_left = 34.0
-offset_top = 4.9999995
-offset_right = 154.0
-offset_bottom = 69.0
-scale = Vector2(0.1, 0.1)
+offset_top = 3.9999995
+offset_right = 58.0
+offset_bottom = 20.0
+scale = Vector2(0.41, 0.41)
 text = "-123"
 label_settings = ExtResource("5_7njf1")

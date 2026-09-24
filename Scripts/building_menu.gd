@@ -2,6 +2,7 @@ class_name BuildingMenu extends NinePatchRect
 
 @onready var upgrade: TextureButton = $Control/Upgrade
 @onready var sell: TextureButton = $Control/Sell
+@onready var repair: TextureButton = $Control/Repair
 
 @export var can_afford_color: Color = Color("abff7a")
 @export var cant_afford_color: Color = Color("ff7a7a")
@@ -38,7 +39,8 @@ func setup(parent_ref: Building):
 	parent.structure_manager.entered_build.connect(set_can_click.bind(true))
 	parent.structure_manager.exited_build.connect(set_can_click.bind(false))
 	upgrade.pressed.connect(try_upgrade_level)
-	
+	repair.pressed.connect(try_repair)
+	parent.prices_changed.connect(set_labels)
 	if not parent.can_sell:
 		sell.visible = false
 	else:
@@ -58,6 +60,12 @@ func set_can_click(value: bool):
 func show_menu():
 	check_tween()
 	sell.visible = true if parent.can_sell else false
+	upgrade.visible = true if parent.can_upgrade else false
+	var is_max_health = parent.health == parent.max_health
+	repair.visible = false if is_max_health else true
+	if not sell.visible and not upgrade.visible and not repair.visible:
+		return
+	set_labels()
 	parent.structure_manager.set_shown_building_menu(self)
 	is_showing = true
 	visible = true
@@ -76,6 +84,17 @@ func hide_menu():
 	await move_tween.finished
 	visible = false
 
+func set_labels():
+	var amount = parent.structure_manager.wood_amount
+	var u_cost = parent.current_upgrade_cost
+	var r_cost = parent.repair_cost
+	var s_amt = parent.sell_amount
+	upgrade_cost.text = "-" + str(u_cost)
+	upgrade_cost.modulate = can_afford_color if u_cost <= amount else cant_afford_color
+	repair_cost.text = "-" + str(r_cost)
+	repair_cost.modulate = can_afford_color if r_cost <= amount else cant_afford_color
+	sell_cost.text = "+" + str(s_amt)
+
 func check_tween():
 	if move_tween and move_tween.is_running():
 		move_tween.kill()
@@ -84,6 +103,9 @@ func check_tween():
 
 func try_upgrade_level():
 	parent.upgrade_level()
+
+func try_repair():
+	parent.repair()
 
 func try_sell():
 	parent.sell()

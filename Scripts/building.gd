@@ -1,6 +1,7 @@
 class_name Building extends Area2D
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var building_menu: BuildingMenu = $BuildingMenu
 
 @export var repair_cost: int = 1
 var amount_spent: int = 0
@@ -17,26 +18,35 @@ var current_upgrade_cost: int
 var level: int = 1
 var max_level: int = 10
 var can_sell: bool = true
+var can_upgrade: bool = true
 var origin: Vector2i
 var occupied_cells: Array[Vector2i]
-var is_active: bool = false
+var is_active: bool = true
 var chosen_target: Enemy
 var sell_amount: int
 
+var damaged_tween: Tween
+@export var damaged_color: Color = Color("79444a")
+var damaged_time: float = 0.3
+
 signal clicked
 signal max_level_reached
+signal damaged
 signal destroyed_signal
 signal repaired_signal
 signal target_changed
-
+signal prices_changed
 
 func _ready() -> void:
+	setup()
 	for child in get_children():
 		if child.has_method("setup"):
 			child.setup(self)
-	setup()
 	_calculate_upgrade_cost()
 	health = max_health
+	amount_spent += purchase_cost
+	sell_amount = int(round(float(amount_spent / 2)))
+	prices_changed.emit()
 
 func setup():
 	pass
@@ -50,11 +60,13 @@ func upgrade_level() -> bool:
 	level += 1
 	structure_manager.change_wood(-current_upgrade_cost)
 	amount_spent += current_upgrade_cost
+	sell_amount = int(round(float(amount_spent / 2)))
 	calculate_repair_cost()
 	calculate_stats()
 	if level == max_level:
 		max_level_reached.emit()
 	_calculate_upgrade_cost()
+	prices_changed.emit()
 	return true
 
 func calculate_stats():
@@ -73,10 +85,21 @@ func set_active(active: bool):
 func take_damage(amount: float):
 	if not is_active:
 		return
+	if damaged_tween and damaged_tween.is_running():
+		damaged_tween.kill()
+	damaged_tween = create_tween()
+	damaged_tween.tween_property(self, "modulate", damaged_color, damaged_time / 2)
+	damaged_tween.tween_property(self, "modulate", Color.WHITE, damaged_time / 2)
 	health -= amount
+	damaged.emit()
 	if health <= 0:
 		health = 0
 		destroy()
+
+func heal(amount: int):
+	health += amount
+	if health > max_health:
+		health = max_health
 
 func destroy():
 	set_active(false)
@@ -119,3 +142,6 @@ func cleanup():
 func update_target(target: Enemy):
 	chosen_target = target
 	target_changed.emit()
+
+func building_placed():
+	amount_spent += purchase_cost

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://n8tfc07m78jm" path="res://Sprites/Walls/EVWall.png" id="1_2hi4b"]
 [ext_resource type="Script" uid="uid://c1b07x6ws2jrs" path="res://Scripts/wall.gd" id="1_f7tdo"]
 [ext_resource type="Texture2D" uid="uid://dvrxwu8lkufd2" path="res://Sprites/Walls/EVDestroyed.png" id="2_kvxnp"]
+[ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="4_eso5a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fauc5"]
 size = Vector2(9, 20)
@@ -13,6 +14,8 @@ collision_mask = 0
 script = ExtResource("1_f7tdo")
 destroyed = ExtResource("2_kvxnp")
 texture = ExtResource("1_2hi4b")
+
+[node name="BuildingMenu" parent="." unique_id=1431244483 instance=ExtResource("4_eso5a")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=583963234]
 position = Vector2(-5.5, 0)

@@ -7,27 +7,43 @@ var wood_tween: Tween
 
 @export var semi_trans: Color
 @onready var build_menu: NinePatchRect = $BuildMenu
-var build_menu_start := Vector2(139.0, 673.0)
-var build_menu_destination := Vector2(139.0, 544.0)
+var build_menu_start := Vector2(72.5, 181.0)
+var build_menu_destination := Vector2(72.5, 147.0)
 var tween_time: float = 0.5
 var build_move_tween: Tween
 var build_scale_tween: Tween
+var structure_dict: Dictionary
 
-@onready var barracks_button: Button = $BuildMenu/Barracks/BarracksButton
-@onready var barracks_hint: NinePatchRect = $BuildMenu/Barracks/BarracksHint
+var barracks_purchase_cost: int = 15
+@onready var barracks_button: TextureButton = $BuildMenu/BarracksButton
+@onready var barracks_hint: NinePatchRect = $BuildMenu/BarracksButton/BarracksHint
 
-@onready var watchtower_button: Button = $BuildMenu/Watchtower/WatchtowerButton
-@onready var watchtower_hint: NinePatchRect = $BuildMenu/Watchtower/WatchtowerHint
+var watchtower_purchase_cost: int = 5
+@onready var watchtower_button: TextureButton = $BuildMenu/WatchtowerButton
+@onready var watchtower_hint: NinePatchRect = $BuildMenu/WatchtowerButton/WatchtowerHint
+
+var bongo_purchase_cost: int = 20
+@onready var bongo_button: TextureButton = $BuildMenu/BongoButton
+@onready var bongo_hint: NinePatchRect = $BuildMenu/BongoButton/BongoHint
+
+var axel_purchase_cost: int = 15
+@onready var axel_button: TextureButton = $BuildMenu/AxelButton
+@onready var axel_hint: NinePatchRect = $BuildMenu/AxelButton/AxelHint
 
 signal unhandled_click
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	structure_dict = {
+		sm.structures_enum.barracks: [barracks_button, barracks_hint],
+		sm.structures_enum.watchtower: [watchtower_button, watchtower_hint],
+		sm.structures_enum.bongo: [bongo_button, bongo_hint],
+		sm.structures_enum.axel: [axel_button, axel_hint]
+	}
 	build_menu.position = build_menu_start
-	barracks_button.mouse_entered.connect(show_barracks_hint)
-	barracks_button.mouse_exited.connect(hide_barracks_hint)
-	barracks_button.pressed.connect(select_building.bind(sm.structures_enum.barracks))
-	watchtower_button.pressed.connect(select_building.bind(sm.structures_enum.watchtower))
+	for structure in structure_dict.keys():
+		structure_dict[structure][0].mouse_entered.connect(show_hint.bind(structure_dict[structure][1]))
+		structure_dict[structure][0].mouse_exited.connect(hide_hint.bind(structure_dict[structure][1]))
+		structure_dict[structure][0].pressed.connect(select_building.bind(structure))
 
 func check_tween():
 	if build_move_tween and build_move_tween.is_running():
@@ -54,23 +70,17 @@ func hide_build_menu():
 	wood_tween.tween_property(wood_amount, "modulate", semi_trans, tween_time)
 	sm.select_structure(sm.structures_enum.empty)
 
-#func select_barracks():
-	#if sm.get_selected_structure() == sm.barracks:
-		#sm.select_structure(sm.structures_enum.empty)
-	#else:
-		#sm.select_structure(sm.structures_enum.barracks)
-
 func select_building(structure: StructureManager.structures_enum):
 	if sm.get_selected_structure() == structure:
 		sm.select_structure(sm.structures_enum.empty)
 	else:
 		sm.select_structure(structure)
 
-func show_barracks_hint():
-	barracks_hint.visible = true
+func show_hint(hint: NinePatchRect):
+	hint.visible = true
 
-func hide_barracks_hint():
-	barracks_hint.visible = false
+func hide_hint(hint: NinePatchRect):
+	hint.visible = false
 
 func set_wood_amount(amount: int):
 	wood_label.text = str(amount)

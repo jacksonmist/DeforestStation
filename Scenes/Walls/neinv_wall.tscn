@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://k76t88m1xh5q" path="res://Sprites/Walls/NEINVWall.png" id="1_bnhh4"]
 [ext_resource type="Script" uid="uid://c1b07x6ws2jrs" path="res://Scripts/wall.gd" id="1_ix2hg"]
 [ext_resource type="Texture2D" uid="uid://dsemaa354odqq" path="res://Sprites/Walls/NEIDestroyed.png" id="2_73uf0"]
+[ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="4_05rol"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fauc5"]
 size = Vector2(21, 20)
@@ -20,3 +21,5 @@ shape = SubResource("RectangleShape2D_fauc5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1216909187]
 texture = ExtResource("1_bnhh4")
+
+[node name="BuildingMenu" parent="." unique_id=1431244483 instance=ExtResource("4_05rol")]

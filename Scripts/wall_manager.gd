@@ -1,5 +1,6 @@
 class_name WallManager extends Node
 
+@export var sm: StructureManager
 const N = 1
 const E = 2
 const S = 4
@@ -64,6 +65,7 @@ func place_walls(border_cells: Dictionary, station_cells: Dictionary):
 				await timer.timeout
 			timer.start()
 			var instance = wall_choice.instantiate()
+			instance.set_structure_manager(sm)
 			add_child(instance)
 			walls[cell] = instance
 			instance.position = (cell - Vector2i(24, 24)) * 16

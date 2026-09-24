@@ -2,62 +2,89 @@
 
 [ext_resource type="Script" uid="uid://nn6gsecwwex1" path="res://Scripts/ui_manager.gd" id="1_blom3"]
 [ext_resource type="Texture2D" uid="uid://cjwae43ssabe1" path="res://Sprites/UIBorder.png" id="2_toaf1"]
-[ext_resource type="Texture2D" uid="uid://cn4ktcd2hgtqe" path="res://Sprites/SpriteContainer.png" id="3_i37jq"]
+[ext_resource type="Texture2D" uid="uid://bqgtuarbekgp6" path="res://Sprites/SmallButton.png" id="3_y4mvd"]
 [ext_resource type="Texture2D" uid="uid://dg7d05vrk5blu" path="res://Sprites/Buildings/Barracks.png" id="4_laqw3"]
+[ext_resource type="Texture2D" uid="uid://dq553djcny4kl" path="res://Sprites/SmallButtonPressed.png" id="4_wflq5"]
+[ext_resource type="Texture2D" uid="uid://boagaoqrc42pl" path="res://Sprites/SmallButtonHovered.png" id="5_irgxn"]
 [ext_resource type="Texture2D" uid="uid://jpnmctqotyp3" path="res://Sprites/wood.png" id="5_laqw3"]
+[ext_resource type="Texture2D" uid="uid://dx0td1a8y68jy" path="res://Sprites/BuildMenuButtonHovered.png" id="5_pwm6i"]
 [ext_resource type="Texture2D" uid="uid://d0o6egassawcm" path="res://Sprites/Buildings/Watchtower.png" id="5_wcp00"]
 [ext_resource type="LabelSettings" uid="uid://cddqxk8eahrc2" path="res://Fonts/GrapeSoda.tres" id="6_k436y"]
+[ext_resource type="Texture2D" uid="uid://c64uys76yoeq6" path="res://Sprites/Buildings/BongoBuilding.png" id="11_y4mvd"]
+[ext_resource type="Texture2D" uid="uid://dm0mavw58gvkn" path="res://Sprites/Buildings/AxelBuilding.png" id="12_wflq5"]
 
 [node name="UIManager" type="CanvasLayer" unique_id=952831957]
 script = ExtResource("1_blom3")
 semi_trans = Color(1, 1, 1, 0.39215687)
 
 [node name="BuildMenu" type="NinePatchRect" parent="." unique_id=906879882]
-anchors_preset = 7
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.93333334
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -437.0
-offset_top = 25.0
-offset_right = 437.0
-offset_bottom = 129.0
+anchor_bottom = 0.99999994
+offset_left = -87.5
+offset_top = -21.0
+offset_right = 87.5
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("2_toaf1")
 patch_margin_left = 8
 patch_margin_top = 8
-patch_margin_right = 7
+patch_margin_right = 8
 patch_margin_bottom = 7
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Barracks" type="TextureRect" parent="BuildMenu" unique_id=292860773]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 14.0
-offset_right = 88.0
-offset_bottom = 86.0
-pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("3_i37jq")
+[node name="BarracksButton" type="TextureButton" parent="BuildMenu" unique_id=1922812393]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.06
+anchor_top = 0.72727317
+anchor_right = 0.06
+anchor_bottom = 0.72727317
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 1.0
+grow_vertical = 2
+texture_normal = ExtResource("3_y4mvd")
+texture_pressed = ExtResource("4_wflq5")
+texture_hover = ExtResource("5_irgxn")
+stretch_mode = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="BarracksButton" type="Button" parent="BuildMenu/Barracks" unique_id=668198238]
-layout_mode = 0
-offset_right = 24.0
-offset_bottom = 24.0
-scale = Vector2(3, 3)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.5019608)
-icon = ExtResource("4_laqw3")
-icon_alignment = 1
+[node name="BarracksTexture" type="TextureRect" parent="BuildMenu/BarracksButton" unique_id=1441402750]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("4_laqw3")
 
-[node name="BarracksHint" type="NinePatchRect" parent="BuildMenu/Barracks" unique_id=2060877071]
+[node name="BarracksHint" type="NinePatchRect" parent="BuildMenu/BarracksButton" unique_id=2060877071]
 visible = false
-layout_mode = 0
-offset_top = -41.0
-offset_right = 75.29
-offset_bottom = -2.0299988
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -84.0
+offset_right = 32.5
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("2_toaf1")
 patch_margin_left = 8
@@ -65,61 +92,498 @@ patch_margin_top = 7
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Watchtower" type="TextureRect" parent="BuildMenu" unique_id=1346197962]
+[node name="Control" type="Control" parent="BuildMenu/BarracksButton/BarracksHint" unique_id=1628720534]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.75
+offset_top = -19.5
+offset_right = 25.25
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title Box" type="TextureRect" parent="BuildMenu/BarracksButton/BarracksHint/Control" unique_id=1937831642]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = -2.5
+offset_right = 22.0
+offset_bottom = 13.5
+grow_horizontal = 2
+texture = ExtResource("5_pwm6i")
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="BuildMenu/BarracksButton/BarracksHint/Control/Title Box" unique_id=1075829267]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = -23.5
+offset_right = 155.4255
+offset_bottom = 40.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.73, 0.73)
+text = "Barracks"
+label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="BuildMenu/BarracksButton/BarracksHint/Control/Title Box" unique_id=1436455033]
+layout_mode = 1
+offset_left = 0.99999994
+offset_top = 25.999996
+offset_right = 151.0
+offset_bottom = 80.0
+scale = Vector2(0.31, 0.31)
+text = "Spawns Lumberjacks to
+ help collect wood and
+ fight"
+label_settings = ExtResource("6_k436y")
+
+[node name="Cost" type="Label" parent="BuildMenu/BarracksButton/BarracksHint/Control" unique_id=1795598419]
 layout_mode = 0
-offset_left = 96.0
-offset_top = 14.0
-offset_right = 168.0
-offset_bottom = 86.0
-pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("3_i37jq")
+offset_left = 10.0
+offset_top = 12.5
+offset_right = 70.0
+offset_bottom = 28.5
+scale = Vector2(0.6, 0.6)
+text = "15"
+label_settings = ExtResource("6_k436y")
+
+[node name="Wood Icon" type="TextureRect" parent="BuildMenu/BarracksButton/BarracksHint" unique_id=1617133014]
+z_index = 1
+layout_mode = 0
+offset_left = 6.5
+offset_top = 19.0
+offset_right = 22.5
+offset_bottom = 35.0
+texture = ExtResource("5_laqw3")
+
+[node name="WatchtowerButton" type="TextureButton" parent="BuildMenu" unique_id=1318022909]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.18
+anchor_top = 0.72727317
+anchor_right = 0.18
+anchor_bottom = 0.72727317
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 1.0
+grow_vertical = 2
+texture_normal = ExtResource("3_y4mvd")
+texture_pressed = ExtResource("4_wflq5")
+texture_hover = ExtResource("5_irgxn")
+stretch_mode = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="WatchtowerButton" type="Button" parent="BuildMenu/Watchtower" unique_id=1348464953]
-layout_mode = 0
-offset_right = 24.0
-offset_bottom = 24.0
-scale = Vector2(3, 3)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.5019608)
-icon = ExtResource("5_wcp00")
-icon_alignment = 1
+[node name="WatchtowerTexture" type="TextureRect" parent="BuildMenu/WatchtowerButton" unique_id=1939968699]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_wcp00")
 
-[node name="WatchtowerHint" type="NinePatchRect" parent="BuildMenu/Watchtower" unique_id=902141098]
+[node name="WatchtowerHint" type="NinePatchRect" parent="BuildMenu/WatchtowerButton" unique_id=1369659405]
 visible = false
-layout_mode = 0
-offset_top = -41.0
-offset_right = 75.29
-offset_bottom = -2.0299988
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -84.0
+offset_right = 32.5
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("2_toaf1")
 patch_margin_left = 8
 patch_margin_top = 7
 patch_margin_right = 8
 patch_margin_bottom = 8
+
+[node name="Control" type="Control" parent="BuildMenu/WatchtowerButton/WatchtowerHint" unique_id=1354275112]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.75
+offset_top = -19.5
+offset_right = 25.25
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title Box" type="TextureRect" parent="BuildMenu/WatchtowerButton/WatchtowerHint/Control" unique_id=222327437]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = -2.5
+offset_right = 22.0
+offset_bottom = 13.5
+grow_horizontal = 2
+texture = ExtResource("5_pwm6i")
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="BuildMenu/WatchtowerButton/WatchtowerHint/Control/Title Box" unique_id=536546331]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.5
+offset_top = -5.0
+offset_right = 51.5
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.56, 0.56)
+text = "Watchtower"
+label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="BuildMenu/WatchtowerButton/WatchtowerHint/Control/Title Box" unique_id=46904399]
+layout_mode = 1
+offset_left = 1.4999999
+offset_top = 25.999996
+offset_right = 151.5
+offset_bottom = 80.0
+scale = Vector2(0.31, 0.31)
+text = "Attack nearby enemies"
+label_settings = ExtResource("6_k436y")
+
+[node name="Cost" type="Label" parent="BuildMenu/WatchtowerButton/WatchtowerHint/Control" unique_id=927372927]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 12.5
+offset_right = 70.0
+offset_bottom = 28.5
+scale = Vector2(0.6, 0.6)
+text = "5"
+label_settings = ExtResource("6_k436y")
+
+[node name="Wood Icon" type="TextureRect" parent="BuildMenu/WatchtowerButton/WatchtowerHint" unique_id=139675060]
+z_index = 1
+layout_mode = 0
+offset_left = 6.5
+offset_top = 19.0
+offset_right = 22.5
+offset_bottom = 35.0
+texture = ExtResource("5_laqw3")
+
+[node name="BongoButton" type="TextureButton" parent="BuildMenu" unique_id=886608891]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.72727317
+anchor_right = 0.3
+anchor_bottom = 0.72727317
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 1.0
+grow_vertical = 2
+texture_normal = ExtResource("3_y4mvd")
+texture_pressed = ExtResource("4_wflq5")
+texture_hover = ExtResource("5_irgxn")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="BongoTexture" type="TextureRect" parent="BuildMenu/BongoButton" unique_id=199836980]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("11_y4mvd")
+
+[node name="BongoHint" type="NinePatchRect" parent="BuildMenu/BongoButton" unique_id=1376741425]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -84.0
+offset_right = 32.5
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_toaf1")
+patch_margin_left = 8
+patch_margin_top = 7
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Control" type="Control" parent="BuildMenu/BongoButton/BongoHint" unique_id=1852319322]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.75
+offset_top = -19.5
+offset_right = 25.25
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title Box" type="TextureRect" parent="BuildMenu/BongoButton/BongoHint/Control" unique_id=1958080832]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = -2.5
+offset_right = 22.0
+offset_bottom = 13.5
+grow_horizontal = 2
+texture = ExtResource("5_pwm6i")
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="BuildMenu/BongoButton/BongoHint/Control/Title Box" unique_id=2092988722]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.5
+offset_top = -5.0
+offset_right = 51.5
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.56, 0.56)
+text = "Bongo"
+label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="BuildMenu/BongoButton/BongoHint/Control/Title Box" unique_id=423370594]
+layout_mode = 1
+offset_left = 1.4999999
+offset_top = 25.999996
+offset_right = 151.5
+offset_bottom = 80.0
+scale = Vector2(0.31, 0.31)
+text = "Periodically heals 
+adjacent buildings"
+label_settings = ExtResource("6_k436y")
+
+[node name="Cost" type="Label" parent="BuildMenu/BongoButton/BongoHint/Control" unique_id=207588763]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 12.5
+offset_right = 70.0
+offset_bottom = 28.5
+scale = Vector2(0.6, 0.6)
+text = "20"
+label_settings = ExtResource("6_k436y")
+
+[node name="Wood Icon" type="TextureRect" parent="BuildMenu/BongoButton/BongoHint" unique_id=2102812558]
+z_index = 1
+layout_mode = 0
+offset_left = 6.5
+offset_top = 19.0
+offset_right = 22.5
+offset_bottom = 35.0
+texture = ExtResource("5_laqw3")
+
+[node name="AxelButton" type="TextureButton" parent="BuildMenu" unique_id=756940610]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42
+anchor_top = 0.72727317
+anchor_right = 0.42
+anchor_bottom = 0.72727317
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 1.0
+grow_vertical = 2
+texture_normal = ExtResource("3_y4mvd")
+texture_pressed = ExtResource("4_wflq5")
+texture_hover = ExtResource("5_irgxn")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="AxelTexture" type="TextureRect" parent="BuildMenu/AxelButton" unique_id=610858848]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("12_wflq5")
+
+[node name="AxelHint" type="NinePatchRect" parent="BuildMenu/AxelButton" unique_id=419017412]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -84.0
+offset_right = 32.5
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_toaf1")
+patch_margin_left = 8
+patch_margin_top = 7
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Control" type="Control" parent="BuildMenu/AxelButton/AxelHint" unique_id=1046011715]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.75
+offset_top = -19.5
+offset_right = 25.25
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title Box" type="TextureRect" parent="BuildMenu/AxelButton/AxelHint/Control" unique_id=2052305471]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = -2.5
+offset_right = 22.0
+offset_bottom = 13.5
+grow_horizontal = 2
+texture = ExtResource("5_pwm6i")
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="BuildMenu/AxelButton/AxelHint/Control/Title Box" unique_id=1751698197]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.5
+offset_top = -5.0
+offset_right = 51.5
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.56, 0.56)
+text = "Axe-L"
+label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="BuildMenu/AxelButton/AxelHint/Control/Title Box" unique_id=22226415]
+layout_mode = 1
+offset_left = 1.4999999
+offset_top = 25.999996
+offset_right = 151.5
+offset_bottom = 80.0
+scale = Vector2(0.31, 0.31)
+text = "SPINS!!!"
+label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
+
+[node name="Cost" type="Label" parent="BuildMenu/AxelButton/AxelHint/Control" unique_id=1908921319]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 12.5
+offset_right = 70.0
+offset_bottom = 28.5
+scale = Vector2(0.6, 0.6)
+text = "15"
+label_settings = ExtResource("6_k436y")
+
+[node name="Wood Icon" type="TextureRect" parent="BuildMenu/AxelButton/AxelHint" unique_id=928306627]
+z_index = 1
+layout_mode = 0
+offset_left = 6.5
+offset_top = 19.0
+offset_right = 22.5
+offset_bottom = 35.0
+texture = ExtResource("5_laqw3")
 
 [node name="WoodAmount" type="NinePatchRect" parent="." unique_id=1641177984]
-offset_right = 300.0
-offset_bottom = 75.0
+offset_right = 115.0
+offset_bottom = 33.0
 texture = ExtResource("2_toaf1")
-patch_margin_left = 8
+patch_margin_left = 9
 patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
 
 [node name="TextureRect" type="TextureRect" parent="WoodAmount" unique_id=234175591]
 layout_mode = 0
-offset_left = 5.0
-offset_top = -9.0
-offset_right = 45.0
-offset_bottom = 31.0
+offset_left = 6.0
+offset_top = -2.0
+offset_right = 22.0
+offset_bottom = 14.0
 scale = Vector2(2, 2)
 texture = ExtResource("5_laqw3")
 
 [node name="Label" type="Label" parent="WoodAmount" unique_id=783702641]
 layout_mode = 0
-offset_left = 79.0
-offset_top = 7.0
-offset_right = 293.3
-offset_bottom = 71.0
+offset_left = 32.0
+offset_top = 8.0
+offset_right = 107.0
+offset_bottom = 24.0
 text = "1234567"
 label_settings = ExtResource("6_k436y")

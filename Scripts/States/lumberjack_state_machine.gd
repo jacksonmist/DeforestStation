@@ -13,7 +13,6 @@ var states: Dictionary = {
 }
 
 var current_state: State
-var house: Building
 var barracks: Building
 var last_target: Entity = null
 
@@ -39,11 +38,6 @@ func _physics_process(delta: float) -> void:
 	if not current_state: return
 	
 	current_state.update(delta)
-
-func set_house(house_ref: Building) -> void:
-	house = house_ref
-	for state in states.values():
-		state.house = house
 
 func set_barracks(barracks_ref: Barracks) -> void:
 	barracks = barracks_ref

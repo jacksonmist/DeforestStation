@@ -29,6 +29,7 @@ var position_tween_y: Tween
 var rotation_tween: Tween
 var x_dir: int = 0
 var is_dead: bool = false
+var is_setup: bool = false
 
 var damaged_tween: Tween
 @export var damaged_color: Color = Color("79444a")
@@ -99,6 +100,8 @@ func attack():
 			break
 		if target.has_method("set_active") and target.is_active:
 			chosen_target = target
+		elif not target.is_active:
+			imm_targets.erase(target)
 	if chosen_target and chosen_target.has_method("take_damage"):
 		chosen_target.take_damage(damage)
 		can_attack = false

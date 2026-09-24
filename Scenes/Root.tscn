@@ -18,8 +18,10 @@
 [ext_resource type="Script" uid="uid://bdap35saw13ne" path="res://Scripts/house.gd" id="9_am7h6"]
 [ext_resource type="Script" uid="uid://cl8dmktg4iq2y" path="res://Scripts/tree_manager.gd" id="10_dtygg"]
 [ext_resource type="PackedScene" uid="uid://cgmrfselonvx3" path="res://Scenes/watchtower.tscn" id="10_r2ss6"]
+[ext_resource type="PackedScene" uid="uid://c1s23t55v6ain" path="res://Scenes/bongo.tscn" id="11_0dy5o"]
 [ext_resource type="PackedScene" uid="uid://bi0p2cxdn3yy5" path="res://Scenes/tree.tscn" id="11_aoudc"]
 [ext_resource type="PackedScene" uid="uid://dpempw6q6puu7" path="res://Scenes/wood.tscn" id="11_fauc5"]
+[ext_resource type="PackedScene" uid="uid://2wdnkkjk6dd3" path="res://Scenes/axel.tscn" id="12_r2ss6"]
 [ext_resource type="Script" uid="uid://3qbuoccerxyg" path="res://Scripts/player.gd" id="13_7f8yv"]
 [ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="13_75oan"]
 [ext_resource type="Texture2D" uid="uid://bgxie15kcisp8" path="res://Sprites/lumberjack.png" id="15_fauc5"]
@@ -36,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="26_lbgny"]
 [ext_resource type="PackedScene" uid="uid://cvvwlioxxd46o" path="res://Scenes/tree_sprite.tscn" id="28_asw58"]
 [ext_resource type="PackedScene" uid="uid://cncyhvhqrtrbr" path="res://Scenes/sapling.tscn" id="29_b2f2k"]
+[ext_resource type="Texture2D" uid="uid://scj60w220fse" path="res://Sprites/Buildings/HouseDestroyed.png" id="30_7j4pg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ltfbr"]
 size = Vector2(16, 16)
@@ -89,6 +92,8 @@ neg_selection = ExtResource("3_lbgny")
 neu_selection = ExtResource("4_asw58")
 barracks = SubResource("PackedScene_s7pcd")
 watchtower = ExtResource("10_r2ss6")
+bongo = ExtResource("11_0dy5o")
+axel = ExtResource("12_r2ss6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StructureManager" unique_id=1633693362]
 shape = SubResource("CircleShape2D_4bev8")
@@ -117,8 +122,9 @@ script = ExtResource("6_626no")
 ground_map = NodePath("..")
 tree_manager = NodePath("../../TreeManager")
 
-[node name="WallManager" type="Node" parent="GroundMap" unique_id=53144409]
+[node name="WallManager" type="Node" parent="GroundMap" unique_id=53144409 node_paths=PackedStringArray("sm")]
 script = ExtResource("17_yiytj")
+sm = NodePath("../../StructureManager")
 N_wall = ExtResource("18_7f8yv")
 E_wall = ExtResource("19_ve1ck")
 S_wall = ExtResource("20_m1xq0")
@@ -144,8 +150,10 @@ difficulty_manager = NodePath("../DifficultyManager")
 ground_map = NodePath("../GroundMap")
 grid = NodePath("../GridManager")
 starting_radius = 2
+destroyed = ExtResource("30_7j4pg")
+texture = ExtResource("8_difym")
+max_health = 100.0
 structure_manager = NodePath("../StructureManager")
-base_upgrade_cost = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="House" unique_id=1493826941]
 shape = SubResource("RectangleShape2D_4bev8")
@@ -169,7 +177,7 @@ difficulty_manager = NodePath("../DifficultyManager")
 tree_manager = NodePath("../TreeManager")
 house = NodePath("../House")
 wood = ExtResource("11_fauc5")
-base_amount_to_spawn = 20
+base_amount_to_spawn = 100
 
 [node name="Timer" type="Timer" parent="EnemyManager" unique_id=1248380354]
 
@@ -193,7 +201,6 @@ damage = 1.0
 shape = SubResource("CircleShape2D_ltfbr")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=769562444]
-zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 
 [node name="AttackCircle" parent="Player" unique_id=1872592653 instance=ExtResource("13_75oan")]

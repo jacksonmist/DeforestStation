@@ -1,13 +1,13 @@
 class_name Lumberjack extends Entity
 
 @onready var state_manager: LumberjackStateManager = $LumberjackStateManager
-var house: House
 var barracks: Barracks
 @export var wood: PackedScene
 
-func setup(house_ref: House, barracks_ref: Barracks):
-	house = house_ref
-	state_manager.set_house(house)
+func setup(barracks_ref: Barracks):
+	if is_setup:
+		return
+	is_setup = true
 	barracks = barracks_ref
 	state_manager.set_barracks(barracks)
 	area_entered.connect(_on_body_entered)

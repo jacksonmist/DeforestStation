@@ -13,11 +13,12 @@ func setup():
 	cell = Vector2i(floor(ground_map.cell_by_cell/2))
 	grid.set_house_cell(cell)
 	for i in range(starting_radius):
-		upgrade_level()
+		grid.upgrade_circle()
 	structure_manager.set_house(self)
 
 func upgrade_level():
+	if not grid.upgrade_circle():
+		return false
 	super()
-	grid.upgrade_circle()
 	difficulty_manager.update_level(level)
 	return true
