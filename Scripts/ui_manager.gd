@@ -14,21 +14,20 @@ var build_move_tween: Tween
 var build_scale_tween: Tween
 var structure_dict: Dictionary
 
-var barracks_purchase_cost: int = 15
 @onready var barracks_button: TextureButton = $BuildMenu/BarracksButton
 @onready var barracks_hint: NinePatchRect = $BuildMenu/BarracksButton/BarracksHint
 
-var watchtower_purchase_cost: int = 5
 @onready var watchtower_button: TextureButton = $BuildMenu/WatchtowerButton
 @onready var watchtower_hint: NinePatchRect = $BuildMenu/WatchtowerButton/WatchtowerHint
 
-var bongo_purchase_cost: int = 20
 @onready var bongo_button: TextureButton = $BuildMenu/BongoButton
 @onready var bongo_hint: NinePatchRect = $BuildMenu/BongoButton/BongoHint
 
-var axel_purchase_cost: int = 15
 @onready var axel_button: TextureButton = $BuildMenu/AxelButton
 @onready var axel_hint: NinePatchRect = $BuildMenu/AxelButton/AxelHint
+
+@onready var boxing_ring_button: TextureButton = $BuildMenu/BoxingRingButton
+@onready var box_hint: NinePatchRect = $BuildMenu/BoxingRingButton/BoxHint
 
 signal unhandled_click
 
@@ -37,7 +36,8 @@ func _ready() -> void:
 		sm.structures_enum.barracks: [barracks_button, barracks_hint],
 		sm.structures_enum.watchtower: [watchtower_button, watchtower_hint],
 		sm.structures_enum.bongo: [bongo_button, bongo_hint],
-		sm.structures_enum.axel: [axel_button, axel_hint]
+		sm.structures_enum.axel: [axel_button, axel_hint],
+		sm.structures_enum.boxing_ring: [boxing_ring_button, box_hint]
 	}
 	build_menu.position = build_menu_start
 	for structure in structure_dict.keys():

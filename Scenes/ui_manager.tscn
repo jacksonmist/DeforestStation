@@ -12,6 +12,7 @@
 [ext_resource type="LabelSettings" uid="uid://cddqxk8eahrc2" path="res://Fonts/GrapeSoda.tres" id="6_k436y"]
 [ext_resource type="Texture2D" uid="uid://c64uys76yoeq6" path="res://Sprites/Buildings/BongoBuilding.png" id="11_y4mvd"]
 [ext_resource type="Texture2D" uid="uid://dm0mavw58gvkn" path="res://Sprites/Buildings/AxelBuilding.png" id="12_wflq5"]
+[ext_resource type="Texture2D" uid="uid://cv41yioe78jk7" path="res://Sprites/Buildings/BoxingRing.png" id="13_irgxn"]
 
 [node name="UIManager" type="CanvasLayer" unique_id=952831957]
 script = ExtResource("1_blom3")
@@ -149,12 +150,13 @@ text = "Spawns Lumberjacks to
  help collect wood and
  fight"
 label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
 
 [node name="Cost" type="Label" parent="BuildMenu/BarracksButton/BarracksHint/Control" unique_id=1795598419]
 layout_mode = 0
-offset_left = 10.0
+offset_left = 22.5
 offset_top = 12.5
-offset_right = 70.0
+offset_right = 82.5
 offset_bottom = 28.5
 scale = Vector2(0.6, 0.6)
 text = "15"
@@ -163,9 +165,9 @@ label_settings = ExtResource("6_k436y")
 [node name="Wood Icon" type="TextureRect" parent="BuildMenu/BarracksButton/BarracksHint" unique_id=1617133014]
 z_index = 1
 layout_mode = 0
-offset_left = 6.5
+offset_left = 19.0
 offset_top = 19.0
-offset_right = 22.5
+offset_right = 35.0
 offset_bottom = 35.0
 texture = ExtResource("5_laqw3")
 
@@ -272,19 +274,20 @@ vertical_alignment = 1
 
 [node name="Description" type="Label" parent="BuildMenu/WatchtowerButton/WatchtowerHint/Control/Title Box" unique_id=46904399]
 layout_mode = 1
-offset_left = 1.4999999
+offset_left = 0.49999994
 offset_top = 25.999996
-offset_right = 151.5
+offset_right = 150.5
 offset_bottom = 80.0
 scale = Vector2(0.31, 0.31)
 text = "Attack nearby enemies"
 label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
 
 [node name="Cost" type="Label" parent="BuildMenu/WatchtowerButton/WatchtowerHint/Control" unique_id=927372927]
 layout_mode = 0
-offset_left = 10.0
+offset_left = 24.5
 offset_top = 12.5
-offset_right = 70.0
+offset_right = 84.5
 offset_bottom = 28.5
 scale = Vector2(0.6, 0.6)
 text = "5"
@@ -293,9 +296,9 @@ label_settings = ExtResource("6_k436y")
 [node name="Wood Icon" type="TextureRect" parent="BuildMenu/WatchtowerButton/WatchtowerHint" unique_id=139675060]
 z_index = 1
 layout_mode = 0
-offset_left = 6.5
+offset_left = 21.0
 offset_top = 19.0
-offset_right = 22.5
+offset_right = 37.0
 offset_bottom = 35.0
 texture = ExtResource("5_laqw3")
 
@@ -410,12 +413,13 @@ scale = Vector2(0.31, 0.31)
 text = "Periodically heals 
 adjacent buildings"
 label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
 
 [node name="Cost" type="Label" parent="BuildMenu/BongoButton/BongoHint/Control" unique_id=207588763]
 layout_mode = 0
-offset_left = 10.0
+offset_left = 21.5
 offset_top = 12.5
-offset_right = 70.0
+offset_right = 81.5
 offset_bottom = 28.5
 scale = Vector2(0.6, 0.6)
 text = "20"
@@ -424,9 +428,9 @@ label_settings = ExtResource("6_k436y")
 [node name="Wood Icon" type="TextureRect" parent="BuildMenu/BongoButton/BongoHint" unique_id=2102812558]
 z_index = 1
 layout_mode = 0
-offset_left = 6.5
+offset_left = 18.0
 offset_top = 19.0
-offset_right = 22.5
+offset_right = 34.0
 offset_bottom = 35.0
 texture = ExtResource("5_laqw3")
 
@@ -544,9 +548,9 @@ horizontal_alignment = 1
 
 [node name="Cost" type="Label" parent="BuildMenu/AxelButton/AxelHint/Control" unique_id=1908921319]
 layout_mode = 0
-offset_left = 10.0
+offset_left = 22.5
 offset_top = 12.5
-offset_right = 70.0
+offset_right = 82.5
 offset_bottom = 28.5
 scale = Vector2(0.6, 0.6)
 text = "15"
@@ -555,9 +559,141 @@ label_settings = ExtResource("6_k436y")
 [node name="Wood Icon" type="TextureRect" parent="BuildMenu/AxelButton/AxelHint" unique_id=928306627]
 z_index = 1
 layout_mode = 0
-offset_left = 6.5
+offset_left = 19.0
 offset_top = 19.0
-offset_right = 22.5
+offset_right = 35.0
+offset_bottom = 35.0
+texture = ExtResource("5_laqw3")
+
+[node name="BoxingRingButton" type="TextureButton" parent="BuildMenu" unique_id=531676698]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.54
+anchor_top = 0.72727317
+anchor_right = 0.54
+anchor_bottom = 0.72727317
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 1.0
+grow_vertical = 2
+texture_normal = ExtResource("3_y4mvd")
+texture_pressed = ExtResource("4_wflq5")
+texture_hover = ExtResource("5_irgxn")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="BoxTexture" type="TextureRect" parent="BuildMenu/BoxingRingButton" unique_id=319451029]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("13_irgxn")
+
+[node name="BoxHint" type="NinePatchRect" parent="BuildMenu/BoxingRingButton" unique_id=2056223509]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -84.0
+offset_right = 32.5
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_toaf1")
+patch_margin_left = 8
+patch_margin_top = 7
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Control" type="Control" parent="BuildMenu/BoxingRingButton/BoxHint" unique_id=1950200951]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.75
+offset_top = -19.5
+offset_right = 25.25
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title Box" type="TextureRect" parent="BuildMenu/BoxingRingButton/BoxHint/Control" unique_id=991396900]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = -2.5
+offset_right = 22.0
+offset_bottom = 13.5
+grow_horizontal = 2
+texture = ExtResource("5_pwm6i")
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="BuildMenu/BoxingRingButton/BoxHint/Control/Title Box" unique_id=1382672359]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.5
+offset_top = -5.0
+offset_right = 52.5
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.56, 0.56)
+text = "Boxing Ring"
+label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="BuildMenu/BoxingRingButton/BoxHint/Control/Title Box" unique_id=2095996281]
+layout_mode = 1
+offset_left = 1.4999999
+offset_top = 25.999996
+offset_right = 151.5
+offset_bottom = 80.0
+scale = Vector2(0.31, 0.31)
+text = "Knocks back nearby 
+enemies"
+label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
+
+[node name="Cost" type="Label" parent="BuildMenu/BoxingRingButton/BoxHint/Control" unique_id=1058863427]
+layout_mode = 0
+offset_left = 20.5
+offset_top = 12.5
+offset_right = 80.5
+offset_bottom = 28.5
+scale = Vector2(0.6, 0.6)
+text = "25"
+label_settings = ExtResource("6_k436y")
+
+[node name="Wood Icon" type="TextureRect" parent="BuildMenu/BoxingRingButton/BoxHint" unique_id=1894852915]
+z_index = 1
+layout_mode = 0
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 33.0
 offset_bottom = 35.0
 texture = ExtResource("5_laqw3")
 

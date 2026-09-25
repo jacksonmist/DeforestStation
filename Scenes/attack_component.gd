@@ -24,7 +24,7 @@ func attack():
 	var direction_to_target = (chosen_target.position - global_position).normalized()
 	var instance = projectile.instantiate()
 	call_deferred("add_child", instance)
-	instance.setup(direction_to_target, proj_speed, parent.damage, proj_time)
+	instance.setup(direction_to_target, proj_speed, parent.damage, proj_time, parent.knockback)
 	timer.wait_time = parent.cooldown
 	timer.start()
 

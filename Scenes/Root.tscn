@@ -10,10 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://njuuhkdepf1c" path="res://Sprites/neg_selection.png" id="3_lbgny"]
 [ext_resource type="Texture2D" uid="uid://cdcil8c1cjwwf" path="res://Sprites/neu_selection.png" id="4_asw58"]
 [ext_resource type="Script" uid="uid://brclpklxi4iph" path="res://Scripts/pds_manager.gd" id="6_626no"]
-[ext_resource type="Script" uid="uid://o3n3bfkslhgv" path="res://Scripts/barracks.gd" id="6_okppc"]
-[ext_resource type="PackedScene" uid="uid://bq1vdjj0tnmfv" path="res://Scenes/lumberjack.tscn" id="7_0dy5o"]
+[ext_resource type="PackedScene" uid="uid://5hr4ryv38sbb" path="res://Scenes/barracks.tscn" id="6_r2ss6"]
 [ext_resource type="Script" uid="uid://uds2sukswpu" path="res://Scripts/grid_manager.gd" id="7_6ebx2"]
-[ext_resource type="Texture2D" uid="uid://dg7d05vrk5blu" path="res://Sprites/Buildings/Barracks.png" id="8_7j4pg"]
 [ext_resource type="Texture2D" uid="uid://eu8e1ajk145w" path="res://Sprites/BasicHouse.png" id="8_difym"]
 [ext_resource type="Script" uid="uid://bdap35saw13ne" path="res://Scripts/house.gd" id="9_am7h6"]
 [ext_resource type="Script" uid="uid://cl8dmktg4iq2y" path="res://Scripts/tree_manager.gd" id="10_dtygg"]
@@ -24,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://2wdnkkjk6dd3" path="res://Scenes/axel.tscn" id="12_r2ss6"]
 [ext_resource type="Script" uid="uid://3qbuoccerxyg" path="res://Scripts/player.gd" id="13_7f8yv"]
 [ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="13_75oan"]
+[ext_resource type="PackedScene" uid="uid://de7pd0iugl0dt" path="res://Scenes/boxing_ring.tscn" id="13_p20sc"]
 [ext_resource type="Texture2D" uid="uid://bgxie15kcisp8" path="res://Sprites/lumberjack.png" id="15_fauc5"]
 [ext_resource type="Script" uid="uid://0er3lf37txt3" path="res://Scripts/wall_manager.gd" id="17_yiytj"]
 [ext_resource type="PackedScene" uid="uid://b1mrwso64rt0p" path="res://Scenes/Walls/nh_wall.tscn" id="18_7f8yv"]
@@ -40,30 +39,6 @@
 [ext_resource type="PackedScene" uid="uid://cncyhvhqrtrbr" path="res://Scenes/sapling.tscn" id="29_b2f2k"]
 [ext_resource type="Texture2D" uid="uid://scj60w220fse" path="res://Sprites/Buildings/HouseDestroyed.png" id="30_7j4pg"]
 [ext_resource type="PackedScene" uid="uid://bvepdyl5mvunk" path="res://Scenes/healthbar.tscn" id="33_s7pcd"]
-[ext_resource type="Script" uid="uid://bee4vpa8ku0hg" path="res://Scenes/boxing_ring.gd" id="41_p20sc"]
-[ext_resource type="Texture2D" uid="uid://kq8o0rllyrq7" path="res://Sprites/Buildings/BoxingRingDestroyed.png" id="42_jefpb"]
-[ext_resource type="Texture2D" uid="uid://cv41yioe78jk7" path="res://Sprites/Buildings/BoxingRing.png" id="42_mil3p"]
-[ext_resource type="Script" uid="uid://cvo6v8vhg0j2r" path="res://Scenes/attack_component.gd" id="44_ric31"]
-[ext_resource type="PackedScene" uid="uid://631pop8ih08f" path="res://Scenes/structure_attack_circle.tscn" id="44_y78se"]
-[ext_resource type="PackedScene" uid="uid://c1pw3qgaed5h1" path="res://Scenes/boxing_ring_proj.tscn" id="45_h1spj"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltfbr"]
-size = Vector2(16, 16)
-
-[sub_resource type="PackedScene" id="PackedScene_s7pcd"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
-"names": PackedStringArray("Barracks", "Area2D", "script", "lj_scene", "texture", "metadata/_custom_type_script", "CollisionShape2D", "CollisionShape2D", "shape", "Sprite2D", "Sprite2D", "texture", "BuildingMenu", "HealTimer", "Timer"),
-"node_count": 5,
-"node_ids": PackedInt32Array(1416347816, 708572482, 445120335, 1431244483, 65002723),
-"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath(".")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 4, 2, 0, 3, 1, 4, 2, 5, 3, 0, 1073741824, 0, 7, 6, -1, 1, 8, 4, 0, 1073741825, 0, 10, 9, -1, 1, 11, 5, 0, 1073741826, 0, 2147483647, 12, 6, 0, 0, 1073741827, 0, 14, 13, -1, 0, 0),
-"variants": [ExtResource("6_okppc"), ExtResource("7_0dy5o"), ExtResource("8_7j4pg"), "uid://j4q133l8rdcj", SubResource("RectangleShape2D_ltfbr"), ExtResource("8_7j4pg"), ExtResource("26_lbgny")],
-"version": 3
-}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4bev8"]
 
@@ -85,9 +60,6 @@ size = Vector2(16, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ltfbr"]
 radius = 8.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wovv8"]
-size = Vector2(32, 32)
-
 [node name="Node2D" type="Node2D" unique_id=1513264109]
 
 [node name="DifficultyManager" type="Node" parent="." unique_id=250027250]
@@ -100,10 +72,11 @@ script = ExtResource("24_ql2nr")
 pos_selection = ExtResource("2_8btxg")
 neg_selection = ExtResource("3_lbgny")
 neu_selection = ExtResource("4_asw58")
-barracks = SubResource("PackedScene_s7pcd")
+barracks = ExtResource("6_r2ss6")
 watchtower = ExtResource("10_r2ss6")
 bongo = ExtResource("11_0dy5o")
 axel = ExtResource("12_r2ss6")
+boxing_ring = ExtResource("13_p20sc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StructureManager" unique_id=1633693362]
 shape = SubResource("CircleShape2D_4bev8")
@@ -190,7 +163,7 @@ difficulty_manager = NodePath("../DifficultyManager")
 tree_manager = NodePath("../TreeManager")
 house = NodePath("../House")
 wood = ExtResource("11_fauc5")
-base_amount_to_spawn = 100
+base_amount_to_spawn = 0
 
 [node name="Timer" type="Timer" parent="EnemyManager" unique_id=1248380354]
 
@@ -223,39 +196,3 @@ collision_mask = 12
 texture = ExtResource("15_fauc5")
 
 [node name="Timer" type="Timer" parent="Player" unique_id=1313961637]
-
-[node name="BoxingRing" type="Area2D" parent="." unique_id=1191862686]
-position = Vector2(-46, 0)
-script = ExtResource("41_p20sc")
-destroyed = ExtResource("42_jefpb")
-texture = ExtResource("42_mil3p")
-base_upgrade_cost = 20
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxingRing" unique_id=1619618194]
-position = Vector2(8, 8)
-shape = SubResource("RectangleShape2D_wovv8")
-
-[node name="Sprite2D" type="Sprite2D" parent="BoxingRing" unique_id=1706445619]
-position = Vector2(8, 8)
-texture = ExtResource("42_mil3p")
-
-[node name="BuildingMenu" parent="BoxingRing" unique_id=1256980055 instance=ExtResource("26_lbgny")]
-visible = false
-offset_left = -23.0
-offset_right = 40.0
-
-[node name="Healthbar" parent="BoxingRing" unique_id=1475095031 instance=ExtResource("33_s7pcd")]
-offset_left = 0.0
-offset_top = 17.0
-offset_right = 16.0
-offset_bottom = 33.0
-
-[node name="StructureAttackCircle" parent="BoxingRing" unique_id=1048175314 instance=ExtResource("44_y78se")]
-position = Vector2(8, 8)
-
-[node name="AttackComponent" type="Node2D" parent="BoxingRing" unique_id=216968976]
-position = Vector2(8, 8)
-script = ExtResource("44_ric31")
-projectile = ExtResource("45_h1spj")
-proj_speed = 40.0
-metadata/_custom_type_script = "uid://cvo6v8vhg0j2r"

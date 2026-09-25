@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c1pw3qgaed5h1"]
 
-[ext_resource type="Script" uid="uid://v1jbay3e7am0" path="res://Scripts/projectile.gd" id="1_1v851"]
+[ext_resource type="Script" uid="uid://bjx5lp6ng7nqb" path="res://Scenes/boxing_ring_proj.gd" id="1_1v851"]
 [ext_resource type="Texture2D" uid="uid://cydbudtoowvqn" path="res://Sprites/BoxingGlove.png" id="2_4ytf7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fojhu"]

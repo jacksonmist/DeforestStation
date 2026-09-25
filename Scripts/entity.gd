@@ -146,3 +146,6 @@ func heal(amount: float):
 
 func set_active(active: bool):
 	is_active = active
+
+func knockback(amount: float, direction: Vector2):
+	position += (amount * direction)

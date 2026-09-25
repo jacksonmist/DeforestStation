@@ -14,7 +14,7 @@ func setup(parent_ref: Building):
 
 func set_range(value: float):
 	attack_range = value
-	collision.shape.radius = range
+	collision.shape.radius = attack_range
 
 func enemy_entered(body):
 	if not targets.has(body):

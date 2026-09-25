@@ -29,6 +29,7 @@ var selected_structure: structures_enum
 @export var watchtower: PackedScene
 @export var bongo: PackedScene
 @export var axel: PackedScene
+@export var boxing_ring: PackedScene
 
 var shown_building_menu: BuildingMenu
 
@@ -42,7 +43,8 @@ enum structures_enum {
 	barracks,
 	watchtower,
 	bongo,
-	axel
+	axel,
+	boxing_ring
 }
 var structure_dict: Dictionary
 
@@ -62,7 +64,8 @@ func set_structure_dict():
 		structures_enum.barracks: barracks,
 		structures_enum.watchtower: watchtower,
 		structures_enum.bongo: bongo,
-		structures_enum.axel: axel
+		structures_enum.axel: axel,
+		structures_enum.boxing_ring: boxing_ring
 	}
 
 func _process(delta: float) -> void:
@@ -91,13 +94,18 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 		if not selected_structure and structures.has(mouse_cell):
 			var clicked_building = structures[mouse_cell]
 		elif selected_structure and not structures.has(mouse_cell) and station_cells.has(mouse_cell):
-			var cell = mouse_cell
-			cached_instance.position = (cell - Vector2i(24, 24)) * 16
+			var occupied_cells = get_occupied_cells(mouse_cell, cached_instance.cell_size)
+			if intersects(occupied_cells, structures.keys()):
+				return
+			if not is_subset(occupied_cells, station_cells.keys()):
+				return
+			cached_instance.position = (mouse_cell - Vector2i(24, 24)) * 16
 			cached_instance.set_active(true)
-			structures[cell] = cached_instance
+			for cell in occupied_cells:
+				structures[cell] = cached_instance
 			change_wood(-cached_instance.purchase_cost)
 			cached_instance.building_placed()
-			cached_instance.set_origin(cell)
+			cached_instance.set_origin(mouse_cell)
 			add_child(cached_instance)
 			cached_instance = null
 			select_structure(structures_enum.empty)
@@ -131,18 +139,7 @@ func select_structure(type: structures_enum):
 		cached_instance.queue_free()
 	external_sprite.texture = null
 	cached_instance = null
-	match type:
-		structures_enum.empty:
-			selected_structure = structures_enum.empty
-		structures_enum.barracks:
-			selected_structure = structures_enum.barracks
-		structures_enum.watchtower:
-			selected_structure = structures_enum.watchtower
-		structures_enum.bongo:
-			selected_structure = structures_enum.bongo
-		structures_enum.axel:
-			selected_structure = structures_enum.axel
-	
+	selected_structure = type
 	if selected_structure:
 		cached_instance = structure_dict[selected_structure].instantiate()
 		if cached_instance.purchase_cost > wood_amount:
@@ -150,7 +147,9 @@ func select_structure(type: structures_enum):
 			cached_instance = null
 			selected_structure = structures_enum.empty
 			return
+		var offset = (cached_instance.cell_size - Vector2i(1, 1)) * 8
 		selected_structure_sprite.texture = cached_instance.texture
+		selected_structure_sprite.offset = offset
 		cached_instance.set_structure_manager(self)
 		external_sprite.texture = cached_instance.texture
 	else:
@@ -199,3 +198,30 @@ func repair_walls(first_wall: Wall):
 
 func get_building_at_cell(cell: Vector2i) -> Building:
 	return structures[cell] if structures.has(cell) else null
+
+func get_occupied_cells(origin: Vector2i, size: Vector2i) -> Array[Vector2i]:
+	var cells: Array[Vector2i]
+	for x in range(size.x):
+		for y in range(size.y):
+			cells.append(origin + Vector2i(x, y))
+	return cells
+
+func intersects(arr1: Array, arr2: Array) -> bool:
+	var smaller: Array
+	var larger: Array
+	if arr1.size() <= arr2.size():
+		smaller = arr1
+		larger = arr2
+	else:
+		smaller = arr2
+		larger = arr1
+	for i in smaller:
+		if larger.has(i):
+			return true
+	return false
+
+func is_subset(subset: Array, superset: Array) -> bool:
+	for i in subset:
+		if not superset.has(i):
+			return false
+	return true
