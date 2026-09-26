@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c1s23t55v6ain" path="res://Scenes/bongo.tscn" id="11_0dy5o"]
 [ext_resource type="PackedScene" uid="uid://bi0p2cxdn3yy5" path="res://Scenes/tree.tscn" id="11_aoudc"]
 [ext_resource type="PackedScene" uid="uid://dpempw6q6puu7" path="res://Scenes/wood.tscn" id="11_fauc5"]
+[ext_resource type="PackedScene" uid="uid://dqly7ykummcmo" path="res://Scenes/big_barracks.tscn" id="11_s7pcd"]
 [ext_resource type="PackedScene" uid="uid://2wdnkkjk6dd3" path="res://Scenes/axel.tscn" id="12_r2ss6"]
 [ext_resource type="Script" uid="uid://3qbuoccerxyg" path="res://Scripts/player.gd" id="13_7f8yv"]
 [ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="13_75oan"]
@@ -77,6 +78,7 @@ watchtower = ExtResource("10_r2ss6")
 bongo = ExtResource("11_0dy5o")
 axel = ExtResource("12_r2ss6")
 boxing_ring = ExtResource("13_p20sc")
+big_barracks = ExtResource("11_s7pcd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StructureManager" unique_id=1633693362]
 shape = SubResource("CircleShape2D_4bev8")
@@ -125,6 +127,7 @@ grid_manager = NodePath("../GridManager")
 house = NodePath("../House")
 
 [node name="House" type="Area2D" parent="." unique_id=859446054 node_paths=PackedStringArray("player", "difficulty_manager", "ground_map", "grid", "structure_manager")]
+unique_name_in_owner = true
 texture_filter = 1
 collision_mask = 0
 script = ExtResource("9_am7h6")
@@ -149,8 +152,9 @@ visible = false
 
 [node name="Healthbar" parent="House" unique_id=305234403 instance=ExtResource("33_s7pcd")]
 
-[node name="GridManager" type="Node" parent="." unique_id=366981937 node_paths=PackedStringArray("tree_manager", "ground_map", "wall_manager", "structure_manager")]
+[node name="GridManager" type="Node" parent="." unique_id=366981937 node_paths=PackedStringArray("house", "tree_manager", "ground_map", "wall_manager", "structure_manager")]
 script = ExtResource("7_6ebx2")
+house = NodePath("../House")
 tree_manager = NodePath("../TreeManager")
 ground_map = NodePath("../GroundMap")
 wall_manager = NodePath("../GroundMap/WallManager")
@@ -179,9 +183,9 @@ collision_mask = 28
 script = ExtResource("13_7f8yv")
 house = NodePath("../House")
 structure_manager = NodePath("../StructureManager")
-speed = 25.0
-aps = 2.0
-damage = 1.0
+speed = 100.0
+aps = 50.0
+damage = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=759726425]
 shape = SubResource("CircleShape2D_ltfbr")

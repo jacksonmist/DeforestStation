@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c64uys76yoeq6" path="res://Sprites/Buildings/BongoBuilding.png" id="11_y4mvd"]
 [ext_resource type="Texture2D" uid="uid://dm0mavw58gvkn" path="res://Sprites/Buildings/AxelBuilding.png" id="12_wflq5"]
 [ext_resource type="Texture2D" uid="uid://cv41yioe78jk7" path="res://Sprites/Buildings/BoxingRing.png" id="13_irgxn"]
+[ext_resource type="Texture2D" uid="uid://dim6nbjybk03x" path="res://Sprites/Buildings/BigBarracks.png" id="14_4eo48"]
 
 [node name="UIManager" type="CanvasLayer" unique_id=952831957]
 script = ExtResource("1_blom3")
@@ -689,6 +690,138 @@ text = "25"
 label_settings = ExtResource("6_k436y")
 
 [node name="Wood Icon" type="TextureRect" parent="BuildMenu/BoxingRingButton/BoxHint" unique_id=1894852915]
+z_index = 1
+layout_mode = 0
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 33.0
+offset_bottom = 35.0
+texture = ExtResource("5_laqw3")
+
+[node name="BigBarracksButton" type="TextureButton" parent="BuildMenu" unique_id=544995157]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.66
+anchor_top = 0.72727317
+anchor_right = 0.66
+anchor_bottom = 0.72727317
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 1.0
+grow_vertical = 2
+texture_normal = ExtResource("3_y4mvd")
+texture_pressed = ExtResource("4_wflq5")
+texture_hover = ExtResource("5_irgxn")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="BBTexture" type="TextureRect" parent="BuildMenu/BigBarracksButton" unique_id=1330266480]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("14_4eo48")
+
+[node name="BBHint" type="NinePatchRect" parent="BuildMenu/BigBarracksButton" unique_id=176944321]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -84.0
+offset_right = 32.5
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_toaf1")
+patch_margin_left = 8
+patch_margin_top = 7
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Control" type="Control" parent="BuildMenu/BigBarracksButton/BBHint" unique_id=313630922]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.75
+offset_top = -19.5
+offset_right = 25.25
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title Box" type="TextureRect" parent="BuildMenu/BigBarracksButton/BBHint/Control" unique_id=1364681737]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = -2.5
+offset_right = 22.0
+offset_bottom = 13.5
+grow_horizontal = 2
+texture = ExtResource("5_pwm6i")
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="BuildMenu/BigBarracksButton/BBHint/Control/Title Box" unique_id=1669408285]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.5
+offset_top = -4.0
+offset_right = 64.5
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.48, 0.48)
+text = "BIG Barracks"
+label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="BuildMenu/BigBarracksButton/BBHint/Control/Title Box" unique_id=2125827908]
+layout_mode = 1
+offset_left = 0.49999994
+offset_top = 25.999996
+offset_right = 153.5
+offset_bottom = 80.0
+scale = Vector2(0.31, 0.31)
+text = "Spawns some...
+interesting lumberjacks"
+label_settings = ExtResource("6_k436y")
+horizontal_alignment = 1
+
+[node name="Cost" type="Label" parent="BuildMenu/BigBarracksButton/BBHint/Control" unique_id=130623996]
+layout_mode = 0
+offset_left = 20.5
+offset_top = 12.5
+offset_right = 80.5
+offset_bottom = 28.5
+scale = Vector2(0.6, 0.6)
+text = "50"
+label_settings = ExtResource("6_k436y")
+
+[node name="Wood Icon" type="TextureRect" parent="BuildMenu/BigBarracksButton/BBHint" unique_id=1443721519]
 z_index = 1
 layout_mode = 0
 offset_left = 17.0

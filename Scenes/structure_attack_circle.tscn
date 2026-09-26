@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://631pop8ih08f"]
 
-[ext_resource type="Script" uid="uid://chlfduv0r0x3i" path="res://Scenes/structure_attack_circle.gd" id="1_7nfs3"]
+[ext_resource type="Script" uid="uid://chlfduv0r0x3i" path="res://Scripts/structure_attack_circle.gd" id="1_7nfs3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fojhu"]
 radius = 64.0

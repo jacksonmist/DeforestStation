@@ -13,6 +13,8 @@ var amount_spent: int = 0
 @export var texture: Texture2D
 @export var max_health: float = 10
 var health: float = 10
+@export var health_scale: float = 5
+var base_max_health: float
 @export var structure_manager: StructureManager
 @export var cell_size: Vector2i = Vector2i(1, 1)
 @export var purchase_cost: int
@@ -48,6 +50,7 @@ func _ready() -> void:
 			child.setup(self)
 	_calculate_upgrade_cost()
 	health = max_health
+	base_max_health = max_health
 	amount_spent += purchase_cost
 	sell_amount = int(round(float(amount_spent / 2)))
 	prices_changed.emit()

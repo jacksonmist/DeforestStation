@@ -27,3 +27,4 @@ func calculate_stats():
 	structure_attack_circle.set_range(attack_range)
 	damage = base_damage + (damage_scale * (level - 1))
 	cooldown = base_cooldown + (cooldown_scale * (level - 1))
+	max_health = base_max_health + (health_scale * (level - 1))

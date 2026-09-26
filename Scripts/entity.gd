@@ -98,10 +98,10 @@ func attack():
 	for target in imm_targets:
 		if chosen_target and imm_targets.has(chosen_target) and chosen_target.is_active:
 			break
-		if target.has_method("set_active") and target.is_active:
-			chosen_target = target
-		elif not target.is_active:
+		if not target.is_active or not target:
 			imm_targets.erase(target)
+		elif target.has_method("set_active") and target.is_active and target:
+			chosen_target = target
 	if chosen_target and chosen_target.has_method("take_damage"):
 		chosen_target.take_damage(damage)
 		can_attack = false

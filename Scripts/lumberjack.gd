@@ -10,16 +10,6 @@ func setup(barracks_ref: Barracks):
 	is_setup = true
 	barracks = barracks_ref
 	state_manager.set_barracks(barracks)
-	area_entered.connect(_on_body_entered)
-	area_entered.connect(_on_body_exited)
-	
-func _on_body_entered(body):
-	if not dis_targets.has(body):
-		dis_targets.append(body)
-
-func _on_body_exited(body):
-	if dis_targets.has(body):
-		dis_targets.erase(body)
 
 func set_active(active: bool):
 	can_pick_wood = active

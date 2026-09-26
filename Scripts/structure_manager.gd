@@ -30,6 +30,7 @@ var selected_structure: structures_enum
 @export var bongo: PackedScene
 @export var axel: PackedScene
 @export var boxing_ring: PackedScene
+@export var big_barracks: PackedScene
 
 var shown_building_menu: BuildingMenu
 
@@ -44,7 +45,8 @@ enum structures_enum {
 	watchtower,
 	bongo,
 	axel,
-	boxing_ring
+	boxing_ring,
+	big_barracks
 }
 var structure_dict: Dictionary
 
@@ -65,7 +67,8 @@ func set_structure_dict():
 		structures_enum.watchtower: watchtower,
 		structures_enum.bongo: bongo,
 		structures_enum.axel: axel,
-		structures_enum.boxing_ring: boxing_ring
+		structures_enum.boxing_ring: boxing_ring,
+		structures_enum.big_barracks: big_barracks
 	}
 
 func _process(delta: float) -> void:

@@ -20,6 +20,7 @@ func calculate_stats():
 	rot_speed = base_rotation_speed + (rotation_speed_scale * (level-1))
 	var scale_amt = base_scale + (scale_increase * (level-1))
 	axe_pivot.scale = Vector2(scale_amt, scale_amt)
+	max_health = base_max_health + (health_scale * (level - 1))
 
 func _process(delta: float) -> void:
 	if not is_active:

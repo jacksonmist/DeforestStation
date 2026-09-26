@@ -15,3 +15,4 @@ func setup():
 
 func calculate_stats():
 	cooldown = base_cooldown + (cooldown_scale * (level - 1))
+	max_health = base_max_health + (health_scale * (level - 1))

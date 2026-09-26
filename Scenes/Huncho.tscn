@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://c1qrim2x1yigk"]
+
+[ext_resource type="Script" uid="uid://37gdam2uo2fs" path="res://Scenes/huncho.gd" id="1_p7wst"]
+[ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="1_sc31k"]
+[ext_resource type="PackedScene" uid="uid://cj2dw8bv8dirr" path="res://Scenes/bullet.tscn" id="2_6myln"]
+[ext_resource type="Texture2D" uid="uid://cqcxfvyrjd1ck" path="res://Sprites/HunchoSprite.png" id="2_p7wst"]
+[ext_resource type="Script" uid="uid://cp5s8rtccpehk" path="res://Scripts/States/huncho_state_machine.gd" id="4_qwoe4"]
+[ext_resource type="Texture2D" uid="uid://bwvs5a612bauk" path="res://Sprites/HunchoSpriteGun.png" id="5_k6c6b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4bev8"]
+radius = 5.0
+
+[node name="Huncho" type="Area2D" unique_id=959206224]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_p7wst")
+bullet = ExtResource("2_6myln")
+speed = 75.0
+starting_max_wood = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1080508368]
+shape = SubResource("CircleShape2D_4bev8")
+
+[node name="AttackCircle" parent="." unique_id=1872592653 instance=ExtResource("1_sc31k")]
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1501148642]
+texture = ExtResource("2_p7wst")
+
+[node name="SpecialJackStateManager" type="Node" parent="." unique_id=837564237]
+script = ExtResource("4_qwoe4")
+metadata/_custom_type_script = "uid://cp5s8rtccpehk"
+
+[node name="GunPivot1" type="Node2D" parent="." unique_id=1125276649]
+
+[node name="gun" type="Sprite2D" parent="GunPivot1" unique_id=2080121390]
+position = Vector2(12, 0)
+texture = ExtResource("5_k6c6b")
+
+[node name="Barrel" type="Node2D" parent="GunPivot1" unique_id=985374403]
+position = Vector2(16, -1)
+
+[node name="GunPivot2" type="Node2D" parent="." unique_id=166260547]
+
+[node name="gun" type="Sprite2D" parent="GunPivot2" unique_id=307204834]
+position = Vector2(12, 0)
+texture = ExtResource("5_k6c6b")
+
+[node name="Barrel" type="Node2D" parent="GunPivot2" unique_id=247686372]
+position = Vector2(16, -1)
+
+[node name="GunPivot3" type="Node2D" parent="." unique_id=1905352609]
+
+[node name="gun" type="Sprite2D" parent="GunPivot3" unique_id=1325754661]
+position = Vector2(12, 0)
+texture = ExtResource("5_k6c6b")
+
+[node name="Barrel" type="Node2D" parent="GunPivot3" unique_id=516471682]
+position = Vector2(16, -1)
+
+[node name="GunPivot4" type="Node2D" parent="." unique_id=2121492960]
+
+[node name="gun" type="Sprite2D" parent="GunPivot4" unique_id=1889480929]
+position = Vector2(12, 0)
+texture = ExtResource("5_k6c6b")
+
+[node name="Barrel" type="Node2D" parent="GunPivot4" unique_id=1918929205]
+position = Vector2(16, -1)
+
+[node name="Timer" type="Timer" parent="." unique_id=1966975036]

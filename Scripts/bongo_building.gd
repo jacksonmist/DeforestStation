@@ -32,6 +32,7 @@ func calculate_stats():
 	heal_amount = base_heal_amount + (heal_amount_increase * (level - 1))
 	heal_timer = base_heal_timer - (heal_timer_decrease * (level - 1))
 	timer.wait_time = heal_timer
+	max_health = base_max_health + (health_scale * (level - 1))
 
 func update_adjacent_buildings():
 	for offset in adjacent_offsets:

@@ -4,7 +4,7 @@ class_name State extends Resource
 var parent: Entity
 var sm
 var house: Building
-var barracks: Barracks
+var barracks: Building
 
 func setup(parent_ref: Entity, state_machine_ref):
 	parent = parent_ref

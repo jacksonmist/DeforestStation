@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dqly7ykummcmo"]
+
+[ext_resource type="Script" uid="uid://baghul7akv88x" path="res://Scripts/big_barracks.gd" id="1_ve8pb"]
+[ext_resource type="PackedScene" uid="uid://ckjpicvx3m5gc" path="res://Scenes/duck.tscn" id="2_nuaca"]
+[ext_resource type="Texture2D" uid="uid://ehgr78kcndrs" path="res://Sprites/Buildings/BigBarracksDestroyed.png" id="2_xpmme"]
+[ext_resource type="PackedScene" uid="uid://c1qrim2x1yigk" path="res://Scenes/Huncho.tscn" id="3_07u81"]
+[ext_resource type="Texture2D" uid="uid://dim6nbjybk03x" path="res://Sprites/Buildings/BigBarracks.png" id="3_nuaca"]
+[ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="4_07u81"]
+[ext_resource type="PackedScene" uid="uid://ckv2wn657t70l" path="res://Scenes/reaper.tscn" id="4_wkwv8"]
+[ext_resource type="PackedScene" uid="uid://2gged11lyiul" path="res://Scenes/bears.tscn" id="5_e3xpd"]
+[ext_resource type="PackedScene" uid="uid://bvepdyl5mvunk" path="res://Scenes/healthbar.tscn" id="5_wkwv8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fojhu"]
+size = Vector2(32, 32)
+
+[node name="BigBarracks" type="Area2D" unique_id=805670176]
+script = ExtResource("1_ve8pb")
+remaining_jacks = Array[PackedScene]([ExtResource("2_nuaca"), ExtResource("3_07u81"), ExtResource("4_wkwv8"), ExtResource("5_e3xpd")])
+destroyed = ExtResource("2_xpmme")
+texture = ExtResource("3_nuaca")
+max_health = 50.0
+cell_size = Vector2i(2, 2)
+purchase_cost = 50
+upgrade_factor = 2.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=416639974]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_fojhu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1219208176]
+position = Vector2(8, 8)
+texture = ExtResource("3_nuaca")
+
+[node name="BuildingMenu" parent="." unique_id=1431244483 instance=ExtResource("4_07u81")]
+offset_left = -23.0
+offset_top = -74.0
+offset_right = 40.0
+offset_bottom = -11.0
+
+[node name="Healthbar" parent="." unique_id=305234403 instance=ExtResource("5_wkwv8")]
+offset_left = 0.0
+offset_right = 16.0

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://2gged11lyiul"]
+
+[ext_resource type="Script" uid="uid://cecr6xchba51t" path="res://Scenes/bears.gd" id="1_8ydm5"]
+[ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="2_e65kk"]
+[ext_resource type="Texture2D" uid="uid://xceipwulncia" path="res://Sprites/BearsSprite.png" id="3_hpo4p"]
+[ext_resource type="Script" uid="uid://dsaptgqkgkt3g" path="res://Scripts/States/bears_state_machine.gd" id="4_dj6ea"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mil3p"]
+radius = 12.0
+
+[node name="Bears" type="Area2D" unique_id=1218498669]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_8ydm5")
+starting_max_wood = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=202040701]
+shape = SubResource("CircleShape2D_mil3p")
+
+[node name="AttackCircle" parent="." unique_id=1872592653 instance=ExtResource("2_e65kk")]
+collision_mask = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1376267826]
+texture = ExtResource("3_hpo4p")
+
+[node name="Timer" type="Timer" parent="." unique_id=746598095]
+
+[node name="SpecialJackStateManager" type="Node" parent="." unique_id=1313307925]
+script = ExtResource("4_dj6ea")
+metadata/_custom_type_script = "uid://dsaptgqkgkt3g"

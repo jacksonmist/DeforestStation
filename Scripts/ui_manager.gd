@@ -29,6 +29,9 @@ var structure_dict: Dictionary
 @onready var boxing_ring_button: TextureButton = $BuildMenu/BoxingRingButton
 @onready var box_hint: NinePatchRect = $BuildMenu/BoxingRingButton/BoxHint
 
+@onready var big_barracks_button: TextureButton = $BuildMenu/BigBarracksButton
+@onready var bb_hint: NinePatchRect = $BuildMenu/BigBarracksButton/BBHint
+
 signal unhandled_click
 
 func _ready() -> void:
@@ -37,7 +40,8 @@ func _ready() -> void:
 		sm.structures_enum.watchtower: [watchtower_button, watchtower_hint],
 		sm.structures_enum.bongo: [bongo_button, bongo_hint],
 		sm.structures_enum.axel: [axel_button, axel_hint],
-		sm.structures_enum.boxing_ring: [boxing_ring_button, box_hint]
+		sm.structures_enum.boxing_ring: [boxing_ring_button, box_hint],
+		sm.structures_enum.big_barracks: [big_barracks_button, bb_hint]
 	}
 	build_menu.position = build_menu_start
 	for structure in structure_dict.keys():

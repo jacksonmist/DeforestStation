@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://de7pd0iugl0dt"]
 
-[ext_resource type="Script" uid="uid://bee4vpa8ku0hg" path="res://Scenes/boxing_ring.gd" id="1_s0sug"]
+[ext_resource type="Script" uid="uid://bee4vpa8ku0hg" path="res://Scripts/boxing_ring.gd" id="1_s0sug"]
 [ext_resource type="Texture2D" uid="uid://kq8o0rllyrq7" path="res://Sprites/Buildings/BoxingRingDestroyed.png" id="2_qkn62"]
 [ext_resource type="Texture2D" uid="uid://cv41yioe78jk7" path="res://Sprites/Buildings/BoxingRing.png" id="3_yow0d"]
 [ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="4_xl3bo"]
 [ext_resource type="PackedScene" uid="uid://bvepdyl5mvunk" path="res://Scenes/healthbar.tscn" id="5_otnke"]
 [ext_resource type="PackedScene" uid="uid://631pop8ih08f" path="res://Scenes/structure_attack_circle.tscn" id="6_bjrpv"]
-[ext_resource type="Script" uid="uid://cvo6v8vhg0j2r" path="res://Scenes/attack_component.gd" id="7_1bwmm"]
+[ext_resource type="Script" uid="uid://cvo6v8vhg0j2r" path="res://Scripts/attack_component.gd" id="7_1bwmm"]
 [ext_resource type="PackedScene" uid="uid://c1pw3qgaed5h1" path="res://Scenes/boxing_ring_proj.tscn" id="8_xm5rp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wovv8"]

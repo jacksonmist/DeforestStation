@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://ckjpicvx3m5gc"]
+
+[ext_resource type="Script" uid="uid://ccec4s2tcct1r" path="res://Scenes/duck_jack.gd" id="1_mshtc"]
+[ext_resource type="PackedScene" uid="uid://blckk40rvge0q" path="res://Scenes/quack_proj.tscn" id="2_8ghs4"]
+[ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="3_bvjhm"]
+[ext_resource type="Texture2D" uid="uid://7xlny2ohnnfb" path="res://Sprites/DuckSprite.png" id="4_3a0xp"]
+[ext_resource type="Script" uid="uid://bdqimmjnd8h81" path="res://Scripts/States/duck_state_machine.gd" id="5_h76i3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fojhu"]
+radius = 5.0
+
+[node name="Duck" type="Area2D" unique_id=801916469]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_mshtc")
+quack_proj = ExtResource("2_8ghs4")
+damage = 0.0
+atk_range = 32.0
+starting_max_wood = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=692466997]
+shape = SubResource("CircleShape2D_fojhu")
+
+[node name="AttackCircle" parent="." unique_id=1872592653 instance=ExtResource("3_bvjhm")]
+collision_mask = 4
+
+[node name="Timer" type="Timer" parent="." unique_id=1546531961]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=864312054]
+texture = ExtResource("4_3a0xp")
+
+[node name="SpecialJackStateManager" type="Node" parent="." unique_id=1350825837]
+script = ExtResource("5_h76i3")
+metadata/_custom_type_script = "uid://bdqimmjnd8h81"

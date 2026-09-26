@@ -3,13 +3,21 @@ class_name Wood extends Area2D
 
 var collected: bool = false
 var target: Entity
+var target_pos
+var dir_to_tgt: Vector2
 var collection_speed: float = 30
+var throw_speed: float = 50
+var throw_height: float = 20
+var rotation_speed = 10
 var acceleration: float = 15
 @export var value: int = 1
 var move_distance: float = 10
 var move_time: float = 0.4
 var move_tween: Tween
 var ready_to_collect: bool = false
+var was_thrown: bool = false
+var time: float = 0
+var travel_time
 
 func _ready() -> void:
 	if randi_range(0, 1) == 0:
@@ -19,6 +27,14 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 
 func _process(delta: float) -> void:
+	if target_pos and global_position.distance_to(target_pos) <= 8:
+		target_pos = null
+		sprite.position = Vector2.ZERO	
+	if target_pos:
+		position += (dir_to_tgt * delta * throw_speed)
+		time += delta
+		sprite.rotation += (rotation_speed * delta)
+		return
 	if target and ready_to_collect:
 		var direction = (target.global_position - position).normalized()
 		position += (direction * delta * collection_speed)
@@ -41,3 +57,11 @@ func _on_area_entered(body):
 	if body.wood_amount >= body.max_wood or not body.can_pick_wood:
 		return
 	target = body
+
+func throw(pos: Vector2):
+	if was_thrown:
+		return
+	time = 0
+	was_thrown = true
+	target_pos = pos
+	dir_to_tgt = (target_pos - position).normalized()

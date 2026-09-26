@@ -1,6 +1,7 @@
 class_name GridManager extends Node
 
 var grid: Array[Vector2i]
+@export var house: House
 @export var tree_manager: TreeManager
 @export var ground_map: GroundMap
 @export var wall_manager: WallManager
@@ -39,6 +40,7 @@ func upgrade_circle() -> bool:
 		current_radius += 1
 		structure_manager.update_radius(current_radius)
 		structure_manager.update_station_cells(station_cells)
+		house.update_radius(current_radius)
 	else:
 		can_upgrade = false
 		cached_cells = added_cells

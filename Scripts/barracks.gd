@@ -25,6 +25,7 @@ func setup():
 
 func calculate_stats():
 	heal_amount = base_heal_amount + ((level - 1) * heal_increase_rate)
+	max_health = base_max_health + (health_scale * (level - 1))
 	var lj_amount = base_lj_count + ((level - 1) * lj_increase_rate)
 	create_lumberjacks(lj_amount - lumberjacks.size())
 

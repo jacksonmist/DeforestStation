@@ -6,7 +6,7 @@ class_name House extends Building
 @export var grid: GridManager
 @export var starting_radius: int = 1
 var cell: Vector2i
-
+var radius: int
 
 func setup():
 	can_sell = false
@@ -22,3 +22,9 @@ func upgrade_level():
 	super()
 	difficulty_manager.update_level(level)
 	return true
+
+func calculate_stats():
+	max_health = base_max_health + (health_scale * (level - 1))
+
+func update_radius(value: int):
+	radius = value
