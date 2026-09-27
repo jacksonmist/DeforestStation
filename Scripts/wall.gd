@@ -16,6 +16,7 @@ func repair():
 	return true
 
 func set_repaired():
+	AudioManager.place_repair_building_sound()
 	sprite.texture = texture
 	repaired_signal.emit()
 	health = max_health

@@ -18,6 +18,13 @@
 [ext_resource type="Texture2D" uid="uid://10qegc5as5hu" path="res://Sprites/Buildings/MissileSiloFront.png" id="16_mgq08"]
 [ext_resource type="Texture2D" uid="uid://dpgaje1hduksk" path="res://Sprites/BuildMenuButton.png" id="17_xvsgm"]
 [ext_resource type="Texture2D" uid="uid://4ympbi3uoc6m" path="res://Sprites/BuildMenuButtonPressed.png" id="18_khpyi"]
+[ext_resource type="AudioStream" uid="uid://2efcmjsjlnbi" path="res://Sounds/button_click.wav" id="19_khpyi"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ltfbr"]
+random_pitch = 1.136423
+random_volume_offset_db = 3.3
+streams_count = 1
+stream_0/stream = ExtResource("19_khpyi")
 
 [node name="UIManager" type="CanvasLayer" unique_id=952831957]
 process_mode = 3
@@ -1058,9 +1065,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -20.0
+offset_top = -4.0
 offset_right = 20.0
-offset_bottom = 20.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -1072,10 +1079,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -46.5
-offset_top = -39.0
-offset_right = 46.5
-offset_bottom = -8.0
+offset_left = -46.0
+offset_top = -71.0
+offset_right = 47.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("17_xvsgm")
@@ -1098,6 +1105,42 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.378, 1.378)
 text = "Resume"
+label_settings = ExtResource("6_k436y")
+
+[node name="RestartButton" type="TextureButton" parent="PauseScreen" unique_id=1266724107]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.5
+offset_top = -39.0
+offset_right = 46.5
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("17_xvsgm")
+texture_pressed = ExtResource("18_khpyi")
+texture_hover = ExtResource("5_pwm6i")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PauseScreen/RestartButton" unique_id=1402198073]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -12.5
+offset_right = 14.0
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.378, 1.378)
+text = "Restart"
 label_settings = ExtResource("6_k436y")
 
 [node name="QuitButton" type="TextureButton" parent="PauseScreen" unique_id=354389475]
@@ -1135,3 +1178,6 @@ grow_vertical = 2
 scale = Vector2(1.378, 1.378)
 text = "Quit"
 label_settings = ExtResource("6_k436y")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1727067658]
+stream = SubResource("AudioStreamRandomizer_ltfbr")

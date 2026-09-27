@@ -131,6 +131,7 @@ func repair() -> bool:
 	health = max_health
 	set_active(true)
 	update_health_bar()
+	AudioManager.place_repair_building_sound()
 	return true
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:

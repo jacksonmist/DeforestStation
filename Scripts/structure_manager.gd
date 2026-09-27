@@ -117,6 +117,7 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 			cached_instance = null
 			select_structure(structures_enum.empty)
 			external_sprite.texture = null
+			AudioManager.place_repair_building_sound()
 
 func _player_entered(body):
 	is_build_mode = true

@@ -15,6 +15,7 @@ var build_move_tween: Tween
 var build_scale_tween: Tween
 var structure_dict: Dictionary
 
+
 @onready var barracks_button: TextureButton = $BuildMenu/BarracksButton
 @onready var barracks_hint: NinePatchRect = $BuildMenu/BarracksButton/BarracksHint
 
@@ -37,17 +38,22 @@ var structure_dict: Dictionary
 @onready var ms_hint: NinePatchRect = $BuildMenu/MissileSiloButton/MSHint
 
 @onready var start_button: TextureButton = $StartButton
+var start_start_pos: Vector2
 
 @onready var pause_screen: Control = $PauseScreen
 @onready var resume_button: TextureButton = $PauseScreen/ResumeButton
+@onready var restart_button: TextureButton = $PauseScreen/RestartButton
 @onready var quit_button: TextureButton = $PauseScreen/QuitButton
 
+@onready var button_sound: AudioStreamPlayer = $AudioStreamPlayer
 
 signal unhandled_click
 
 func _ready() -> void:
+	start_start_pos = start_button.position
 	start_button.pressed.connect(start_game)
 	resume_button.pressed.connect(resume)
+	restart_button.pressed.connect(restart)
 	quit_button.pressed.connect(quit)
 	
 	structure_dict = {
@@ -91,6 +97,7 @@ func hide_build_menu():
 	sm.select_structure(sm.structures_enum.empty)
 
 func select_building(structure: StructureManager.structures_enum):
+	play_button_sound()
 	if sm.get_selected_structure() == structure:
 		sm.select_structure(sm.structures_enum.empty)
 	else:
@@ -111,19 +118,31 @@ func set_structure_manager(sm_ref: StructureManager):
 func start_game():
 	if not gm:
 		return
+	play_button_sound()
 	var tween = create_tween().set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(start_button, "position", Vector2(113.5, 181.0), 0.5)
 	gm.start_game()
 
 func resume():
 	gm.resume_game()
+	play_button_sound()
+
+func restart():
+	pause_screen.visible = false
+	start_button.position = start_start_pos
+	gm.restart_game()
+	play_button_sound()
 
 func quit():
+	play_button_sound()
 	gm.quit_game()
 
 func set_pause_menu(active: bool):
 	pause_screen.visible = active
 
+func play_button_sound():
+	button_sound.play()
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("LeftMouse"):
 		unhandled_click.emit()

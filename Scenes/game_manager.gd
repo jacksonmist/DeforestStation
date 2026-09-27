@@ -27,5 +27,8 @@ func resume_game():
 	get_tree().paused = false
 	UiManager.set_pause_menu(false)
 
+func restart_game():
+	get_tree().reload_current_scene()
+
 func quit_game():
 	get_tree().quit()

@@ -45,6 +45,7 @@ func take_damage(amount: float):
 	if not is_active:
 		return
 	health -= amount
+	AudioManager.play_wood_cut_sound()
 	if damaged_tween and damaged_tween.is_running():
 		damaged_tween.kill()
 	damaged_tween = create_tween()
