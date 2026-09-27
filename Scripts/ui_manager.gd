@@ -1,5 +1,6 @@
 class_name UIManager extends CanvasLayer
 
+var gm: GameManager
 var sm: StructureManager
 @onready var wood_amount: NinePatchRect = $WoodAmount
 @onready var wood_label: Label = $WoodAmount/Label
@@ -32,16 +33,31 @@ var structure_dict: Dictionary
 @onready var big_barracks_button: TextureButton = $BuildMenu/BigBarracksButton
 @onready var bb_hint: NinePatchRect = $BuildMenu/BigBarracksButton/BBHint
 
+@onready var missile_silo_button: TextureButton = $BuildMenu/MissileSiloButton
+@onready var ms_hint: NinePatchRect = $BuildMenu/MissileSiloButton/MSHint
+
+@onready var start_button: TextureButton = $StartButton
+
+@onready var pause_screen: Control = $PauseScreen
+@onready var resume_button: TextureButton = $PauseScreen/ResumeButton
+@onready var quit_button: TextureButton = $PauseScreen/QuitButton
+
+
 signal unhandled_click
 
 func _ready() -> void:
+	start_button.pressed.connect(start_game)
+	resume_button.pressed.connect(resume)
+	quit_button.pressed.connect(quit)
+	
 	structure_dict = {
 		sm.structures_enum.barracks: [barracks_button, barracks_hint],
 		sm.structures_enum.watchtower: [watchtower_button, watchtower_hint],
 		sm.structures_enum.bongo: [bongo_button, bongo_hint],
 		sm.structures_enum.axel: [axel_button, axel_hint],
 		sm.structures_enum.boxing_ring: [boxing_ring_button, box_hint],
-		sm.structures_enum.big_barracks: [big_barracks_button, bb_hint]
+		sm.structures_enum.big_barracks: [big_barracks_button, bb_hint],
+		sm.structures_enum.missile_silo: [missile_silo_button, ms_hint]
 	}
 	build_menu.position = build_menu_start
 	for structure in structure_dict.keys():
@@ -92,6 +108,25 @@ func set_wood_amount(amount: int):
 func set_structure_manager(sm_ref: StructureManager):
 	sm = sm_ref
 
+func start_game():
+	if not gm:
+		return
+	var tween = create_tween().set_trans(Tween.TRANS_ELASTIC)
+	tween.tween_property(start_button, "position", Vector2(113.5, 181.0), 0.5)
+	gm.start_game()
+
+func resume():
+	gm.resume_game()
+
+func quit():
+	gm.quit_game()
+
+func set_pause_menu(active: bool):
+	pause_screen.visible = active
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("LeftMouse"):
 		unhandled_click.emit()
+
+func set_game_manager(gm_ref: GameManager):
+	gm = gm_ref

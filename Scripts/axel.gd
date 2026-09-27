@@ -21,6 +21,7 @@ func calculate_stats():
 	var scale_amt = base_scale + (scale_increase * (level-1))
 	axe_pivot.scale = Vector2(scale_amt, scale_amt)
 	max_health = base_max_health + (health_scale * (level - 1))
+	print(max_health)
 
 func _process(delta: float) -> void:
 	if not is_active:

@@ -29,7 +29,6 @@ func _process(delta: float) -> void:
 func enemy_hit(body):
 	if body and body.has_method("take_damage") and body.is_active:
 		body.take_damage(damage)
-		queue_free()
 
 func timeout():
 	queue_free()

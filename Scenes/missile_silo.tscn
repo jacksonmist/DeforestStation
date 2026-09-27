@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://1fshxv14wph1"]
+
+[ext_resource type="Script" uid="uid://byui0dnxnjbgs" path="res://Scenes/missile_silo.gd" id="1_awgsy"]
+[ext_resource type="Texture2D" uid="uid://c3dpo5t5jbjbu" path="res://Sprites/Buildings/MissileSiloDestroyed.png" id="2_da2hn"]
+[ext_resource type="PackedScene" uid="uid://5ikwnmmlcuv8" path="res://Scenes/missile.tscn" id="2_lsi2v"]
+[ext_resource type="Texture2D" uid="uid://10qegc5as5hu" path="res://Sprites/Buildings/MissileSiloFront.png" id="2_siapi"]
+[ext_resource type="Texture2D" uid="uid://clvtqwk8m2w2q" path="res://Sprites/Buildings/MissileSiloBack.png" id="3_da2hn"]
+[ext_resource type="PackedScene" uid="uid://pqpgexsumlbu" path="res://Scenes/building_menu.tscn" id="4_lsi2v"]
+[ext_resource type="PackedScene" uid="uid://bvepdyl5mvunk" path="res://Scenes/healthbar.tscn" id="5_yyrwx"]
+[ext_resource type="Texture2D" uid="uid://cajd2rxh68vi6" path="res://Sprites/Buildings/MissileSiloFlattened.png" id="6_siapi"]
+[ext_resource type="PackedScene" uid="uid://631pop8ih08f" path="res://Scenes/structure_attack_circle.tscn" id="9_yyrwx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltfbr"]
+size = Vector2(48, 48)
+
+[node name="MissileSilo" type="Area2D" unique_id=1794625306]
+script = ExtResource("1_awgsy")
+missile = ExtResource("2_lsi2v")
+destroyed = ExtResource("2_da2hn")
+texture = ExtResource("6_siapi")
+cell_size = Vector2i(3, 3)
+purchase_cost = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=696590653]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_ltfbr")
+
+[node name="Front" type="Sprite2D" parent="." unique_id=1745038106]
+z_index = 1
+position = Vector2(16, 16)
+texture = ExtResource("2_siapi")
+
+[node name="Back" type="Sprite2D" parent="." unique_id=474373628]
+position = Vector2(16, 16)
+texture = ExtResource("3_da2hn")
+
+[node name="BuildingMenu" parent="." unique_id=1431244483 instance=ExtResource("4_lsi2v")]
+visible = false
+offset_left = -16.0
+offset_top = -74.0
+offset_right = 47.0
+offset_bottom = -11.0
+
+[node name="Healthbar" parent="." unique_id=305234403 instance=ExtResource("5_yyrwx")]
+offset_left = 8.0
+offset_top = 11.0
+offset_right = 24.0
+offset_bottom = 27.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1840751243]
+visible = false
+position = Vector2(16, 16)
+texture = ExtResource("6_siapi")
+
+[node name="StructureAttackCircle" parent="." unique_id=1048175314 instance=ExtResource("9_yyrwx")]
+position = Vector2(16, 16)
+
+[node name="Timer" type="Timer" parent="." unique_id=1124071971]
+one_shot = true

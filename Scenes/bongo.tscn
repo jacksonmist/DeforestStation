@@ -17,6 +17,7 @@ anim1 = ExtResource("2_2to3s")
 anim2 = ExtResource("3_icg70")
 destroyed = ExtResource("4_0mx1y")
 texture = ExtResource("5_s32is")
+purchase_cost = 20
 base_upgrade_cost = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=751032120]

@@ -29,16 +29,8 @@ func calculate_stats():
 	var lj_amount = base_lj_count + ((level - 1) * lj_increase_rate)
 	create_lumberjacks(lj_amount - lumberjacks.size())
 
-func destroy():
-	super()
-	heal_timer.stop()
-
-func repair():
-	super()
-	heal_timer.start()
-
 func heal_lumberjacks():
-	if healing.is_empty():
+	if healing.is_empty() or not is_active:
 		heal_timer.start()
 		return
 	for jack in healing:

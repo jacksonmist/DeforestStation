@@ -8,7 +8,7 @@ var damage: float = 0.0
 @export var cooldown_scale: float = -0.5
 var cooldown: float = 5
 
-var knockback: float = 20.0
+var knockback: float = 40.0
 
 func setup():
 	cooldown - base_cooldown

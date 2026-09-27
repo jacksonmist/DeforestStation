@@ -18,10 +18,12 @@ var active_enemies: Array[Enemy]
 
 func _ready() -> void:
 	timer.wait_time = spawn_delay
+	timer.timeout.connect(spawn_enemy)
 	spawn_enemy()
 
 func spawn_enemy():
-	var amount_to_spawn = base_amount_to_spawn * spawn_amount_modifier
+	var amount_to_spawn = difficulty_manager.difficulty
+	print(amount_to_spawn)
 	var max = enemy_scenes.size() - 1
 	for i in amount_to_spawn:
 		var rand = randf()
@@ -40,4 +42,7 @@ func spawn_enemy():
 	timer.start()
 
 func get_position() -> Vector2:
-	return  tree_manager.tree_dict.values().pick_random()[0].position
+	var choice = null
+	while not choice:
+		choice = tree_manager.tree_dict.values().pick_random()[0]
+	return choice.position

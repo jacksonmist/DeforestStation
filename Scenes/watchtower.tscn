@@ -14,8 +14,13 @@
 [node name="Watchtower" type="Area2D" unique_id=1353480180]
 collision_mask = 0
 script = ExtResource("1_sfo61")
+base_damage = 1.5
+damage_scale = 1.5
+base_cooldown = 2.2
+cooldown_scale = -0.2
 destroyed = ExtResource("2_dravq")
 texture = ExtResource("3_l5kcv")
+max_health = 25.0
 purchase_cost = 5
 base_upgrade_cost = 5
 upgrade_factor = 1.5

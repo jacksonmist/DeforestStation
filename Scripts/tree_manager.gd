@@ -56,6 +56,12 @@ func remove_marked(tree):
 		grid_manager.no_marked_trees()
 
 func remove_from_dict(tree: TreeObj):
-	tree_dict[tree.cell].remove_at(tree.index)
+	tree_dict[tree.cell][tree.index] = null
 	if tree_dict[tree.cell].is_empty():
+		tree_dict.erase(tree.cell)
+	var all_null: bool = true
+	for tr in tree_dict[tree.cell]:
+		if tr:
+			all_null = false
+	if all_null:
 		tree_dict.erase(tree.cell)

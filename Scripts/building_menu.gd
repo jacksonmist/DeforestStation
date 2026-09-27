@@ -33,6 +33,7 @@ func setup(parent_ref: Building):
 	position = start_pos
 	scale = Vector2.ZERO
 	visible = false
+	parent.damaged.connect(show_repair)
 	parent.clicked.connect(on_clicked)
 	parent.max_level_reached.connect(disable_upgrade)
 	parent.structure_manager.exited_build.connect(hide_menu)
@@ -104,8 +105,12 @@ func check_tween():
 func try_upgrade_level():
 	parent.upgrade_level()
 
+func show_repair():
+	repair.visible = true
+
 func try_repair():
-	parent.repair()
+	if parent.repair():
+		repair.visible = false
 
 func try_sell():
 	parent.sell()

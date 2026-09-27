@@ -1,6 +1,7 @@
 class_name WallManager extends Node
 
 @export var sm: StructureManager
+@export var house: House
 const N = 1
 const E = 2
 const S = 4
@@ -30,6 +31,7 @@ func place_walls(border_cells: Dictionary, station_cells: Dictionary):
 	for wall in walls.keys():
 		walls[wall].queue_free()
 	walls.clear()
+	sm.clear_destroyed_walls()
 	for cell in border_cells:
 		if cell == Vector2i(25, 24) or cell == Vector2i(24, 23) or cell == Vector2i(23, 24) or cell == Vector2i(24, 25):
 			continue
@@ -65,6 +67,7 @@ func place_walls(border_cells: Dictionary, station_cells: Dictionary):
 				await timer.timeout
 			timer.start()
 			var instance = wall_choice.instantiate()
+			instance.upgrade_health(house.level)
 			instance.set_structure_manager(sm)
 			add_child(instance)
 			walls[cell] = instance

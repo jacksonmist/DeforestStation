@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://5ikwnmmlcuv8"]
+
+[ext_resource type="Script" uid="uid://dw5dhd7kbuggv" path="res://Scenes/missile.gd" id="1_u28tq"]
+[ext_resource type="Texture2D" uid="uid://bf777gewlv21d" path="res://Sprites/Buildings/Missile.png" id="2_bkb3y"]
+
+[sub_resource type="Gradient" id="Gradient_4bev8"]
+colors = PackedColorArray(1, 0.55, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fojhu"]
+radius = 64.0
+
+[sub_resource type="Gradient" id="Gradient_ltfbr"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.48333335, 0, 0)
+
+[node name="Missile" type="Area2D" unique_id=931684509]
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("1_u28tq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1695527581]
+texture = ExtResource("2_bkb3y")
+
+[node name="Rocket" type="CPUParticles2D" parent="Sprite2D" unique_id=1960052541]
+position = Vector2(0, 22.65)
+emitting = false
+amount = 45
+lifetime = 0.08
+emission_shape = 3
+emission_rect_extents = Vector2(8.57, 1)
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 202.97
+initial_velocity_max = 326.73
+color_ramp = SubResource("Gradient_4bev8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1866503472]
+shape = SubResource("CircleShape2D_fojhu")
+
+[node name="Timer" type="Timer" parent="." unique_id=1355784091]
+one_shot = true
+
+[node name="Explosion" type="CPUParticles2D" parent="." unique_id=385237879]
+emitting = false
+amount = 242
+lifetime = 0.39
+one_shot = true
+explosiveness = 0.63
+direction = Vector2(0, -1)
+spread = 90.0
+initial_velocity_min = 247.52
+initial_velocity_max = 518.6
+color_ramp = SubResource("Gradient_ltfbr")

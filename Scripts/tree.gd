@@ -16,6 +16,7 @@ var cell: Vector2i
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 @export var health: float = 5.0
+var max_health: float
 @export var respawn_time: float = 10.0
 var index: int = 0
 
@@ -26,6 +27,7 @@ var damaged_tween: Tween
 var damaged_time: float = 0.3
 
 func _ready() -> void:
+	max_health = health
 	timer.timeout.connect(respawn)
 	x.visible = false
 	if randi_range(0, 1) == 0:
@@ -68,12 +70,14 @@ func cut_down():
 
 func respawn():
 	set_active(true)
+	health = max_health
 
 func set_active(active: bool):
 	is_active = active
 	if active:
 		respawn_tween = create_tween()
 		respawn_tween.tween_property(sprite, "modulate", opaque, 0.5)
+		collision.disabled = false
 	else:
 		collision.disabled = true
 		sprite.modulate = transparent

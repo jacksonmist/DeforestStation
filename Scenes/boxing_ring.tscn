@@ -15,11 +15,12 @@ size = Vector2(32, 32)
 [node name="BoxingRing" type="Area2D" unique_id=494150197]
 script = ExtResource("1_s0sug")
 base_cooldown = 4.0
+cooldown_scale = -0.4
 destroyed = ExtResource("2_qkn62")
 texture = ExtResource("3_yow0d")
 cell_size = Vector2i(2, 2)
-purchase_cost = 25
-base_upgrade_cost = 20
+purchase_cost = 10
+upgrade_factor = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=62831586]
 position = Vector2(8, 8)

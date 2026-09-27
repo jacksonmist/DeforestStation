@@ -14,7 +14,7 @@ var amount_spent: int = 0
 @export var max_health: float = 10
 var health: float = 10
 @export var health_scale: float = 5
-var base_max_health: float
+var base_max_health: float = 10
 @export var structure_manager: StructureManager
 @export var cell_size: Vector2i = Vector2i(1, 1)
 @export var purchase_cost: int
@@ -22,7 +22,7 @@ var base_max_health: float
 @export var upgrade_factor: float = 2
 var current_upgrade_cost: int
 var level: int = 1
-var max_level: int = 10
+@export var max_level: int = 10
 var can_sell: bool = true
 var can_upgrade: bool = true
 var origin: Vector2i
@@ -122,12 +122,16 @@ func destroy():
 	sprite.texture = destroyed
 	destroyed_signal.emit()
 
-func repair():
+func repair() -> bool:
+	if structure_manager.wood_amount < repair_cost:
+		return false
 	sprite.texture = texture
 	structure_manager.change_wood(-repair_cost)
 	repaired_signal.emit()
 	health = max_health
 	set_active(true)
+	update_health_bar()
+	return true
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("LeftMouse"):

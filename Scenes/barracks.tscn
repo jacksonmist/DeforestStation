@@ -13,9 +13,10 @@ size = Vector2(16, 16)
 [node name="Barracks" type="Area2D" unique_id=1416347816]
 script = ExtResource("1_coeoc")
 lj_scene = ExtResource("2_87o8n")
+base_lj_count = 5
 destroyed = ExtResource("3_he61m")
 texture = ExtResource("2_3p7p4")
-max_health = 20.0
+max_health = 50.0
 purchase_cost = 15
 metadata/_custom_type_script = "uid://j4q133l8rdcj"
 

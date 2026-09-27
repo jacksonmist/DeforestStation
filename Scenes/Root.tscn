@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dv2sgwsfcdyca"]
 
 [ext_resource type="Script" uid="uid://c5h4s6nibgffr" path="res://Scripts/enemy_manager.gd" id="1_lbgny"]
+[ext_resource type="Script" uid="uid://b6xxype4euorw" path="res://Scenes/game_manager.gd" id="1_mil3p"]
 [ext_resource type="Script" uid="uid://dl6pfjoswjku6" path="res://Scripts/difficulty_manager.gd" id="1_rcb2t"]
 [ext_resource type="Texture2D" uid="uid://dhat3ipmnjj1a" path="res://Sprites/BasicGroundTexture.png" id="1_y1djv"]
 [ext_resource type="Texture2D" uid="uid://doniadc2wwyju" path="res://Sprites/selection.png" id="2_7f8yv"]
@@ -20,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bi0p2cxdn3yy5" path="res://Scenes/tree.tscn" id="11_aoudc"]
 [ext_resource type="PackedScene" uid="uid://dpempw6q6puu7" path="res://Scenes/wood.tscn" id="11_fauc5"]
 [ext_resource type="PackedScene" uid="uid://dqly7ykummcmo" path="res://Scenes/big_barracks.tscn" id="11_s7pcd"]
+[ext_resource type="PackedScene" uid="uid://1fshxv14wph1" path="res://Scenes/missile_silo.tscn" id="12_p20sc"]
 [ext_resource type="PackedScene" uid="uid://2wdnkkjk6dd3" path="res://Scenes/axel.tscn" id="12_r2ss6"]
 [ext_resource type="Script" uid="uid://3qbuoccerxyg" path="res://Scripts/player.gd" id="13_7f8yv"]
 [ext_resource type="PackedScene" uid="uid://duxbbfus1ti24" path="res://Scenes/attack_circle.tscn" id="13_75oan"]
@@ -40,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://cncyhvhqrtrbr" path="res://Scenes/sapling.tscn" id="29_b2f2k"]
 [ext_resource type="Texture2D" uid="uid://scj60w220fse" path="res://Sprites/Buildings/HouseDestroyed.png" id="30_7j4pg"]
 [ext_resource type="PackedScene" uid="uid://bvepdyl5mvunk" path="res://Scenes/healthbar.tscn" id="33_s7pcd"]
+[ext_resource type="Script" uid="uid://b8001bq5hp24c" path="res://Scenes/pause_button.gd" id="43_jefpb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4bev8"]
 
@@ -61,24 +64,28 @@ size = Vector2(16, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ltfbr"]
 radius = 8.0
 
-[node name="Node2D" type="Node2D" unique_id=1513264109]
+[node name="Node2D" type="Node2D" unique_id=1513264109 node_paths=PackedStringArray("player_camera")]
+script = ExtResource("1_mil3p")
+player_camera = NodePath("Player/Camera2D")
 
 [node name="DifficultyManager" type="Node" parent="." unique_id=250027250]
 script = ExtResource("1_rcb2t")
 
-[node name="StructureManager" type="Area2D" parent="." unique_id=806441737]
+[node name="StructureManager" type="Area2D" parent="." unique_id=806441737 node_paths=PackedStringArray("wall_manager")]
 collision_layer = 128
 collision_mask = 64
 script = ExtResource("24_ql2nr")
 pos_selection = ExtResource("2_8btxg")
 neg_selection = ExtResource("3_lbgny")
 neu_selection = ExtResource("4_asw58")
+wall_manager = NodePath("../GroundMap/WallManager")
 barracks = ExtResource("6_r2ss6")
 watchtower = ExtResource("10_r2ss6")
 bongo = ExtResource("11_0dy5o")
 axel = ExtResource("12_r2ss6")
 boxing_ring = ExtResource("13_p20sc")
 big_barracks = ExtResource("11_s7pcd")
+missile_silo = ExtResource("12_p20sc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StructureManager" unique_id=1633693362]
 shape = SubResource("CircleShape2D_4bev8")
@@ -107,9 +114,10 @@ script = ExtResource("6_626no")
 ground_map = NodePath("..")
 tree_manager = NodePath("../../TreeManager")
 
-[node name="WallManager" type="Node" parent="GroundMap" unique_id=53144409 node_paths=PackedStringArray("sm")]
+[node name="WallManager" type="Node" parent="GroundMap" unique_id=53144409 node_paths=PackedStringArray("sm", "house")]
 script = ExtResource("17_yiytj")
 sm = NodePath("../../StructureManager")
+house = NodePath("../../House")
 N_wall = ExtResource("18_7f8yv")
 E_wall = ExtResource("19_ve1ck")
 S_wall = ExtResource("20_m1xq0")
@@ -140,6 +148,7 @@ destroyed = ExtResource("30_7j4pg")
 texture = ExtResource("8_difym")
 max_health = 100.0
 structure_manager = NodePath("../StructureManager")
+purchase_cost = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="House" unique_id=1493826941]
 shape = SubResource("RectangleShape2D_4bev8")
@@ -167,7 +176,7 @@ difficulty_manager = NodePath("../DifficultyManager")
 tree_manager = NodePath("../TreeManager")
 house = NodePath("../House")
 wood = ExtResource("11_fauc5")
-base_amount_to_spawn = 0
+base_amount_to_spawn = 3
 
 [node name="Timer" type="Timer" parent="EnemyManager" unique_id=1248380354]
 
@@ -177,20 +186,19 @@ one_shot = true
 
 [node name="Player" type="Area2D" parent="." unique_id=583931774 node_paths=PackedStringArray("house", "structure_manager")]
 z_index = 1
-position = Vector2(32, 0)
-collision_layer = 66
+collision_layer = 64
 collision_mask = 28
 script = ExtResource("13_7f8yv")
 house = NodePath("../House")
 structure_manager = NodePath("../StructureManager")
-speed = 100.0
-aps = 50.0
-damage = 50.0
+speed = 25.0
+damage = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=759726425]
 shape = SubResource("CircleShape2D_ltfbr")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=769562444]
+zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 
 [node name="AttackCircle" parent="Player" unique_id=1872592653 instance=ExtResource("13_75oan")]
@@ -200,3 +208,8 @@ collision_mask = 12
 texture = ExtResource("15_fauc5")
 
 [node name="Timer" type="Timer" parent="Player" unique_id=1313961637]
+
+[node name="Node" type="Node" parent="." unique_id=1686087407 node_paths=PackedStringArray("gm")]
+process_mode = 3
+script = ExtResource("43_jefpb")
+gm = NodePath("..")

@@ -4,6 +4,7 @@ class_name StructureManager extends Area2D
 @export var neg_selection: Texture2D
 @export var neu_selection: Texture2D
 
+@export var wall_manager: WallManager
 @onready var shape: CollisionShape2D = $CollisionShape2D
 @onready var external_sprite: Sprite2D = $ExternalSprite
 @onready var selection: Sprite2D = $Selection
@@ -31,6 +32,7 @@ var selected_structure: structures_enum
 @export var axel: PackedScene
 @export var boxing_ring: PackedScene
 @export var big_barracks: PackedScene
+@export var missile_silo: PackedScene
 
 var shown_building_menu: BuildingMenu
 
@@ -46,7 +48,8 @@ enum structures_enum {
 	bongo,
 	axel,
 	boxing_ring,
-	big_barracks
+	big_barracks,
+	missile_silo
 }
 var structure_dict: Dictionary
 
@@ -56,7 +59,7 @@ func _ready() -> void:
 	area_exited.connect(_player_exited)
 	selection.visible = false
 	UiManager.set_structure_manager(self)
-	wood_amount = 500
+	wood_amount = 0
 	UiManager.set_wood_amount(wood_amount)
 	UiManager.unhandled_click.connect(unhandled_click)
 
@@ -68,7 +71,8 @@ func set_structure_dict():
 		structures_enum.bongo: bongo,
 		structures_enum.axel: axel,
 		structures_enum.boxing_ring: boxing_ring,
-		structures_enum.big_barracks: big_barracks
+		structures_enum.big_barracks: big_barracks,
+		structures_enum.missile_silo: missile_silo
 	}
 
 func _process(delta: float) -> void:
@@ -160,6 +164,8 @@ func select_structure(type: structures_enum):
 
 func change_wood(amount: int):
 	wood_amount += amount
+	if wood_amount < 0:
+		wood_amount = 0
 	UiManager.set_wood_amount(wood_amount)
 
 func get_selected_structure() -> structures_enum:
@@ -194,7 +200,12 @@ func repair_walls(first_wall: Wall):
 	for wall in destroyed_walls:
 		if wall.repair_cost > wood_amount:
 			return
-		change_wood(wall.repair_cost)
+		change_wood(-wall.repair_cost)
+		wall.set_repaired()
+	for wall in wall_manager.walls.values():
+		if wall.repair_cost > wood_amount:
+			return
+		change_wood(-wall.repair_cost)
 		wall.set_repaired()
 		
 	set_shown_building_menu(null)
@@ -228,3 +239,6 @@ func is_subset(subset: Array, superset: Array) -> bool:
 		if not superset.has(i):
 			return false
 	return true
+
+func clear_destroyed_walls():
+	destroyed_walls.clear()
